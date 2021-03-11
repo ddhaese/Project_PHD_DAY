@@ -1,0 +1,170 @@
+---
+title: "Boxplot"
+author: "David D'Haese"
+date: "Gepubliceerd op `r Sys.Date()`"
+output: 
+  html_document: 
+    highlight: zenburn
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+library(readxl)
+library(data.table)
+library(magrittr)
+library(dplyr)
+
+# Code van https://community.rstudio.com/t/showing-only-the-first-few-lines-of-the-results-of-a-code-chunk/6963/2
+hook_output <- knit_hooks$get("output")
+knit_hooks$set(output = function(x, options) {
+  lines <- options$output.lines
+  if (is.null(lines)) {
+    return(hook_output(x, options))  # pass to default hook
+  }
+  x <- unlist(strsplit(x, "\n"))
+  more <- "..."
+  if (length(lines)==1) {        # first n lines
+    if (length(x) > lines) {
+      # truncate the output, but add ....
+      x <- c(head(x, lines), more)
+    }
+  } else {
+    x <- c(more, x[lines], more)
+  }
+  # paste these lines together
+  x <- paste(c(x, ""), collapse = "\n")
+  hook_output(x, options)
+})
+
+opts_chunk$set(echo = TRUE)
+
+sem_1_anon <- read_excel("dat/sem_1_anon.xlsx")
+```
+
+## Start
+
+Indien je dit nog niet eerder hebt gedaan moet je de meest recente versies van [R](https://cran.r-project.org/bin/windows/base/) en [RStudio](https://rstudio.com/products/rstudio/download/) downloaden en installeren.
+
+## Nieuw project
+
+Je kan ook zonder, maar het is beter om een project-folder te definiëren. Helemaal rechtsboven in RStudio, onder het kruisje om de applicatie te sluiten, vind je een keuzelijst met daarin de mogelijkheid om een nieuw project te creëren. Volgens de wizard en maak een project aan in een folder naar keuze. Het is wel best om voor deze workshop lokaal te werken.
+
+## Nieuw rapport
+
+We werken standaard met het principe van elektronische notitieboeken (eng: _notebooks_) om dat dit de reproduceerbaarheid verhoogt en gewoon ook veel plezieriger werkt. Het formaat daarvoor is een RMarkdown bestand. Maak een nieuw notitieboek aan via de eerste knop linksboven in de knoppenbalk: _New File > R Markdown_ en dan een titel opgeven voor een HTML document aan te maken (HTML document is de standaard keuze). Het kan zijn dat RSTudio de eerste keer vraagt om een aantal pakketten te downloaden. Antwoord dan 'ja' en de installatie rustig voltooien.
+
+Je merkt dat RStudio een voorbeeld bestandje heeft aangemaakt. Druk nu op de _Save_-knop of gebruik de sneltoets `Ctrl + S` om het bestand in de project-folder te bewaren (gebruik de sneltoets `Alt + Shift + K` voor een overzicht van andere sneltoetsen). Het bestand gaan we meteen eens _uitvoeren_ of 'knitten' door op de knit-knop te drukken. Als alles goed gaat wordt er een voorbeeld rapportje gegenereerd en in de _viewer_-pane getoond.
+
+## Data opladen
+
+TODO: Herkomst data
+
+Er zijn in R meerdere manieren om data op laden. De eenvoudigste is om via de gebruikersinterface van RStudio te werken. Die doe je via _Environment > Import Dataset > From Excel..._. Het kan zijn dat RSTudio de eerste keer ook hier vraagt om een aantal pakketten te downloaden. Antwoord dan weerom 'ja' en de installatie rustig voltooien.
+
+Open het Excel bestand dan je kan terugvinden op deze locatie:
+
+```
+TODO: Locatie Excel bestand
+```
+
+Je zal merken dat het in de R console de volgende code verschijnt, dit is de code die de _Import Dataset_ wizard genereert zodat je de code laten kunt hergebruiken om bijv. in een automatisch script te verwerken:
+
+```r
+library(readxl)
+
+sem_1_anon <- read_excel("dat/sem_1_anon.xlsx")
+View(sem_1_anon)
+```
+
+De data wordt bewaard in het object `sem_1_anon` en als je gaat kijken onder de 'Environment' tab, zo je inderdaad dit object moeten zien staan. De laatste lijn open de dataset meteen in de viewer van RStudio. Voor kleine en middelgrote datasets is dit een snelle manier om de data te exploreren. Merk op dat je in de viewer het data type kan achterhalen door met je muis over de naam van de variabele (= kolom) te hoveren. Je kan in de `Environment`-tab ook het object openklappen om die informatie te zien. Een derde manier om snel de inhoud van eender welk object in R te bekijken is met de `str` functie. Geef in de console de volgende code op en je zou een lange lijst moeten zien verschijnen met de variabele namen en geassocieerd data types, de lengte van de kolom en de eerste waarden. Je ziet ook dat het object van het type `tibble` is, een soort tabel afgeleid van een `data.frame`.
+
+```{r view-object, output.lines = 15}
+# In de console:
+str(sem_1_anon)
+```
+
+In je nieuw Rmd bestand, verwijder je de voorbeeld code, i.e. alles vanaf `## R Markdown`. Maak dan een nieuw titeltje aan '## TODO: TITEL WIJZIGEN' met daarna een lege lijn. Druk dan op het icoontje om code-chunks in te voegen en kies in de keuzelijst voor R-code. Plak dan de gegenereerde code uit de console in deze code chunk zodat je de volgende twee chunks krijgt:
+
+````md
+`r ''````{r setup, include=FALSE}
+library(readxl)
+```
+````
+
+````md
+`r ''````{r load-data}
+sem_1_anon <- read_excel("dat/sem_1_anon.xlsx")
+View(sem_1_anon)
+```
+````
+
+## Woordenschat
+
+Elke rij in de dataset stelt een student voor en elke kolom een eigenschap die op die student van toepassing is. Laten we een aantal van die eigenschappen eens van naderbij onderzoeken. Het is tenslotte belangrijk om een beeld te vormen van de data. We beginnen met het laden van een aantal pakketten. Plak deze code na de vorige `library`-statement, zodat al de dependencies vooraf gekend zijn.
+
+```r
+library(readxl)
+library(data.table)
+library(magrittr)
+library(dplyr)
+```
+
+Het opladen van de pakketten zal enkel functioneren als de pakketten ook op jouw pc zijn geïnstalleerd. Voer indien nodig de onderstaande code eenmalig uit in de console:
+
+```r
+# In de console (enkel eenmalig bij eerste gebruik):
+install.packages(c("data.table", "magrittr", "dplyr"))
+```
+
+Nu kunnen we bijvoorbeeld de variabele `woordenschat` onderzoeken. We isoleren de variabele uit de `sem_1_anon` dataset en gebruiken een speciale operator teken van `magrittr` (`%>%`) om het resultaat door te geven aan de `hist`-functie (men spreekt van _method chaining_ of _piping_). Daarna voegen we een lijn toe ter hoogte van de 50% om te accentueren dat de grote meerderheid van de studenten voor deze proef geslaagd was. De kleuren worden centraal beheert met de fucntie `palette` zodat we op één plek de kleuren van onze plots kunnen wijzigen. Dus, `col = 1` betekent `aliceblue` en `col = 2` staat voor `black`.
+
+```{r fig.width=6}
+
+palette(c("aliceblue", "black"))
+
+sem_1_anon$Woordenschat %>%
+  hist(main = "Verdeling score woordenschat",
+    xlab = "Score", ylab = "Aantal studenten",
+    col = 1)
+
+abline(v = 50, lwd = 2, col = 2)
+```
+
+## Departement
+
+Laten we nu eens onderzoeken welke departementen vertegenwoordigd zijn in de gegevensset. 
+
+```{r}
+sem_1_anon$Departement %>%
+  table %>%
+  sort %>%
+  rev %>%
+  barplot(main = "Verdeling per departement",
+    xlab = "Department", ylab = "Aantal studenten",
+    cex.names = .7, cex.axis = .9, col = 1)
+```
+
+We zien dat een aantal departementen amper vertegenwoordigd zijn. Die laten we eruit. In de eerste lijn zetten we het tibble object om naar een `data.table` object d.m.v. de `setDT` functie. Daarna tellen we het aantal studenten (met speciale functie `.N`) per departement, selecteren we de departementen waarvoor méér dan 5 studenten antwoorden en bewaren we het resultaat in het object `dep_top`.
+
+```{r}
+sem_1_anon <- setDT(sem_1_anon)
+
+dep_top <- sem_1_anon[, .N, Departement][N > 5, Departement]
+
+dep_top
+```
+
+## De boxplot
+
+We kennen de globale verdeling van de scores voor woordenschat en we weten welke van de 4 departmenten we willen bestuderen. Nu kunnen we een boxplot uittekenen:
+
+```{r fig.width = 6}
+sem_1_anon %>% 
+  filter(Departement %in% dep_top) %>% 
+  boxplot(Woordenschat ~ Departement, data = .,
+    col = 1, pch = 19, cex = .5,
+    main = "Verdeling score woordenschat per departement")
+
+abline(h = 50, lwd = 2, col = 2)
+```
+
