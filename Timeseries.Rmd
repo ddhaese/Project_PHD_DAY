@@ -1,5 +1,5 @@
 ---
-title: "Boxplot"
+title: "Timeseries"
 author: "David D'Haese"
 date: "Gepubliceerd op `r Sys.Date()`"
 output: 
@@ -38,7 +38,18 @@ knit_hooks$set(output = function(x, options) {
 
 opts_chunk$set(echo = TRUE)
 
-sem_1_anon <- read_excel("dat/sem_1_anon.xlsx")
+## eenmalig >>>
+# sem_1_anon <- read_excel("dat/sem_1_anon.xlsx")
+# col_types <- sem_1_anon %>% sapply(class)
+# col_types[col_types != "logical"] <- "guess"
+# col_types[col_types == "logical"] <- "numeric"
+# col_types <- col_types %>% unlist
+# sem_1_anon <- read_excel("dat/sem_1_anon.xlsx", col_types = col_types)
+# 
+# sem_1_anon %>% fwrite("dat/sem_1_anon.tsv", sep = "\t")
+## <<< eenmalig
+
+sem_1_anon <- fread("dat/sem_1_anon.tsv")
 ```
 
 ## Start
@@ -51,7 +62,7 @@ Je kan ook zonder, maar het is beter om een project-folder te definiëren. Helem
 
 ## Nieuw rapport
 
-We werken standaard met het principe van elektronische notitieboeken (eng: _notebooks_) om dat dit de reproduceerbaarheid verhoogt en gewoon ook veel plezieriger werkt. Het formaat daarvoor is een RMarkdown bestand. Maak een nieuw notitieboek aan via de eerste knop linksboven in de knoppenbalk: _New File > R Markdown_ en dan een titel opgeven voor een HTML document aan te maken (HTML document is de standaard keuze). Het kan zijn dat RSTudio de eerste keer vraagt om een aantal pakketten te downloaden. Antwoord dan 'ja' en laat de installatie rustig voltooien.
+We werken standaard met het principe van elektronische notitieboeken (eng: _notebooks_) om dat dit de reproduceerbaarheid verhoogt en gewoon ook veel plezieriger werkt. Het formaat daarvoor is een RMarkdown bestand. Maak een nieuw notitieboek aan via de eerste knop linksboven in de knoppenbalk: _New File > R Markdown_ en dan een titel opgeven voor een HTML document aan te maken (HTML document is de standaard keuze). Het kan zijn dat RStudio de eerste keer vraagt om een aantal pakketten te downloaden. Antwoord dan 'ja' en laat de installatie rustig voltooien.
 
 Je merkt dat RStudio een voorbeeld bestandje heeft aangemaakt. Druk nu op de _Save_-knop of gebruik de sneltoets `Ctrl + S` om het bestand in de project-folder te bewaren (gebruik de sneltoets `Alt + Shift + K` voor een overzicht van andere sneltoetsen). Het bestand gaan we meteen eens _uitvoeren_ of 'knitten' door op de knit-knop te drukken. Als alles goed gaat wordt er een voorbeeld rapportje gegenereerd en in de _viewer_-pane getoond.
 
