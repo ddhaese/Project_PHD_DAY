@@ -1,0 +1,70 @@
+:root{
+  --shadow: grey;
+  --default_back: LightBlue;
+  --default_light: #D3EAF1;
+  --default_front: #646464;
+}
+
+body{
+  background-color: var(--shadow);
+  font-family: Roboto;
+  counter-reset: step-counter;
+}
+
+q {
+  margin-left: 50px;
+}
+
+.main-container {
+  background-color: var(--default_back);
+  color: var(--default_front);
+}
+
+h1.title{
+  font-size: 24px;
+  color: var(--default_back);
+  background-color: var(--default_front);
+  padding: 20px;
+  border-radius: 0px 8px 8px 0px;
+  margin: 20px 50px 40px -15px;
+}
+
+h4.author{
+  font-size: .8em;
+}
+
+h4.date{
+  font-size: .8em;
+}
+
+pre, pre:not([class]) {
+  background-color: var(--default_light);
+}
+
+ol {
+  list-style: none;
+}
+
+ol li {
+  padding: 20px;
+  margin: 5 px;
+  list-style: none;
+  width: 80%;
+  background-color: var(--default_light);
+}
+
+ol:before {
+  content: url("step.svg");
+  background-color: var(--default_light);
+  width: 80%;
+  display: block;
+  padding: 5px 10px 0;
+  margin-bottom: 0;
+}
+
+ol li::before {
+  content: counter(step-counter) ". ";
+  counter-increment: step-counter;
+  font-size: 2em;
+  font-weight: bold;
+}

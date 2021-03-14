@@ -1,10 +1,11 @@
 ---
-title: "Boxplot"
-author: "David D'Haese"
+title: "Boxplot - Analyse van ..."
+author: "Gert Vanthournout"
 date: "Gepubliceerd op `r Sys.Date()`"
 output: 
   html_document: 
     highlight: zenburn
+css: "css/labo.css"
 ---
 
 ```{r setup, include=FALSE}
@@ -76,14 +77,14 @@ sem_1_anon <- read_excel("dat/sem_1_anon.xlsx")
 View(sem_1_anon)
 ```
 
-De data wordt bewaard in het object `sem_1_anon` en als je gaat kijken onder de 'Environment' tab, zo je inderdaad dit object moeten zien staan. De laatste lijn open de dataset meteen in de viewer van RStudio. Voor kleine en middelgrote datasets is dit een snelle manier om de data te exploreren. Merk op dat je in de viewer het data type kan achterhalen door met je muis over de naam van de variabele (= kolom) te hoveren. Je kan in de `Environment`-tab ook het object openklappen om die informatie te zien. Een derde manier om snel de inhoud van eender welk object in R te bekijken is met de `str` functie. Geef in de console de volgende code op en je zou een lange lijst moeten zien verschijnen met de variabele namen en geassocieerd data types, de lengte van de kolom en de eerste waarden. Je ziet ook dat het object van het type `tibble` is, een soort tabel afgeleid van een `data.frame`.
+De data wordt bewaard in het object `sem_1_anon` en als je gaat kijken onder de 'Environment' tab, zo je inderdaad dit object moeten zien staan. De laatste lijn opent de dataset meteen in de viewer van RStudio. Voor kleine en middelgrote datasets is dit een snelle manier om de data te exploreren. Merk op dat je in de viewer het data type kan achterhalen door met je muis over de naam van de variabele (= kolom) te hoveren. Je kan in de `Environment`-tab ook het object openklappen om die informatie te zien. Een derde manier om snel de inhoud van eender welk object in R te bekijken is met de `str` functie. Geef in de console de volgende code op en je zou een lange lijst moeten zien verschijnen met de variabele namen en geassocieerd data types, de lengte van de kolom en de eerste waarden. Je ziet ook dat het object van het type `tibble` is, een soort tabel afgeleid van een `data.frame`.
 
 ```{r view-object, output.lines = 15}
 # In de console:
 str(sem_1_anon)
 ```
 
-In je nieuw Rmd bestand, verwijder je de voorbeeld code, i.e. alles vanaf `## R Markdown`. Maak dan een nieuw titeltje aan '## TODO: TITEL WIJZIGEN' met daarna een lege lijn. Druk dan op het icoontje om code-chunks in te voegen en kies in de keuzelijst voor R-code. Plak dan de gegenereerde code uit de console in deze code chunk zodat je de volgende twee chunks krijgt:
+In je nieuw Rmd bestand, verwijder je de voorbeeld code, i.e. alles vanaf `## R Markdown`. Maak dan een nieuw titeltje aan '## TODO: TITEL WIJZIGEN' met daarna een lege lijn. Druk dan op het icoontje om codeblok (eng: _code chunk_) in te voegen en kies in de keuzelijst voor R-code. Plak dan de gegenereerde code uit de console in deze codeblok zodat je de volgende twee blokken krijgt:
 
 ````md
 `r ''````{r setup, include=FALSE}
