@@ -483,7 +483,7 @@ Figuur 2.1: De dyade blauw-5 tegenover geelrood-5 (5B-5YR). In elke gekleurd vak
 <span id="cb8-3"><a href="tijdreeksen.html#cb8-3" aria-hidden="true" tabindex="-1"></a>main <span class="ot">&lt;-</span> <span class="st">&quot;Verkoopcijfers (volume)</span><span class="sc">\n</span><span class="st">voor drie producten&quot;</span></span>
 <span id="cb8-4"><a href="tijdreeksen.html#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-5"><a href="tijdreeksen.html#cb8-5" aria-hidden="true" tabindex="-1"></a>sales_ts <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="at">main =</span> main, <span class="at">xlab =</span> <span class="st">&quot;Jaartal&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/sales-plot-01-1.png" width="672" /></p>
 <p>Bijna perfect. Er is nog één probleempje met de y-assen. De positie van de labels op assen in <code>base</code> R wordt bepaald door een functie <code>pretty</code>. Je zou dus de y-assen in de plot kunnen uitschakelen (<code>yaxt = "n"</code>) en deze helemaal manueel uittekenen door gebruik te maken van de functie <code>axis</code>, maar het is natuurlijk veel eenvoudiger om de aantallen te delen door een factor 1000.</p>
 <ol style="list-style-type: decimal">
 <li>Pas de voorgaande code aan om de verkoopcijfers eerst te delen door 1000 en pas ook de titel van de figuur aan:</li>
@@ -495,7 +495,7 @@ Figuur 2.1: De dyade blauw-5 tegenover geelrood-5 (5B-5YR). In elke gekleurd vak
 <span id="cb9-5"><a href="tijdreeksen.html#cb9-5" aria-hidden="true" tabindex="-1"></a>main <span class="ot">&lt;-</span> <span class="st">&quot;Verkoopcijfers (volume x 1000)</span><span class="sc">\n</span><span class="st">voor drie producten&quot;</span></span>
 <span id="cb9-6"><a href="tijdreeksen.html#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-7"><a href="tijdreeksen.html#cb9-7" aria-hidden="true" tabindex="-1"></a>sales_ts_th <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="at">main =</span> main, <span class="at">xlab =</span> <span class="st">&quot;Jaartal&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/sales-plot-02-1.png" width="672" /></p>
 </div>
 <div id="tijdreeks-analyses" class="section level2" number="2.10">
 <h2><span class="header-section-number">2.10</span> Tijdreeks analyses</h2>
@@ -505,7 +505,7 @@ Figuur 2.1: De dyade blauw-5 tegenover geelrood-5 (5B-5YR). In elke gekleurd vak
 </ol>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="tijdreeksen.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">bg =</span> <span class="dv">4</span>)</span>
 <span id="cb10-2"><a href="tijdreeksen.html#cb10-2" aria-hidden="true" tabindex="-1"></a>sales_ts_th <span class="sc">%&gt;%</span> <span class="fu">acf</span>(<span class="at">lag.max =</span> <span class="dv">18</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/sales-plot-03-1.png" width="672" /></p>
 <p>Hieruit leren we bijv. dat er een correlatie is tussen producten A en E met een horizon van 1 ‘seizoen’ (1 jaar in dit geval), maar dat de relatie niet volledig symmetrisch is, dus het ene geeft mogelijk aanleiding tot het andere en niet omgekeerd. Om dit te zien vergelijk je de correlatie op 1.0 voor <em>A &amp; E</em> (onder significantie niveau) met die van -1.0 voor <em>E &amp; A</em> (boven significantie niveau).</p>
 </div>
 <div id="ontbinden-in-factoren" class="section level2" number="2.11">
@@ -516,7 +516,7 @@ Figuur 2.1: De dyade blauw-5 tegenover geelrood-5 (5B-5YR). In elke gekleurd vak
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="tijdreeksen.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">bg =</span> <span class="dv">4</span>)</span>
 <span id="cb11-2"><a href="tijdreeksen.html#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="tijdreeksen.html#cb11-3" aria-hidden="true" tabindex="-1"></a>sales_ts_th[, <span class="st">&quot;C&quot;</span>] <span class="sc">%&gt;%</span> <span class="fu">stl</span>(<span class="at">s.window =</span> <span class="st">&quot;periodic&quot;</span>) <span class="sc">%&gt;%</span> plot</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/sales-plot-04-1.png" width="672" /></p>
 <p>Merk op dat het probleem van de assen hier wordt opgelost door de positie van de y-as te laten alterneren.</p>
 <ol style="list-style-type: decimal">
 <li>Onderzoek hoe de plot van een <code>stl</code> object ervoor zorgt dat de assen alternerend getoond worden:</li>
@@ -545,7 +545,7 @@ Figuur 2.1: De dyade blauw-5 tegenover geelrood-5 (5B-5YR). In elke gekleurd vak
 <span id="cb14-3"><a href="tijdreeksen.html#cb14-3" aria-hidden="true" tabindex="-1"></a>sales_ts_th <span class="sc">%&gt;%</span> forecast <span class="sc">%&gt;%</span></span>
 <span id="cb14-4"><a href="tijdreeksen.html#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">col =</span> <span class="dv">3</span>, <span class="at">xlab =</span> <span class="st">&quot;Jaar&quot;</span>,</span>
 <span id="cb14-5"><a href="tijdreeksen.html#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">main =</span> <span class="st">&quot;Stuks verkocht (x 1000)&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Dit is al vrij goed maar er zijn een aantal problemen. Laten we met een belangrijk detail beginnen: de kleur en de schakeringen van de predictie-intervallen.</p>
 <ol style="list-style-type: decimal">
 <li>Met <code>fan</code> kan je meer kleurschakeringen bekomen en met <code>colorRampPalette</code> maken we een eenvoudige kleurschakering:</li>
@@ -557,7 +557,7 @@ Figuur 2.1: De dyade blauw-5 tegenover geelrood-5 (5B-5YR). In elke gekleurd vak
 <span id="cb15-5"><a href="tijdreeksen.html#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">forecast</span>(<span class="at">fan =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb15-6"><a href="tijdreeksen.html#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">col =</span> <span class="dv">3</span>, <span class="at">xlab =</span> <span class="st">&quot;Jaar&quot;</span>, <span class="at">shadecols =</span> ramp,</span>
 <span id="cb15-7"><a href="tijdreeksen.html#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">main =</span> <span class="st">&quot;Stuks verkocht (x 1000)&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>Nu komt het belangrijkste probleem: we willen eigenlijk enkel 2019 voorspellen en we willen de actuele en voorspelde data naast elkaar zien. Het zou ook leuke zijn mocht er een duidelijke markering komen bij de start van de voorspelling.</p>
 <ol style="list-style-type: decimal">
 <li>Probeer de voorspellingen te reproduceren met hierboven genoemde vereisten:</li>
@@ -583,7 +583,7 @@ Figuur 2.1: De dyade blauw-5 tegenover geelrood-5 (5B-5YR). In elke gekleurd vak
 <span id="cb16-19"><a href="tijdreeksen.html#cb16-19" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb16-20"><a href="tijdreeksen.html#cb16-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-21"><a href="tijdreeksen.html#cb16-21" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="at">xlab =</span> <span class="st">&quot;Jaar&quot;</span>, <span class="at">outer =</span> <span class="dv">2</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="extra-herbemonsteren-van-temporele-gegevens" class="section level2" number="2.13">
 <h2><span class="header-section-number">2.13</span> Extra: Herbemonsteren van temporele gegevens</h2>
@@ -612,7 +612,7 @@ Figuur 2.1: De dyade blauw-5 tegenover geelrood-5 (5B-5YR). In elke gekleurd vak
 <span id="cb20-13"><a href="tijdreeksen.html#cb20-13" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb20-14"><a href="tijdreeksen.html#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomright&quot;</span>, <span class="at">legend =</span> week_lev_all, <span class="at">col =</span> ramp,</span>
 <span id="cb20-15"><a href="tijdreeksen.html#cb20-15" aria-hidden="true" tabindex="-1"></a> <span class="at">cex =</span> .<span class="dv">7</span>, <span class="at">bg =</span> <span class="cn">NA</span>, <span class="at">ncol =</span> <span class="dv">4</span>, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">border =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/herb-03-1.png" width="672" /></p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="tijdreeksen.html#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">palette</span>(temp_pal)</span></code></pre></div>
 <p>Nu kunnen we eindelijk een selectie maken + de omzetteing naar <code>ts</code> verzorgen.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="tijdreeksen.html#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">bg =</span> <span class="dv">4</span>)</span>
@@ -628,7 +628,7 @@ Figuur 2.1: De dyade blauw-5 tegenover geelrood-5 (5B-5YR). In elke gekleurd vak
 <span id="cb22-11"><a href="tijdreeksen.html#cb22-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">start =</span> <span class="fu">decimal_date</span>(<span class="fu">ymd</span>(<span class="st">&quot;2020-09-07&quot;</span>))) <span class="sc">%&gt;%</span></span>
 <span id="cb22-12"><a href="tijdreeksen.html#cb22-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">xlab =</span> <span class="st">&quot;Tijd (decimaal)&quot;</span>,</span>
 <span id="cb22-13"><a href="tijdreeksen.html#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">&quot;Memoriseren&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Evolutie memoriseren&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="_main_files/figure-html/herb-04-1.png" width="672" /></p>
 <hr />
 
 </div>
