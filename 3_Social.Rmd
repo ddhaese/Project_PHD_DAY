@@ -1,0 +1,164 @@
+---
+title: "Social Network"
+author: "David D'Haese"
+date: "Published on `r Sys.Date()`"
+output: 
+  html_document: 
+      highlight: zenburn
+css: "css/labo.css"
+---
+
+# Social network
+
+![https://www.kaggle.com/rozemberczki/musae-github-social-network](https://storage.googleapis.com/kaggle-datasets-images/373809/726866/a6200c90b023b8184bde620f6cf8113a/dataset-cover.jpeg?t=2019-10-08-03-05-23)
+
+```{r include=FALSE}
+library(knitr)
+```
+
+## Introduction
+
+In this workshop, we will try to create an interactive force-directed network diagram from the [D3.js](https://d3js.org/) framework. Typically, this type of graph is adopted for displaying relations within a social network, but its use extend far beyond social sciences. For example, one could device a similar network depicting the correlation among variables of a large dataset (e.g. the results within the students dataset of workshop 1) or, from the realm of NLP, the co-occurrence of words within tweets.
+
+## Loading the data
+
+We will be using the [MUSAE GitHub Social Network](https://www.kaggle.com/rozemberczki/musae-github-social-network) dataset from Kaggle. This data covers the social network of developers on github. The authors provide us with three files, two of which we will need to display the network:
+
+- a set of nodes containing the name of the developers
+- a set of edges depicting the relationships among developers
+
+1. Start a new project
+1. Load the three files containing the data
+
+```{r load data}
+library(data.table)
+library(magrittr)
+library(networkD3)
+
+edges <- fread("dat/git_edges.tsv")
+nodes <- fread("dat/git_nodes.tsv")
+```
+
+## Exploring
+
+1. Explore the two `data.table` objects using the `str` command until you understand how these are connected to each other
+
+## Reducing size
+
+Unfortunately, visualizing social network is really only feasible with relatively small networks. Once we start talking thousand of nodes, you will need a [bigger boat](https://www.youtube.com/watch?v=2I91DJZKRxs). Not that the D3.js network is slow, it is not. It has to do with the number of edges increasing exponentially with increasing number of nodes.
+
+1. Pick the 40 most popular developers, i.e. the ones with the most connections, andadjust the edges and nodes datasets accordingly
+
+```{r pick-popular}
+popular <- edges %>% unlist %>%
+  table %>% sort %>% rev %>%
+  head(40) %>% names
+
+edges_sel <- edges[Source %in% popular & Target %in% popular]
+edges_sel[, Source := match(Source, popular) - 1]
+edges_sel[, Target := match(Target, popular) - 1]
+
+nodes_sel <- nodes[ID %in% popular]
+nodes_sel[, ID := match(ID, popular) - 1]
+```
+
+## The network
+
+Drawing the network is really easy. Because however it is different from any other plotting system in R, it takes a bit time to get accustomed to. For example, the color palette is being written in Javascript.
+
+1. Start by creating a palette with your two favourite colors
+
+```{r network-01}
+palette(c("#2D859C", "#B86619"))
+```
+
+Now we have to make sure to generate a string that looks like this:
+
+```js
+d3.scaleOrdinal().
+  domain(["0", "1"]).
+  range(["#2D859C", "#B86619"]);
+```
+
+1. Generate the above JS code based on the value of the palette
+
+```{r network-02}
+color_scale <- paste0(
+  "d3.scaleOrdinal().domain([\"0\", \"1\"])",
+  ".range([\"", 
+  palette()[1:2] %>% paste0(collapse = "\", \""), "\"]);")
+```
+
+Indeed, also the content of the `domain` function call could be generated from the unique values in the node groups instead of fixing it to contain `["0", "1"]`. Notice the use of escapes for inserting double quotes.
+
+Now that we have the colors covered, we can call the `forceNetwork` function of the `networkD3` package.
+
+```{r network-03}
+forceNetwork(
+  height = 600,
+  width = 600,
+  Links = edges_sel,
+  Nodes = nodes_sel, 
+  Source = "Source",
+  Target = "Target", 
+  NodeID = "Name",
+  Group = "Group",
+  bounded = TRUE,
+  opacityNoHover = .8,
+  linkColour = "#999999",
+  zoom = TRUE,
+  colourScale = JS(color_scale),
+  legend = TRUE,
+  fontFamily = "Roboto",
+  fontSize = 20,
+  charge = -1,
+  opacity = 1,
+  linkDistance = 200)
+```
+
+Let us go over the arguments one-by-one:
+
+- `height = 600`: set canvas width to 600px
+- `width = 600`: set canvas height to 600px
+- `Links = edges_sel`: attach edge dataset
+- `Nodes = nodes_sel`: attach node dataset
+- `Source = "Source"`: define variable name containing the source of the relationships
+- `Target = "Target"`: define variable name containing the target of the relationships
+- `NodeID = "Name"`: define variable name containing the label to be displayed
+- `Group = "Group"`: define variable name containing the (color) group
+- `bounded = TRUE`: wether nodes are allowed to fly out of the canvas
+- `opacityNoHover = .8`: the opacity of the labels when no node is being hovered over
+- `linkColour = "#999999"`: the color of the edges
+- `zoom = TRUE`: whether the network can be zoomed-in and out
+- `colourScale = JS(color_scale)`: the JS colorscale
+- `legend = TRUE`: whether to add a legend
+- `fontFamily = "Roboto"`: the font family for the labels
+- `fontSize = 20`: the font size for the labels
+- `charge = -1`: the amount of force that pull the nodes together (positive) or apart (negative)
+- `opacity = 1`: the relative opacity of the graph elements
+- `linkDistance = 200`: the default length of the edges disregarding forces acting upon the nodes
+
+See `?forceNetwork` for more details. Mind that the code for the developer type was not clear from the data source, otherwise we could have replaced `0` and `1` by their proper type descriptions and the legend would adjust accordingly.
+
+## Vectors
+
+The network is being rendered as an `svg` HTML element (scalable vector graphics). This has some very interested advantages. For one, it means the texts are not rendered as images, but remain searchable just like any other text on the report.
+
+1. Try to search text within your network (e.g. "mcanthony") or that of this workshop page using your browser
+
+## Cascading style sheets
+
+Hopefully you have heard of CSS before. It is the language used to style the web and it has been growing more popular in the past decades and will probably continue to do so for a while. Because the network is being rendered as pure HTML, elements of it can also be styled using CSS. In Rstudio, which supports multilingual development, you can add a css code chunk instead of an R code chunk.
+
+1. Add a `css` code chunk in your report with the following code:
+
+```{css}
+g circle {
+  stroke: #999999 !important;
+  stroke-width: 1px !important;
+}
+
+g circle[r="11"]{
+  fill: #FD9734;
+}
+```

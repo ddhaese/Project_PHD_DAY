@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Workshop 2 Time Series | Time Series</title>
+  <title>Workshop 2 Time Series | Social Network</title>
   <meta name="description" content="Workshop as a part of the FSS PhD &amp; PostDoc Day event on March 18 2021" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Workshop 2 Time Series | Time Series" />
+  <meta property="og:title" content="Workshop 2 Time Series | Social Network" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Workshop 2 Time Series | Time Series" />
+  <meta name="twitter:title" content="Workshop 2 Time Series | Social Network" />
   
   <meta name="twitter:description" content="Workshop as a part of the FSS PhD &amp; PostDoc Day event on March 18 2021" />
   
@@ -31,7 +31,7 @@
   
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
 <link rel="prev" href="boxplot.html"/>
-
+<link rel="next" href="social-network.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -50,6 +50,9 @@
 
 
 
+<script src="libs/htmlwidgets-1.5.3/htmlwidgets.js"></script>
+<script src="libs/d3-4.5.0/d3.min.js"></script>
+<script src="libs/forceNetwork-binding-0.4/forceNetwork.js"></script>
 
 
 <style type="text/css">
@@ -157,6 +160,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.12" data-path="time-series.html"><a href="time-series.html#predictions"><i class="fa fa-check"></i><b>2.12</b> Predictions</a></li>
 <li class="chapter" data-level="2.13" data-path="time-series.html"><a href="time-series.html#extra-resampling-temporal-data"><i class="fa fa-check"></i><b>2.13</b> Extra: Resampling temporal data</a></li>
 </ul></li>
+<li class="chapter" data-level="3" data-path="social-network.html"><a href="social-network.html"><i class="fa fa-check"></i><b>3</b> Social network</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="social-network.html"><a href="social-network.html#introduction-1"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="social-network.html"><a href="social-network.html#loading-the-data"><i class="fa fa-check"></i><b>3.2</b> Loading the data</a></li>
+<li class="chapter" data-level="3.3" data-path="social-network.html"><a href="social-network.html#exploring"><i class="fa fa-check"></i><b>3.3</b> Exploring</a></li>
+<li class="chapter" data-level="3.4" data-path="social-network.html"><a href="social-network.html#reducing-size"><i class="fa fa-check"></i><b>3.4</b> Reducing size</a></li>
+<li class="chapter" data-level="3.5" data-path="social-network.html"><a href="social-network.html#the-network"><i class="fa fa-check"></i><b>3.5</b> The network</a></li>
+<li class="chapter" data-level="3.6" data-path="social-network.html"><a href="social-network.html#vectors"><i class="fa fa-check"></i><b>3.6</b> Vectors</a></li>
+<li class="chapter" data-level="3.7" data-path="social-network.html"><a href="social-network.html#cascading-style-sheets"><i class="fa fa-check"></i><b>3.7</b> Cascading style sheets</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -166,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Time Series</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Social Network</a>
           </h1>
         </div>
 
@@ -176,6 +189,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="time-series" class="section level1" number="2">
 <h1><span class="header-section-number">Workshop 2</span> Time Series</h1>
+<div class="figure">
+<img src="img/ts.png" alt="" />
+<p class="caption">Time series</p>
+</div>
 <div id="introduction" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Introduction</h2>
 <p>In this workshop we will learn how to handle and visualize temporal data. Most analytic tools dealing with time series depend on the <code>ts</code> class of objects and so we will have to learn how to transform our source data to a <code>ts</code> object. Finally, we will be plotting the results of some diagnostic and predictive analyses typical for time series data.</p>
@@ -230,7 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre class="rmd"><code>---
 title: &quot;Timeseries&quot;
 author: &quot;Your name here&quot;
-date: &quot;Published on 2021-03-15&quot;
+date: &quot;Published on 2021-03-16&quot;
 output: 
   html_document: 
     highlight: zenburn
@@ -623,8 +640,8 @@ Figuur 2.1: The dyad blue-5 versus yellow-red-5 (5B-5YR). In each colored box yo
           </div>
         </div>
       </div>
-<a href="boxplot.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="boxplot.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="social-network.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
