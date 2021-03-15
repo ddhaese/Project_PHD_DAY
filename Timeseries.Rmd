@@ -1,5 +1,5 @@
 ---
-title: "Tijdsreeksen"
+title: "Tijdreeksen"
 author: "David D'Haese"
 date: "Gepubliceerd op `r Sys.Date()`"
 output: 
@@ -8,7 +8,7 @@ output:
 css: "css/labo.css"
 ---
 
-```{r setup, include=FALSE}
+```{r include=FALSE}
 library(knitr)
 
 # Code van https://community.rstudio.com/t/showing-only-the-first-few-lines-of-the-results-of-a-code-chunk/6963/2
@@ -34,37 +34,45 @@ knit_hooks$set(output = function(x, options) {
 })
 ```
 
+# Tijdreeksen
+
 ## Inleiding
 
-In deze workshop krijg je te zien hoe je tijdsreeksgegevens grafisch kunt voorstellen. We zullen zien dat het weergeven van zulke gegevens nauw verweven is met de verwerking ervan. Omdat meeste analyse tools hier ook gebruik van maken zullen onze gegevens omzetten naar de `ts` klasse. We gaan ook zien hoe je een voorspelling op tijdsreeksgegevens best in grafiek zet.
+In deze workshop krijg je te zien hoe je temporele data grafisch kunt voorstellen. We zullen zien dat het weergeven van zulke gegevens nauw verweven is met de verwerking ervan. Omdat meeste analyse tools hier ook gebruik van maken zullen we onze gegevens omzetten naar een object van de klasse `ts` (_time series_). We gaan ook zien hoe je een voorspelling op tijdreeksen best in grafiek zet.
 
 ## Start
 
-Indien je dit nog niet eerder hebt gedaan moet je de meest recente versies van [R](https://cran.r-project.org/bin/windows/base/) en [RStudio](https://rstudio.com/products/rstudio/download/) downloaden en installeren.
+1. Indien je dit nog niet eerder hebt gedaan moet je de meest recente stabiele versies van [R](https://cran.r-project.org/bin/windows/base/) en [RStudio](https://rstudio.com/products/rstudio/download/) downloaden en installeren.
 
 ## Nieuw project
 
-Je kan ook zonder, maar het is beter om een project-folder te definiëren. Helemaal rechtsboven in RStudio, onder het kruisje om de applicatie te sluiten, vind je een keuzelijst met daarin de mogelijkheid om een nieuw project te creëren. Volgens de wizard en maak een project aan in een folder naar keuze. Het is wel best om voor deze workshop lokaal te werken.
+Je kan ook zonder, maar het is beter om een project-folder te definiëren. Helemaal rechtsboven in RStudio, onder het kruisje om de applicatie te sluiten, vind je een keuzelijst met daarin de mogelijkheid om een nieuw project te creëren.
+
+1. Volg de wizard en maak een project aan in een folder naar keuze
+
+Het is wel best om voor deze workshop lokaal te werken.
 
 ## Nieuw rapport
 
-We werken standaard met het principe van elektronische notitieboeken (eng: _notebooks_) om dat dit de reproduceerbaarheid verhoogt maar ook gewoon omdat het plezieriger werkt. Het formaat daarvoor is een RMarkdown bestand (extensie `.rmd``). Ga als volgt te werk:
+We werken standaard met het principe van elektronische notitieboeken (eng: _notebooks_). We doen dit om de reproduceerbaarheid te verhogen maar ook gewoon omdat het plezieriger werkt. Het formaat daarvoor is een RMarkdown bestand (extensie `.rmd``). Ga als volgt te werk:
 
 1. Maak een nieuw notitieboek aan via de eerste knop linksboven in de knoppenbalk: _New File > R Markdown_
 2. Geef een titel op voor het HTML document. HTML is de standaard keuze maar je merkt dat er veel meer keuze bestaat
 3. Het kan zijn dat RStudio de eerste keer vraagt om een aantal pakketten te downloaden. Antwoord dan 'ja' en laat de installatie rustig voltooien
 4. Je merkt dat RStudio een voorbeeld bestandje heeft aangemaakt
 5. Druk nu op de _Save_-knop of gebruik de sneltoets `Ctrl + S` om het bestand in de project-folder te bewaren (gebruik de sneltoets `Alt + Shift + K` voor een overzicht van andere sneltoetsen)
-6. Het bestand gaan we meteen eens _uitvoeren_ of 'knitten' door op de knit-knop te drukken
+6. Het bestand gaan we meteen eens _uitvoeren_ of 'knitten' door op de knit-knop te drukken of de sneltoets `Ctrl + Shift K` te gebruiken
 
-Als alles goed gaat wordt er een voorbeeld rapportje gegenereerd en in de _viewer_-pane getoond.
+Als alles goed gaat, wordt er een voorbeeld-rapportje gegenereerd en in de _viewer_-pane getoond.
 
 ## Data opladen
 
-Op het einde van de workshop krijg je de kans om met dezelfde dataset als voor de Boxplot-workshop te werken, maar omdat die gegevens zich iets moeilijker lenen voor tijdreeksanalyse, gaan we eerst met een eenvoudigere datasets van start.
+Op het einde van de workshop krijg je de kans om met dezelfde dataset als voor de Boxplot-workshop te werken, maar omdat die gegevens zich iets moeilijker lenen voor tijdreeksanalyse, gaan we eerst met een eenvoudigere dataset van start.
 
 Op [Kaggle](https://www.kaggle.com) vind je de dataset genaamd 
-[Time Series Data](https://www.kaggle.com/yugagrawal95/timeseries-data). De data wordt als een Excel werkboek beschikbaar wordt gemaakt. Excel is vaak erg problematisch als databron, dus als je het kan vermijden, gebruik dan het liefst een formaat dat binnen 2000 jaren nog steeds begrepen gaat worden: platte tekst, liefst tab-gescheiden (`.tsv`, tab-separated values) zodat inhoudelijke komma's niet ge-escaped moeten worden met dubbele aanhalingstekens.
+[Time Series Data](https://www.kaggle.com/yugagrawal95/timeseries-data). De data wordt oorspronkelijk als een Excel werkboek beschikbaar wordt gemaakt, maar hier werd dit bestand op voorhand reeds omgezet naar een `tsv`-bestand. Het bestaat uit de verkoopcijfers van een aantal producten samen met nog een heleboel andere gegevens waar we hier geen gebruik van zullen maken.
+
+> Excel is vaak erg problematisch als databron, dus als je het kan vermijden, gebruik dan het liefst een formaat dat binnen 2000 jaren nog steeds begrepen gaat worden: platte tekst, liefst tab-gescheiden (`.tsv`, tab-separated values) zodat inhoudelijke komma's niet ge-escaped moeten worden met dubbele aanhalingstekens.
 
 Voor het opladen van de data gebruiken we `data.table`. Dat is op dit ogenblik de meest professionele manier om data te manipuleren. De `fread` methode is flexibel en laat toe om:
 
@@ -88,167 +96,291 @@ output:
   html_document: 
     highlight: zenburn
 ---
-
-## Workshop tijdsreeksen
-
+   
+## Workshop tijdreeksen
+   
 ...
 ```
 
-1. Geef jouw naam in en vervang `...` met een nieuwe R codeblok (eng: _code chunk_):
-1. Selecteer `...` en gebruik de sneltoets `Ctrl + Alt + I`
+1. Geef in jouw naam in en vervang `...` met een nieuwe R codeblok (eng: _code chunk_) door de drie punjes te selecteren en de sneltoets `Ctrl + Alt + I` in te geven
 1. Zorg ervoor dat er voor én na elke codeblok, titel en opsomming een lege lijn wordt toegevoegd
-1. Plaats in deze eerste blok:
+1. Plaats onderstaande code in deze eerste blok (bijkomdende uitleg volgt hieronder):
 
 ```{r message=FALSE, warning=FALSE}
-library(readxl)
+library(knitr)
 library(data.table)
 library(magrittr)
+library(readxl)
 library(dplyr)
 library(ISOweek)
+library(lubridate)
+library(forecast)
 
 opts_chunk$set(echo = TRUE)
 
-sales <- read_excel("dat/sales.xlsx", sheet = "Final")
-str(sales)
+sales <- fread(, "dat/sales.tsv")
 ```
 
-- Maak daar
+Met de verscheidene `library` uitdrukkingen worden de nodige pakketten in het geheugen geladen. Als deze lijnen een fout genereren, heeft dat er meestal te maken dat het pakket nog niet geïnstalleerd is. Gebruik dan een uitdrukking zoals `install.packages(c("data.atble", "magrittr"))` in de console om de pakketten te installeren. Hieronder overlopen we kort de reden waarom we deze pakketten laden:
 
-Met de `str` functie kijken we snel naar de inhoud. Zulk een functie wordt typisch in de console uitgevoerd en maakt dan geen onderdeel uit van het rapport zelf:
+- `knitr`: parseren van de RMarkdown naar een HTML rapportje
+- `data.table`: laden en manipuleren van data
+- `magrittr`: gebruik van [method chaining](https://en.wikipedia.org/wiki/Method_chaining#:~:text=Method%20chaining%2C%20also%20known%20as,to%20store%20the%20intermediate%20results.)
+- `dplyr`: alternatief voor het manipuleren van data
+- `ISOweek`: omzetten van datum naar weeknummers en omgekeerd en dit volgens [ISO 8601](https://nl.wikipedia.org/wiki/ISO_8601) normering
+- `lubridate`: uitdrukken van een datum als decimaal getal
+- `forecast`: wrapper om voorspellingen uitvoeren op `ts` objecten
 
-```{r view-object, output.lines = 15}
+Merk op dat hier twee alternatieven worden gebruikt voor het manipuleren van data. Merk ook op dat er veel energie wordt gestoken in het manipuleren van datum velden. Zoals we zullen zien is dat niet voor niets. Het afhandelen van datums, zeker indien de gegevens op weekbasis worden ingedeeld, kan een zeer complexe karwij worden.
 
-par(bg = 4)
-library(readxl)
-
-```
+Met de `opts_chunk$set` functie (eigenlijk functie `set` als element in de `list` `opts_chunk`) zorgen we ervoor dat de code mee getoond wordt in het rapport. Wordt het rapport verspreidt naar individuen die aan de code geen boodschap hebben, dan kan je `echo = FALSE` instellen.
 
 ## Kleuren
 
-```{r}
+1. Maak een kleurenpalet aan:
 
-palette(c("grey", "steelblue1", "black", "#D3EAF1"))
+```{r}
+palette(c(rgb(.7, .7, .7), "steelblue1", "black", "#D3EAF1"))
 ```
 
+De lijn hierboven demonstreert het gebruik van een kleurenpalet. Hier zie je dat je kleuren in verschillende formaten kunt ingeven. Nadat het palet gedefinieerd is, kan je naar de kleuren verwijzen d.m.v. 1, 2, &hellip;. Misschien is hier een goede plaats om een zijsprongetje te maken naar de kleurenruimte van [Munsell](https://en.wikipedia.org/wiki/Munsell_color_system).
 
-```{r}
+> Munsell was een genie met kleuren. Een volledige beschrijving van zijn kleurenruimte valt buiten deze workshop, maar het volstaat hier om één van zijn zogenaamde kleurtegenstellingen (dyaden) te bewonderen om waarde ervan in te zien:
 
+```{r munsell, out.width="100%", echo=FALSE, fig.cap="(ref:munsell)"}
+include_graphics("img/Dyad_5B-5YR_Annot.png")
+```
+
+(ref:munsell) De dyade blauw-5 tegenover geelrood-5 (5B-5YR). In elke gekleurd vak zie je van boven naar onder een index voor referentie, de Munsell kleurcode, de overeenkomende RGB waarden en ten slotte de kleur voorgesteld als hex triplet. Zie de [Wikipedia pagina](https://en.wikipedia.org/wiki/Munsell_color_system) voor meer info en [deze pagina](https://www.rit.edu/cos/colorscience/rc_munsell_renotation.php) van de Rochester Institute of Technology waar je datasets vindt om gelijkaardige figuren te produceren.
+
+## Data exploratie
+
+We gaan de data exploratie hier tot een minimum beperken.
+
+1. Met de `str` functie kijk je naar de inhoud van het `sales object`. Zulk een functie wordt typisch in de console uitgevoerd en maakt dan geen onderdeel uit van het rapport zelf:
+
+```r
+sales %>% str
+```
+
+```
+## Classes 'data.table' and 'data.frame':   935 obs. of  86 variables:
+##  $ Key                                              : chr  "A" "B" "C" "D" ...
+##  $ Date                                             : POSIXct, format: "2014-01-01" "2014-01-01" ...
+##  $ Volume                                           : num  1346974 677826 1210359 436761 434 ...
+##  $ Disc                                             : num  4.29e+08 1.16e+08 1.04e+08 5.63e+07 2.94e+05 ...
+##  $ max_T                                            : num  49.5 49.5 49.5 49.5 49.5 ...
+##  $ min_T                                            : num  29.7 29.7 29.7 29.7 29.7 ...
+##  $ avg_T                                            : num  39.6 39.6 39.6 39.6 39.6 ...
+##  $ precipitation                                    : num  0.448 0.448 0.448 0.448 0.448 ...
+##  $ Consumer_Price_Index_month                       : num  85.5 85.5 85.5 85.5 85.5 ...
+##  $ Exchange_Rate_Index_Period_Average_month         : num  109 109 109 109 109 ...
+##  $ Exchange_Rate_LCU_per_US_Period_Average_month    : num  6.83 6.83 6.83 6.83 6.83 ...
+...
+```
+
+We zien dat er een aantal producten zijn (onder `Key`), een datum van verkoop (`Date`) en dat de verkoopcijfers onder `Volume` staan. Zoals je kan zien zijn er veel meer variabelen, maar met deze drie zouden we toch al aan de slag moeten kunnen om het principe te demonstreren.
+
+## Data voorbereiden
+
+Het bijzondere aan tijdreeksen (maar ook bijvoorbeeld GIS data) is dat de afhankelijke variabelen niet enkel van andere variabelen afhangt, maar ook van zichzelf. Men spreekt van _autocorrelatie_ wanneer een waarde van een naburige waarde (in ruimte of tijd) afhangt.
+
+1. In R werk je bij tijdreeksen het best met `ts`-klasse objecten (staat voor _time series_). Daarvoor moeten we eerst de data pivoteren:
+
+```{r sales-pivot}
 sales <- sales %>%
-  setDT %>% 
-  dcast(Date~Key, value.var = "Volume") %>%
-  setDT(sales)
-
-sales_ts <- sales[Date < "2020-02-01", .(A, C, E)] %>%
-  ts(freq = 12, start = c(2014, 1))
-
-sales_ts %>% plot
-
-# par(bg = "#D3EAF1")
-sales_ts %>% acf(lag.max = 18)
+  dcast(Date ~ Key, value.var = "Volume")
 ```
 
+:::{.table-wrapper}
 
-```{r}
-sales_ts[,"C"] %>% stl(s.window = "periodic") %>% plot
-
+```{r sales-pivot-show, echo=FALSE}
+sales %>% head %>% kable
 ```
 
+:::
+
+Dit formaat is eerder uitzonderlijk in statistische analyses en komt men voornamelijk tegen bij gegevens met autocorrelatie (zie ook de term _repeated measures_).
+
+1. Nu selecteren we drie producten en selecteren ze ook op `Date` om dat er een aantal waarden op het einde van de tijdsreeks ontbreken. Daarna converteren we de data naar een `ts` object:
 
 ```{r}
-library("forecast")
+sales_ts <- sales[
+  Date < "2020-02-01",    # Selectie op datum
+  .(A, C, E)] %>%         # Selectie van Variabelen
+    ts(frequency = 12,    # Omzetten ts, 12 maanden per jaar
+      start = c(2014, 1)) # Startdatum opgeven
+```
+
+## In grafiek zetten van tijdreeksen
+
+1. Vanaf dat alles in het juiste formaat staat is het zo eenvoudig als de plot functie op te roepen:
+
+```{r}
+par(bg = 4, cex.main = 1)
+
+main <- "Verkoopcijfers (volume)\nvoor drie producten"
+
+sales_ts %>% plot(main = main, xlab = "Jaartal")
+```
+
+Bijna perfect. Er is nog één probleempje met de y-assen. De positie van de labels op assen in `base` R wordt bepaald door een functie `pretty`. Je zou dus de y-assen in de plot kunnen uitschakelen (`yaxt = "n"`) en deze helemaal manueel uittekenen door gebruik te maken van de functie `axis`, maar het is natuurlijk veel eenvoudiger om de aantallen te delen door een factor 1000.
+
+1. Pas de voorgaande code aan om de verkoopcijfers eerst te delen door 1000 en pas ook de titel van de figuur aan:
+
+```{r}
+sales_ts_th <- sales_ts / 1000
+
+par(bg = 4, cex.main = 1)
+
+main <- "Verkoopcijfers (volume x 1000)\nvoor drie producten"
+
+sales_ts_th %>% plot(main = main, xlab = "Jaartal")
+```
+
+## Tijdreeks analyses
+
+Dit is geen workshop rond analyses, maar in werkelijkheid gaan de analyses en de visualisatie hand-in-hand. Visualisatie is immers vaak ook het in beeld brengen van diagnostieken. Voor tijdreeksen zijn er bijzondere statistieken die de autocorrelatie (binnen eenzelfde variabele) en cross-correlatie (tussen verschillende variabelen) mooi kunnen visualiseren. Hier komt past echt de voordelen van `ts` naar boven.
+
+1. Onderzoek de auto- en cross-correlatie voor alle combinaties van de verkoopvolumes voor de producten A, c en E. Doe dit voor een _horizon_ van 18 maanden in de toekomst (positief) en in het verleden (negatief):
+
+```{r}
+par(bg = 4)
+sales_ts_th %>% acf(lag.max = 18)
+```
+
+Hieruit leren we bijv. dat er een correlatie is tussen producten A en E met een horizon van 1 'seizoen' (1 jaar in dit geval), maar dat de relatie niet volledig symmetrisch is, dus het ene geeft mogelijk aanleiding tot het andere en niet omgekeerd. Om dit te zien vergelijk je de correlatie op 1.0 voor _A & E_ (onder significantie niveau) met die van -1.0 voor _E & A_ (boven significantie niveau).
+
+## Ontbinden in factoren
+
+1. Laten we de verkoopcijfers voor één product, namelijk product C ontbinden in een seizoenseffect (het zuiver repetitief gedeelte), de trend (achtergrond niveau) en de overblijvende ruis:
+
+```{r}
+par(bg = 4)
+
+sales_ts_th[, "C"] %>% stl(s.window = "periodic") %>% plot
+```
+
+Merk op dat het probleem van de assen hier wordt opgelost door de positie van de y-as te laten alterneren.
+
+1. Onderzoek hoe de plot van een `stl` object ervoor zorgt dat de assen alternerend getoond worden:
+
+```{r output.lines=10}
+stats:::plot.stl
+```
+
+## Voorspellingen
+
+Laten we toekomst voorspellen, meer bepaald de verkoopcijfers voor het jaar 2019. Merk op dat we die cijfers gewoon hebben, waarom zouden we ze dan voorspellen? Omdat het natuurlijk goed is om meteen de voorspelling te toetsen aan de realiteit, anders moeten we een jaar wachten en dat zagen de organisatoren van deze workshop niet zitten &#9786;.
+
+1. Laten we de standaard plot voor `forecast` objecten met meerdere variabelen:
+
+```{r fig.height=7}
+par(bg = 4)
+
+sales_ts_th %>% forecast %>%
+  plot(col = 3, xlab = "Jaar",
+    main = "Stuks verkocht (x 1000)")
+```
+
+Dit is al vrij goed maar er zijn een aantal problemen. Laten we met een belangrijk detail beginnen: de kleur en de schakeringen van de predictie-intervallen.
+
+1. Met `fan` kan je meer kleurschakeringen bekomen en met `colorRampPalette` maken we een eenvoudige kleurschakering:
+
+```{r fig.height=7}
+par(bg = 4)
 ramp <- colorRampPalette(1:2)(25) 
 
+sales_ts_th %>%
+  forecast(fan = TRUE) %>%
+  plot(col = 3, xlab = "Jaar", shadecols = ramp,
+    main = "Stuks verkocht (x 1000)")
+```
+
+Nu komt het belangrijkste probleem: we willen eigenlijk enkel 2019 voorspellen en we willen de actuele en voorspelde data naast elkaar zien. Het zou ook leuke zijn mocht er een duidelijke markering komen bij de start van de voorspelling.
+
+1. Probeer de voorspellingen te reproduceren met hierboven genoemde vereisten:
+
+```{r}
+par(bg = 4, mfrow = c(3, 1), oma = c(5, 3, 1, 1),
+  mar = c(0, 4, 0, 2))
+
 for(series_name in sales_ts %>% colnames) {
-  series <- sales_ts[, series_name]
+  series <- sales_ts_th[, series_name]
   fc <- series %>%
     window(end=c(2019, 1)) %>%
     forecast(fan = TRUE, h = 12)
-  fc %>% plot(shadecols = ramp, lwd = 2, col = 3)
-  abline(v = 2019, lwd = 2, col = 3, lty = 2)
+  fc %>% plot(shadecols = ramp, col = 3,
+    xaxt = "n", main = "")
+  title(ylab = series_name)
+  
+  if (series_name == "E") {
+    axis(1)
+  }
+  abline(v = 2019, lwd = 2, col = 1, lty = 3)
   fc <- series %>%
-    window(start=c(2018, 12)) %>% lines(lwd = 2, col = 3)
+    window(start=c(2018, 12)) %>% lines(col = 3)
 }
+
+title(xlab = "Jaar", outer = 2)
 ```
 
+## Extra: Herbemonsteren van temporele gegevens
 
-## Herbemonsteren van temporele gegevens
-
-Temporele gegevens zijn vaak georganiseerd op week, maand, kwartaal of jaarbasis. Bijvoorbeeld verkoopcijfers per kwartaal.  In het vakjargon spreekt met van een _bucket_ van bijvoorbeeld een week, een kwartaal, enz&hellip;. Soms echter, zoals bij onze data, is er wel een datum veld voorzien, maar zijn dedata niet netjes geaggregeerd naar zulke vaste tijdseenheid. De aggregatie, die men ook wel _resampling_ of _bucketising_ noemt, moeten we dan nog manueel uitvoeren. 
+Temporele gegevens zijn vaak georganiseerd op week, maand, kwartaal of jaarbasis. Bijvoorbeeld verkoopcijfers per kwartaal. In het vakjargon spreekt met van een _bucket_ van bijvoorbeeld een week, een kwartaal, enz&hellip;. Soms echter, zoals bij onze data, is er wel een datum veld voorzien, maar zijn de data niet netjes geaggregeerd naar zulke vaste tijdseenheid. De aggregatie, die men ook wel _resampling_ of _bucketising_ noemt, moeten we dan nog manueel uitvoeren. Hieronder wordt dit voor de volledigheid gedemonstreerd. We vertrekken van de studenten resultaten data uit Workshop 1:
 
 ```{r}
-
 sem_1_anon <- fread("dat/sem_1_anon.tsv")
+```
 
+We controleren eerst het bereik van de variabele `Datum1`, verdelen het al eens in weken en tellen we zeven dagen bij de einddatum:
 
-## eenmalig >>>
-
-# col_types[col_types == "logical"] <- "numeric"
-# col_types <- col_types %>% unlist
-# sem_1_anon <- read_excel("dat/sem_1_anon.xlsx", col_types = col_types)
-# 
-# sem_1_anon %>% fwrite("dat/sem_1_anon.tsv", sep = "\t")
-## <<< eenmalig
-sem_1_anon <- fread("dat/sem_1_anon.tsv")
-par(bg = "#D3EAF1")
-# 
-# sem_1_anon[, plot(Datum1, Totaal_taalvaardigheid)] 
-# sem_1_anon[, plot(Datum1, Totaal_rekenvaardigheid)] 
-# sem_1_anon[, plot(Datum1, KritiS_T)] 
-# sem_1_anon[, plot(Datum1, ToepS_T)] 
-# sem_1_anon[, plot(Datum1, SameL_T)] 
-# sem_1_anon[, plot(Datum1, ZelfR_T)] 
-# sem_1_anon[, plot(Datum1, PlanR_T)] 
-# sem_1_anon[, plot(Datum1, StuuR_T)] 
-# sem_1_anon[, plot(Datum1, ZelfE_T)] 
-# sem_1_anon[, plot(Datum1, AutoM_T)] 
-# sem_1_anon[, plot(Datum1, Cont_M)] 
-# sem_1_anon[, plot(Datum1, AM_T)] 
-# sem_1_anon[, plot(Datum1, RelaS_T)] 
-# sem_1_anon[, plot(Datum1, AnalS_T)] 
-# sem_1_anon[, plot(Datum2, MemoS_T)] 
-
+```{r}
 sem_1_anon$Datum1 %>%
   range(na.rm = TRUE) %>%
   strftime("%Y-W%V-1") %>%
   ISOweek2date %>%
   add(c(0, 7))
-
-sem_1_anon[, Week_T := Datum1 %>% ISOweek %>% factor]
-week_lev_all <- sem_1_anon$Week_T %>% levels
-
-par(bg = "#D3EAF1", mar = c(5, 5, 6, 2), xpd = TRUE)
-sem_1_anon[, plot(Datum1, MemoS_T, col = Week_T, pch = 19,
-  cex = .7)]
-
-legend(x = 1.601e9, y= 9, legend =week_lev_all, col = ramp,
-  cex = .7, bg = NA, ncol = 4, pch = 19)
-
-
-
-library(lubridate)
-sem_1_anon[grepl("2020", Week_T), .(MemoS_T = mean(MemoS_T)), Week_T] %>%
-  arrange(Week_T) %>%
-  select(MemoS_T) %>% 
-  ts(freq = 365.25/7,
-    start = decimal_date(ymd("2020-09-07"))) %>%   plot(lwd = 2)
-# 
-# 
-# sem_1_anon[, .(Datum1, Week_T)]
-# zelfr_t <- sem_1_anon[,
-#   .(ZelfR_T = median(ZelfR_T, na.rm = TRUE)), Week_T]
-# zelfr_t$Week_T %>% range(na.rm = TRUE)
-# zelfr_t$Week_T %>% min(na.rm = TRUE)
-# zelfr_t[order(Week_T),
-#   ts(ZelfR_T, freq = 365.25/7, start = min(Week_T, na.rm = TRUE))] %>% 
-#   plot
-# 
-# sem_1_anon$Departement %>% table %>% sort %>% rev
-# 
-# sem_1_anon[, order(Woordenschat)]
-# 
-# sem_1_anon[Departement %in% c("WT", "MC")]
-# 
-# sem_1_anon[1:2248]
 ```
 
+Door per week in te kleuren zien we waar er voldoende data aanwezig is om een analyse op uit te voeren:
 
+```{r fig.height=7}
+sem_1_anon[, Week_T := factor(ISOweek(Datum1))]
+week_lev_all <- sem_1_anon$Week_T %>% levels
+ 
+par(bg = 4)
+ramp <- rainbow(24, 1)
+temp_pal <- palette(ramp)
+
+sem_1_anon[, plot(Datum1, MemoS_T, col = Week_T,
+  pch = 19, cex = .7,
+  main = "Indicatie weken",
+  xlab = "Datum terugblikversie",
+  ylab = "Memoriseren")] -> d
+ 
+legend("bottomright", legend = week_lev_all, col = ramp,
+ cex = .7, bg = NA, ncol = 4, pch = 19, border = "n")
+
+palette(temp_pal)
+```
+
+Nu kunnen we eindelijk een selectie maken + de omzetteing naar `ts` verzorgen.
+ 
+```{r}
+par(bg = 4)
+
+sem_1_anon[
+  grepl("2020", Week_T),        # Selectie
+  .(MemoS_T = mean(MemoS_T)),   # Var-manipulatie
+  Week_T] %>%                   # Groepering
+   arrange(Week_T) %>%          # dplyr
+   select(MemoS_T) %>% 
+   ts(
+     freq = 365.25/7,
+     start = decimal_date(ymd("2020-09-07"))) %>%
+  plot(lwd = 2, xlab = "Tijd (decimaal)",
+    ylab = "Memoriseren", main = "Evolutie memoriseren")
+```
+
+---
