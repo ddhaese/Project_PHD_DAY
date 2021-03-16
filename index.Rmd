@@ -59,7 +59,7 @@ Participants will be able to practice via exercises. Basic knowledge of R is rec
 
 ## New project {-}
 
-You can do without but it is considered good practice to define a project folder and corresponding R project, no matter how small the project. On the top of the screen in RStudio you will find the button to allow you create a new project or quickly switch between projects. Making use of a project has the added benefit that R-studio saves all of the generated files (such as visualizations) in the project folder. No need to try and remeber where you saved files anymore!
+You can do without but it is considered good practice to define a project folder and corresponding R project, no matter how small the project. On the top of the screen in RStudio you will find the button to allow you create a new project or quickly switch between projects. Making use of a project has the added benefit that R-studio saves all of the generated files (such as visualizations) in the project folder. No need to try and remember where you saved files anymore!
 
 1. Follow the RStudio wizard to create a new project in a folder of your choice (best locally during workshop)
 
