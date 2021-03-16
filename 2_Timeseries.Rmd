@@ -14,7 +14,19 @@ library(knitr)
 
 # Time Series
 
+<<<<<<< HEAD:2_Timeseries.Rmd
 ![](img/ts.png)
+=======
+![Time series](img/ts.png)
+
+## Introduction
+
+In this workshop we will learn how to handle and visualize temporal data. Most analytic tools dealing with time series depend on the `ts` class of objects and so we will have to learn how to transform our source data to a `ts` object. Finally, we will be plotting the results of some diagnostic and predictive analyses typical for time series data.
+
+## Start
+
+1. In case you haven't done this before, install the latest version of [R](https://cran.r-project.org/bin/windows/base/) and [RStudio](https://rstudio.com/products/rstudio/download/)
+>>>>>>> 06ba3f214079fd482a97ebf052461d4458ab62bb:Timeseries.Rmd
 
 ## Introduction to time series
 
