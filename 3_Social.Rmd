@@ -16,7 +16,7 @@ css: "css/labo.css"
 library(knitr)
 ```
 
-## Introduction
+## Introduction to social network
 
 In this workshop, we will try to create an interactive force-directed network diagram from the [D3.js](https://d3js.org/) framework. Typically, this type of graph is adopted for displaying relations within a social network, but its use extend far beyond social sciences. For example, one could device a similar network depicting the correlation among variables of a large dataset (e.g. the results within the students dataset of workshop 1) or, from the realm of NLP, the co-occurrence of words within tweets.
 

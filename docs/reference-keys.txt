@@ -1,4 +1,8 @@
 fig:munsell
+getting-started
+installation
+new-project
+new-rmarkdown-report
 boxplot
 start
 nieuw-project
@@ -8,10 +12,7 @@ woordenschat
 departement
 de-boxplot
 time-series
-introduction
-start-1
-new-project
-new-rmarkdown-report
+introduction-to-time-series
 uploading-the-data
 colors
 data-exploration
@@ -22,7 +23,7 @@ decompose-time-series
 predictions
 extra-resampling-temporal-data
 social-network
-introduction-1
+introduction-to-social-network
 loading-the-data
 exploring
 reducing-size

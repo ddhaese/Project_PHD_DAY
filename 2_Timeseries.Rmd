@@ -14,34 +14,11 @@ library(knitr)
 
 # Time Series
 
-![Time series](img/ts.png)
+![](img/ts.png)
 
-## Introduction
+## Introduction to time series
 
 In this workshop we will learn how to handle and visualize temporal data. Most analytic tools dealing with time series depend on the `ts` class of objects and so we will have to learn how to transform our source data to a `ts` object. Finally, we will be plotting the results of some diagnostic and predictive analyses typical for time series data.
-
-## Start
-
-1. In case you haven't done this before, install the latest version of [R](https://cran.r-project.org/bin/windows/base/) and [RStudio](https://rstudio.com/products/rstudio/download/)
-
-## New project
-
-You can do without but it is considered good practice to define a project folder and corresponding R project, no matter how small the project. On the top of the screen in RStudio you will find the button to allow you create a new project or quickly switch between projects.
-
-1. Follow the RStudio wizard to create a new project in a folder of your choice (best locally during workshop)
-
-## New RMarkdown report
-
-By default data scientists work with notebooks and for R this means RMarkdown notebook (`.rmd` extension). Not only do notebooks offer enhanced reproducibility. Once you get used to them, you will find them increasing your productivity:
-
-1. Make a new rMarkdown file through _New File > R Markdown_
-2. Give your HTML document a title (HTML is the default doc type but there are many more)
-3. If your RStudio asks for it, let it install the necessary packages
-4. You will notice that RStudio has made an example file for you
-5. Use the _Save_-button or `Ctrl + S` to save it in the root of your project folder (b.t.w., use `Alt + Shift + K` for an overview of available shortcuts)
-6. Let us immediate test the parsing of the report.  _Run_ or _knit_ it by pressing the knit-button or use the shortcut  `Ctrl + Shift K`
-
-If all goes well, you should see the example report appearing in the viewer pane of your RStudio.
 
 ## Uploading the data
 
