@@ -48,7 +48,8 @@ opts_chunk$set(echo = TRUE)
 
 # Summary {-}
 
-This workshop will provide you with the basics on visualizing your data using the statistical package R. The workshop will focus on how to generate frequently used graphics, such as the scatter plot, the (ordered) bar chart or the box and whisker plot. Participants will be able to practice via exercises. Basic knowledge of R is recommended, and R-studio should be installed prior to the session. A simple dataset will be provided, but participants can also use their own research-data. 
+This workshop will provide you with the basics on visualizing your data using the statistical package R. The workshop will focus on how to generate frequently used graphics, such as the scatter plot, the (ordered) bar chart or the box and whisker plot. For more experienced users more advanced visuals are added in the form of time series analyses and social network analyses.
+Participants will be able to practice via exercises. Basic knowledge of R is recommended, and R-studio should be installed prior to the session. A simple dataset will be provided, but participants can also use their own research-data. 
 
 # Getting started {-}
 
@@ -58,13 +59,13 @@ This workshop will provide you with the basics on visualizing your data using th
 
 ## New project {-}
 
-You can do without but it is considered good practice to define a project folder and corresponding R project, no matter how small the project. On the top of the screen in RStudio you will find the button to allow you create a new project or quickly switch between projects.
+You can do without but it is considered good practice to define a project folder and corresponding R project, no matter how small the project. On the top of the screen in RStudio you will find the button to allow you create a new project or quickly switch between projects. Making use of a project has the added benefit that R-studio saves all of the generated files (such as visualizations) in the project folder. No need to try and remeber where you saved files anymore!
 
 1. Follow the RStudio wizard to create a new project in a folder of your choice (best locally during workshop)
 
 ## New RMarkdown report {-}
 
-By default data scientists work with notebooks and for R this means RMarkdown notebook (`.rmd` extension). Not only do notebooks offer enhanced reproducibility. Once you get used to them, you will find them increasing your productivity:
+By default data scientists work with notebooks and for R this means RMarkdown notebook (`.rmd` extension). Not only do notebooks offer enhanced reproducibility. For one thing, it is easy to integrate R-code and use working R-code to export to various output formats (html, pdf, word) and output types (documents, dashboards, presentations). Once you get used to them, you will find them increasing your productivity:
 
 1. Make a new rMarkdown file through _New File > R Markdown_
 2. Give your HTML document a title (HTML is the default doc type but there are many more)
