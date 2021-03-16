@@ -14,6 +14,8 @@ library(knitr)
 
 # Time Series
 
+![](img/ts.png)
+
 ## Introduction to time series
 
 In this workshop we will learn how to handle and visualize temporal data. Most analytic tools dealing with time series depend on the `ts` class of objects and so we will have to learn how to transform our source data to a `ts` object. Finally, we will be plotting the results of some diagnostic and predictive analyses typical for time series data.
