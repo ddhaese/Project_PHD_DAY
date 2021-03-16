@@ -1,8 +1,4 @@
 fig:munsell
-getting-started
-installation
-new-project
-new-rmarkdown-report
 boxplot
 start
 nieuw-project
@@ -23,11 +19,10 @@ decompose-time-series
 predictions
 extra-resampling-temporal-data
 social-network
+introduction-to-social-network
 loading-the-data
 exploring
 reducing-size
 the-network
 vectors
 cascading-style-sheets
-introduction-to-social-network
-introduction
