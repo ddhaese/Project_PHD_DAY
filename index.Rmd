@@ -1,7 +1,7 @@
 ---
 title: "An introduction to datavisualisation in R"
 author: "Gert Vanthournout and David D'Haese"
-date: "Gepubliceerd op `r Sys.time()`"
+date: "Published on `r Sys.time()`"
 site: bookdown::bookdown_site
 output:
   bookdown::gitbook:
@@ -50,19 +50,19 @@ opts_chunk$set(echo = TRUE)
 
 This workshop will provide you with the basics on visualizing your data using the statistical package R. The workshop will focus on how to generate frequently used graphics, such as the scatter plot, the (ordered) bar chart or the box and whisker plot. Participants will be able to practice via exercises. Basic knowledge of R is recommended, and R-studio should be installed prior to the session. A simple dataset will be provided, but participants can also use their own research-data. 
 
-# Getting started
+# Getting started {-}
 
-## Installation
+## Installation {-}
 
 1. In case you haven't done this before, install the latest version of [R](https://cran.r-project.org/bin/windows/base/) and [RStudio](https://rstudio.com/products/rstudio/download/)
 
-## New project
+## New project {-}
 
 You can do without but it is considered good practice to define a project folder and corresponding R project, no matter how small the project. On the top of the screen in RStudio you will find the button to allow you create a new project or quickly switch between projects.
 
 1. Follow the RStudio wizard to create a new project in a folder of your choice (best locally during workshop)
 
-## New RMarkdown report
+## New RMarkdown report {-}
 
 By default data scientists work with notebooks and for R this means RMarkdown notebook (`.rmd` extension). Not only do notebooks offer enhanced reproducibility. Once you get used to them, you will find them increasing your productivity:
 
