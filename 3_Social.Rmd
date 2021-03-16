@@ -10,7 +10,7 @@ css: "css/labo.css"
 
 # Social network
 
-![https://www.kaggle.com/rozemberczki/musae-github-social-network](https://storage.googleapis.com/kaggle-datasets-images/373809/726866/a6200c90b023b8184bde620f6cf8113a/dataset-cover.jpeg?t=2019-10-08-03-05-23)
+![](img/social.png)
 
 ```{r include=FALSE}
 library(knitr)
@@ -28,7 +28,7 @@ We will be using the [MUSAE GitHub Social Network](https://www.kaggle.com/rozemb
 - a set of edges depicting the relationships among developers
 
 1. Start a new project
-1. Load the three files containing the data
+1. Load the two files containing the data
 
 ```{r load data}
 library(data.table)
@@ -45,9 +45,9 @@ nodes <- fread("dat/git_nodes.tsv")
 
 ## Reducing size
 
-Unfortunately, visualizing social network is really only feasible with relatively small networks. Once we start talking thousand of nodes, you will need a [bigger boat](https://www.youtube.com/watch?v=2I91DJZKRxs). Not that the D3.js network is slow, it is not. It has to do with the number of edges increasing exponentially with increasing number of nodes.
+Unfortunately, visualizing a social network is really only feasible with relatively small networks. Once we start talking thousand of nodes, you will need a [bigger boat](https://www.youtube.com/watch?v=2I91DJZKRxs). Not that the D3.js network is slow, it is not. It has to do with the number of edges increasing exponentially with increasing number of nodes.
 
-1. Pick the 40 most popular developers, i.e. the ones with the most connections, andadjust the edges and nodes datasets accordingly
+1. Pick the 40 most popular developers, i.e. the ones with the most connections, and adjust the edges and nodes datasets accordingly
 
 ```{r pick-popular}
 popular <- edges %>% unlist %>%
@@ -72,7 +72,7 @@ Drawing the network is really easy. Because however it is different from any oth
 palette(c("#2D859C", "#B86619"))
 ```
 
-Now we have to make sure to generate a string that looks like this:
+Now we have to make sure to generate a Javascript statement that looks like this:
 
 ```js
 d3.scaleOrdinal().
@@ -105,12 +105,12 @@ forceNetwork(
   Group = "Group",
   bounded = TRUE,
   opacityNoHover = .8,
-  linkColour = "#999999",
+  linkColour = "#B3B3B3",
   zoom = TRUE,
   colourScale = JS(color_scale),
   legend = TRUE,
   fontFamily = "Roboto",
-  fontSize = 20,
+  fontSize = 16,
   charge = -1,
   opacity = 1,
   linkDistance = 200)
@@ -118,22 +118,22 @@ forceNetwork(
 
 Let us go over the arguments one-by-one:
 
-- `height = 600`: set canvas width to 600px
-- `width = 600`: set canvas height to 600px
+- `height = 600`: set canvas width to 600 pixels
+- `width = 600`: set canvas height to 600 pixels
 - `Links = edges_sel`: attach edge dataset
 - `Nodes = nodes_sel`: attach node dataset
-- `Source = "Source"`: define variable name containing the source of the relationships
-- `Target = "Target"`: define variable name containing the target of the relationships
-- `NodeID = "Name"`: define variable name containing the label to be displayed
-- `Group = "Group"`: define variable name containing the (color) group
+- `Source = "Source"`: define the variable name containing the source of the relationships
+- `Target = "Target"`: define the variable name containing the target of the relationships
+- `NodeID = "Name"`: define the variable name containing the label to be displayed
+- `Group = "Group"`: define the variable name containing the (color) group
 - `bounded = TRUE`: wether nodes are allowed to fly out of the canvas
 - `opacityNoHover = .8`: the opacity of the labels when no node is being hovered over
-- `linkColour = "#999999"`: the color of the edges
+- `linkColour = "#B3B3B3"`: the color of the edges
 - `zoom = TRUE`: whether the network can be zoomed-in and out
-- `colourScale = JS(color_scale)`: the JS colorscale
+- `colourScale = JS(color_scale)`: the JS color scale
 - `legend = TRUE`: whether to add a legend
 - `fontFamily = "Roboto"`: the font family for the labels
-- `fontSize = 20`: the font size for the labels
+- `fontSize = 16`: the font size for the labels
 - `charge = -1`: the amount of force that pull the nodes together (positive) or apart (negative)
 - `opacity = 1`: the relative opacity of the graph elements
 - `linkDistance = 200`: the default length of the edges disregarding forces acting upon the nodes
@@ -150,11 +150,11 @@ The network is being rendered as an `svg` HTML element (scalable vector graphics
 
 Hopefully you have heard of CSS before. It is the language used to style the web and it has been growing more popular in the past decades and will probably continue to do so for a while. Because the network is being rendered as pure HTML, elements of it can also be styled using CSS. In Rstudio, which supports multilingual development, you can add a css code chunk instead of an R code chunk.
 
-1. Add a `css` code chunk in your report with the following code:
+1. Add a `css` code chunk in your report to adjust the border color and border stroke width of the nodes. Also, when finished growing after hovering over it, turn the node to a brighter orange:
 
 ```{css}
 g circle {
-  stroke: #999999 !important;
+  stroke: #B3B3B3 !important;
   stroke-width: 1px !important;
 }
 
