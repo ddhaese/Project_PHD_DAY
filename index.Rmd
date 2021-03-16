@@ -19,7 +19,7 @@ library(data.table)
 library(magrittr)
 
 opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE,
-  fig.path = "img/gen-")
+  fig.path = "img/gen-", cache = FALSE)
 
 # Code van https://community.rstudio.com/t/showing-only-the-first-few-lines-of-the-results-of-a-code-chunk/6963/2
 hook_output <- knit_hooks$get("output")
