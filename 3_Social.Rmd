@@ -16,11 +16,7 @@ css: "css/labo.css"
 library(knitr)
 ```
 
-<<<<<<< HEAD
 ## Introduction to social network
-=======
-## Introduction
->>>>>>> 06ba3f214079fd482a97ebf052461d4458ab62bb
 
 In this workshop, we will try to create an interactive force-directed network diagram from the [D3.js](https://d3js.org/) framework. Typically, this type of graph is adopted for displaying relations within a social network, but its use extend far beyond social sciences. For example, one could device a similar network depicting the correlation among variables of a large dataset (e.g. the results within the students dataset of workshop 1) or, from the realm of NLP, the co-occurrence of words within tweets.
 
@@ -122,7 +118,6 @@ forceNetwork(
 
 Let us go over the arguments one-by-one:
 
-<<<<<<< HEAD
 - `height = 600`: set canvas width to 600px
 - `width = 600`: set canvas height to 600px
 - `Links = edges_sel`: attach edge dataset
@@ -142,27 +137,6 @@ Let us go over the arguments one-by-one:
 - `charge = -1`: the amount of force that pull the nodes together (positive) or apart (negative)
 - `opacity = 1`: the relative opacity of the graph elements
 - `linkDistance = 200`: the default length of the edges disregarding forces acting upon the nodes
-=======
-`height = 600`: set canvas width to 600px
-`width = 600`: set canvas height to 600px
-`Links = edges_sel`: attach edge dataset
-`Nodes = nodes_sel`: attach node dataset
-`Source = "Source"`: define variable name containing the source of the relationships
-`Target = "Target"`: define variable name containing the target of the relationships
-`NodeID = "Name"`: define variable name containing the label to be displayed
-`Group = "Group"`: define variable name containing the (color) group
-`bounded = TRUE`: wether nodes are allowed to fly out of the canvas
-`opacityNoHover = .8`: the opacity of the labels when no node is being hovered over
-`linkColour = "#999999"`: the color of the edges
-`zoom = TRUE`: whether the network can be zoomed-in and out
-`colourScale = JS(color_scale)`: the JS colorscale
-`legend = TRUE`: whether to add a legend
-`fontFamily = "Roboto"`: the font family for the labels
-`fontSize = 20`: the font size for the labels
-`charge = -1`: the amount of force that pull the nodes together (positive) or apart (negative)
-`opacity = 1`: the relative opacity of the graph elements
-`linkDistance = 200`: the default length of the edges disregarding forces acting upon the nodes
->>>>>>> 06ba3f214079fd482a97ebf052461d4458ab62bb
 
 See `?forceNetwork` for more details. Mind that the code for the developer type was not clear from the data source, otherwise we could have replaced `0` and `1` by their proper type descriptions and the legend would adjust accordingly.
 
