@@ -18,13 +18,13 @@ library(knitr)
 
 ## Introduction to time series
 
-In this workshop we will learn how to handle and visualize temporal data. Most analytic tools dealing with time series depend on the `ts` class of objects and so we will have to learn how to transform our source data to a `ts` object. Finally, we will be plotting the results of some diagnostic and predictive analyses typical for time series data.
+In this workshop we will learn how to handle and visualize temporal data. Most analytic tools dealing with time series depend on the `ts` class of objects and so we will have to learn how to transform our source data to a `ts` object. After that, we will be plotting the results of some diagnostic and predictive analyses typical for time series data.
 
-## Uploading the data
+## Loading the time series data
 
 At the end of the workshop you will have the opportunity to work with the same dataset as for the Boxplot workshop, but because that data is slightly more difficult to use for time series analysis, we will first start with a simpler dataset.
 
-On [Kaggle](https://www.kaggle.com) you will find the dataset called [Time Series Data] (https://www.kaggle.com/yugagrawal95/timeseries-data). The data is originally made available as an Excel workbook, but we will be using the same data converted into a `tsv` file. This dataset consists of the sales figures of a number of products along with several other variables that will not be used here.
+On [Kaggle](https://www.kaggle.com) you will find the dataset called [Time Series Data](https://www.kaggle.com/yugagrawal95/timeseries-data). The data is originally made available as an Excel workbook, but we will be using the same data converted into a `tsv` file. This dataset consists of the sales figures of a number of products along with several other variables that will not be used here.
 
 > Excel is often very problematic as a data source, so if you can avoid it, preferably use a format that will still be understood 2000 years from now: plain text, preferably tab-separated values (`.tsv`) so that values with commas need not to be escaped with double quotes.
 
@@ -57,8 +57,8 @@ output:
 ```
 
 1. Enter in your name and replace `...` with a new R code block (eng: _code chunk_) using the shortcut `Ctrl + Alt + I`
-1. Make sure in a rMArkdown file to add an empty line before and after each code block, title and list
-1. Add the code below in this block (additional info to come):
+1. Make sure in a rMarkdown file to add an empty line before and after each code block, title and list
+1. Add the code below in this block (more details below):
 
 ```{r message=FALSE, warning=FALSE}
 library(knitr)
@@ -75,15 +75,15 @@ opts_chunk$set(echo = TRUE)
 sales <- fread(, "dat/sales.tsv")
 ```
 
-With the various `library` expressions, the necessary packages are loaded into memory. If these lines generate an error, it is usually means the package needs installing first. If so, use an expression such as `install.packages (c (" data.atble "," magrittr "))` in the console to install the missing packages. Let us now briefly review why we need these packages:
+With the various `library` expressions, the necessary packages are loaded into memory. If these lines generate an error, it usually means the package needs installing first. If so, use an expression such as `install.packages (c (" data.table "," magrittr "))` in the console to install the missing packages. Let us now briefly review why we need these packages:
 
 - `knitr`: parsing the RMarkdown to an HTML report
 - `data.table`: loading and manipulating data
-- `magrittr`: using [method chaining] (https://en.wikipedia.org/wiki/Method_chaining#:~:text=Method%20chaining%2C%20also%20known%20as,to%20store%20the%20intermediate % 20results.)
+- `magrittr`: using [method chaining](https://en.wikipedia.org/wiki/Method_chaining)
 - `dplyr`: alternative to manipulating data
-- `ISOweek`: converting from date to week numbers and vice versa, according to [ISO 8601] (https://en.wikipedia.org/wiki/ISO_8601) standards
+- `ISOweek`: converting from date to week numbers and vice versa, according to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) standards
 - `lubridate`: expression of a date as a decimal number
-- `forecast`: wrapper to run forecasts on` ts` objects
+- `forecast`: wrapper to run forecasts on `ts` objects
 
 Note that for demo purposes two alternatives are used here for manipulating data. Also note that a lot of effort is put into manipulating date fields. As we will see, handling dates, especially when the data is classified on a weekly basis, can become very complex very rapidly.
 
@@ -97,7 +97,7 @@ With the `opts_chunk$set` function (actually function `set` that is an element o
 palette(c(rgb(.7, .7, .7), "steelblue1", "black", "#D3EAF1"))
 ```
 
-The above code demonstrates the use of the color palette. Here you see that you can enter colors in different formats. After the palette has been defined, you can refer to the colors by means of their indices 1, 2, & hellip ;.
+The above code demonstrates the use of the color palette. Here you see that you can enter colors in different formats. After the palette has been defined, you can refer to the colors by means of their indices 1, 2, &hellip;.
 
 If you haven't yet heard about it, you might want to examine the [Munsell color space](https://en.wikipedia.org/wiki/Munsell_color_system). Munsell was a genius with colors. A full description of his color space is beyond the scope of this workshop, but why not admire one of his so-called color contrasts (dyads):
 
@@ -105,13 +105,13 @@ If you haven't yet heard about it, you might want to examine the [Munsell color 
 include_graphics("img/Dyad_5B-5YR_Annot.png")
 ```
 
-(ref:munsell) The dyad blue-5 versus yellow-red-5 (5B-5YR). In each colored box you will see from the top down: an index for reference, the Munsell color code, the corresponding RGB values and finally the color represented as a hex triplet. See the [Wikipedia page] (https://en.wikipedia.org/wiki/Munsell_color_system) for more info and [this page] (https://www.rit.edu/cos/colorscience/rc_munsell_renotation.php) of the Rochester Institute of Technology where you will find datasets to produce similar figures.
+(ref:munsell) The dyad blue-5 versus yellow-red-5 (5B-5YR). In each colored box you will see from the top down: an index for reference, the Munsell color code, the corresponding RGB values and finally the color represented as a hex triplet. See the [Wikipedia page](https://en.wikipedia.org/wiki/Munsell_color_system) for more info and [this page](https://www.rit.edu/cos/colorscience/rc_munsell_renotation.php) of the Rochester Institute of Technology where you will find datasets to produce similar figures.
 
 ## Data exploration
 
 We are going to keep data exploration here to a minimum.
 
-1. With the `str` function you can 'look inside' objects such as this ` sales object`. Such a function is typically executed in the console and is not part of the report itself:
+1. With the `str` function you can 'look inside' objects such as this `sales` object. Such a function is typically executed in the console and is not part of the report itself:
 
 ```r
 # In the console...
@@ -134,7 +134,7 @@ sales %>% str
 ...
 ```
 
-We see that there are a number of products (under `Key`), a date of sale (`Date`) and sales `Volume`. As you can see there are many more variables, but with these three we should be able to get started to demonstrate the basics.
+We see that there are a number of products (under `Key`), a date of sale (`Date`) and sales `Volume`. As you can see there are more variables, but with these three we should be able to get started and demonstrate the basics.
 
 ## Prepare data
 
@@ -155,7 +155,7 @@ sales %>% head %>% kable
 
 :::
 
-This pivoting is rather exceptional in statistical analyses and is mainly encountered in autocorrelated data (see also the term _repeated measures_).
+This pivoting of data is rather exceptional in statistical analyses and is mainly encountered in autocorrelated data (see also the term _repeated measures_).
 
 1. Now we select three products and also apply a `Date` filter because some values are missing at the end of the time series. Then we convert the data to a `ts` object:
 
@@ -167,7 +167,7 @@ sales_ts <- sales[
       start = c(2014, 1)) # Provide start of the time series
 ```
 
-## Graphing time series
+## Plotting time series
 
 1. Once everything is in the correct format, it is as simple as calling the `plot` function:
 
@@ -179,7 +179,7 @@ main <- "Sales figures\nfor three products"
 sales_ts %>% plot(main = main, xlab = "Year")
 ```
 
-Close, but no cigar. There is still an issue with the y-axes. The position of the labels on the axes in `base` R is determined by a function` pretty`. So you could turn off the y-axes in the plot (`yaxt = "n"`) and plot them all manually using the `axis` function. Of course, it is much easier to divide the numbers by a factor 1000.
+Close, but no cigar. There is still an issue with the y-axes. The position of the labels on the axes in 'base R' is determined by a function `pretty`. So you could turn off the y-axes in the plot (`yaxt = "n"`) and plot them all manually using the `axis` function. Of course, it is much easier to divide the numbers by a factor 1000.
 
 1. Adjust the previous code to divide the sales figures by 1000 and than adjust the title of the figure:
 
@@ -193,7 +193,7 @@ main <- "Sales figures (x1000)\nfor three products"
 sales_ts_th %>% plot(main = main, xlab = "Year")
 ```
 
-## Time series analyzes
+## Time series analyses
 
 This is not a workshop on analyses, but in reality the analyses and the visualization go hand-in-hand. After all, visualization often serves as a diagnostics tool. Let us measure the amount of cross-correlation among the sales of our three selected products.
 
@@ -204,11 +204,11 @@ par(bg = 4)
 sales_ts_th %>% acf(lag.max = 18)
 ```
 
-From this we learn, for example, that there is a correlation between products A and E with a horizon of 1 'season' (1 year in this case), but that the relationship is not completely symmetrical. In other words one event seems to preceed the other and that may be en important hint to analyse possible causal dependencies. To see this, compare the correlation at 1.0 for _A & E_ (below the dashed blue line indicating the significance level) with that of -1.0 for _E & A_ (above significance level).
+From this we learn, for example, that there is a correlation between products A and E with a horizon of 1 'season' (1 year in this case), but that the relationship is not completely symmetrical. In other words one event seems to precede the other and that may be en important hint to analyse possible causal dependencies. To see this, compare the correlation at 1.0 for _A & E_ (below the dashed blue line indicating the significance level) with that of -1.0 for _E & A_ (above significance level).
 
 ## Decompose time series
 
-1. Let's break the sales figures for one product, namely product C, into a seasonal effect (the purely repetitive part), the trend (background level) and the residual noise:
+1. Let us break the sales figures for one product, namely product C, into a seasonal effect (the purely repetitive part), the trend (background level) and the residual noise:
 
 ```{r sales-plot-04}
 par(bg = 4)
@@ -226,7 +226,7 @@ stats:::plot.stl
 
 ## Predictions
 
-Let us predict the future, more specifically the sales figures for the year 2019. Note that we just have those figures, why would we predict them? Because it is of course good to immediately test the prediction against reality, otherwise we have to wait a year and the organizers of this workshop voted against :-)
+Let us predict the future, more specifically the sales figures for the year 2019. Note that we already have those figures, so why would we predict them? Because it is of course good to immediately test the prediction against reality, otherwise we have to wait a year and the organizers of this workshop voted against :-).
 
 1. Let us take the standard plot for multivariate `forecast` objects:
 
@@ -238,9 +238,9 @@ sales_ts_th %>% forecast %>%
     main = "Items sold (x 1000)")
 ```
 
-This is already quite good, but there are some problems. Let's start with an important detail: the color and shades of the prediction intervals.
+This is already quite good, but there are some problems. Let us start with an important detail: the color and shades of the prediction intervals.
 
-1. With `fan` you can obtain more color shades and with` colorRampPalette` we make a simple color shade:
+1. With `fan` you can obtain more color shades and with `colorRampPalette` we make a simple color gradient:
 
 ```{r sales-forecast-color, fig.height=7}
 par(bg = 4)
@@ -252,7 +252,7 @@ sales_ts_th %>%
     main = "Items sold (x 1000)")
 ```
 
-Now comes the main problem: we really only want to forecast only 2019 and we want to see the current and forecast data superposed. It would also be nice if there were a clear marking at the start of the prediction.
+Now comes the main problem: we really only want to forecast only 2019 and we want to see the current and forecast data superposed. It would also be nice if there were a clear marking to demarcate the start of the prediction.
 
 1. Try to reproduce the predictions with the above requirements:
 
@@ -260,10 +260,10 @@ Now comes the main problem: we really only want to forecast only 2019 and we wan
 par(bg = 4, mfrow = c(3, 1), oma = c(5, 3, 1, 1),
   mar = c(0, 4, 0, 2))
 
-for(series_name in sales_ts %>% colnames) {
+for (series_name in sales_ts %>% colnames) {
   series <- sales_ts_th[, series_name]
   fc <- series %>%
-    window(end=c(2019, 1)) %>%
+    window(end = c(2019, 1)) %>%
     forecast(fan = TRUE, h = 12)
   fc %>% plot(shadecols = ramp, col = 3,
     xaxt = "n", main = "")
@@ -274,21 +274,23 @@ for(series_name in sales_ts %>% colnames) {
   }
   abline(v = 2019, lwd = 2, col = 1, lty = 3)
   fc <- series %>%
-    window(start=c(2018, 12)) %>% lines(col = 3)
+    window(start = c(2018, 12)) %>% lines(col = 3)
 }
 
 title(xlab = "Year", outer = 2)
 ```
 
+Notice how for products A and C the actual sales remain mostly below the point estimate of of the predictions.
+
 ## Extra: Resampling temporal data
 
-Temporal data is often organized on a week, month, quarter, or annual basis. For example sales figures per quarter. In the industry we speak of a _bucket_ and the bucket could be a week, a quarter, etc & hellip ;. Sometimes, however, as with the student data, a date field is provided, but the data is not neatly aggregated into fixed time units. The aggregation, which is also called _resampling_ or _bucketising_, must then be performed manually. This is demonstrated below for the sake of completeness.
+Temporal data is often organized on a weekly, monthly, quarterly, or annual basis. For example sales figures per quarter. In the industry we speak of a _bucket_ and the bucket could be a week, a quarter, etc &hellip;. Sometimes, however, as with the student data, a date field is provided, but the data is not neatly aggregated into fixed time units. The aggregation, which is also called _resampling_ or _bucketizing_, must then be performed manually. This is demonstrated below for the sake of completeness.
 
 ```{r herb-01}
 sem_1 <- fread("dat/sem_1_anon.tsv")
 ```
 
-We first check the range of the variable `Date1`, divide it into weeks and add seven days to the end date:
+We first check the range of the variable `Datum1`, divide it into weeks and add seven days to the end date:
 
 ```r
 sem_1$Datum1 %>%
@@ -320,15 +322,15 @@ legend("bottomright", legend = week_lev_all, col = ramp,
 palette(temp_pal)
 ```
 
-Finally we can select the portion with suffcient data availble and convert to a `ts` object:
+Finally, we can select the portion with sufficient data available and convert to a `ts` object:
  
 ```{r herb-04}
 par(bg = 4)
 
 sem_1[
-  grepl("2020", Week_T),        # Selectie
-  .(MemoS_T = mean(MemoS_T)),   # Var-manipulatie
-  Week_T] %>%                   # Groepering
+  grepl("2020", Week_T),        # Selection
+  .(MemoS_T = mean(MemoS_T)),   # Var-manipulation
+  Week_T] %>%                   # Groeping
    arrange(Week_T) %>%          # dplyr
    select(MemoS_T) %>% 
    ts(
@@ -337,5 +339,3 @@ sem_1[
   plot(lwd = 2, xlab = "Tijd (decimaal)",
     ylab = "Memoriseren", main = "Evolutie memoriseren")
 ```
-
----

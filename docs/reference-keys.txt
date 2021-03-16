@@ -26,3 +26,6 @@ reducing-size
 the-network
 vectors
 cascading-style-sheets
+loading-the-time-series-data
+plotting-time-series
+time-series-analyses
