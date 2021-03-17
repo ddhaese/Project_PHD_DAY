@@ -19,39 +19,29 @@ library(dplyr)
 sem_1_anon <- read_excel("dat/sem_1_anon.xlsx")
 ```
 
-# Boxplot
+# Visualizing Descriptive analyses for beginners
 
-## Start
+## Load data
 
-1. Indien je dit nog niet eerder hebt gedaan moet je de meest recente versies van [R](https://cran.r-project.org/bin/windows/base/) en [RStudio](https://rstudio.com/products/rstudio/download/) downloaden en installeren.
+The data file contains the results of +- 4000 unique students who participated in the begin assessment environment at AP, called AP-Vaardig. Students could participate in assessments on 
 
-## Nieuw project
++ Language skills 
++ Mathematics 
++ Study motivation 
++ Learning strategy use
 
-Je kan ook zonder, maar het is beter om een project-folder te definiëren. Helemaal rechtsboven in RStudio, onder het kruisje om de applicatie te sluiten, vind je een keuzelijst met daarin de mogelijkheid om een nieuw project te creëren.
+In addition to these core-variables we obtained some background variables such as Department, Study program (Opleiding) and Program type (Professionele bachelor or graduaat). We also included students' average score on their exams in January (GPA; Grade Point Average). All variable names are in Dutch.
 
-1. Volg de wizard en maak een project aan in een folder naar keuze
 
-Het is wel best om voor deze workshop lokaal te werken.
+There are multiple ways of importing data files in R-studio. The most straightforward is using the user interface in RStudio. You can access this via _Environment > Import Dataset > From Excel..._. If you are using RStudio for the first time, the program might ask you to download and install some packages. Just agree to installing and let the installation finish.  
 
-## Nieuw rapport
-
-We werken standaard met het principe van elektronische notitieboeken (eng: _notebooks_) om dat dit de reproduceerbaarheid verhoogt en gewoon ook veel plezieriger werkt. Het formaat daarvoor is een RMarkdown bestand. Maak een nieuw notitieboek aan via de eerste knop linksboven in de knoppenbalk: _New File > R Markdown_ en dan een titel opgeven voor een HTML document aan te maken (HTML document is de standaard keuze). Het kan zijn dat RSTudio de eerste keer vraagt om een aantal pakketten te downloaden. Antwoord dan 'ja' en laat de installatie rustig voltooien.
-
-Je merkt dat RStudio een voorbeeld bestandje heeft aangemaakt. Druk nu op de _Save_-knop of gebruik de sneltoets `Ctrl + S` om het bestand in de project-folder te bewaren (gebruik de sneltoets `Alt + Shift + K` voor een overzicht van andere sneltoetsen). Het bestand gaan we meteen eens _uitvoeren_ of 'knitten' door op de knit-knop te drukken. Als alles goed gaat wordt er een voorbeeld rapportje gegenereerd en in de _viewer_-pane getoond.
-
-## Data opladen
-
-TODO: Herkomst data
-
-Er zijn in R meerdere manieren om data op laden. De eenvoudigste is om via de gebruikersinterface van RStudio te werken. Die doe je via _Environment > Import Dataset > From Excel..._. Het kan zijn dat RSTudio de eerste keer ook hier vraagt om een aantal pakketten te downloaden. Antwoord dan weerom 'ja' en de installatie rustig voltooien.
-
-Open het Excel bestand dan je kan terugvinden op deze locatie:
+The data file you have to import can be found in the chat or on this location:
 
 ```
 https://github.com/ddhaese/Project_PHD_DAY/tree/main/dat
 ```
 
-Je zal merken dat het in de R console de volgende code verschijnt, dit is de code die de _Import Dataset_ wizard genereert zodat je de code laten kunt hergebruiken om bijv. in een automatisch script te verwerken:
+You'll notice that RStudio wrote some code in your console.  This is the code the _Import Dataset_ wizard used to import the data file. Y can use this code to import the data in RStudio in the future, instead of using the import wizard. You can also amend this code later, for instance by adding code to define 'NA'-values:
 
 ```r
 library(readxl)
@@ -60,14 +50,14 @@ sem_1_anon <- read_excel("dat/sem_1_anon.xlsx")
 View(sem_1_anon)
 ```
 
-De data wordt bewaard in het object `sem_1_anon` en als je gaat kijken onder de 'Environment' tab, zo je inderdaad dit object moeten zien staan. De laatste lijn opent de dataset meteen in de viewer van RStudio. Voor kleine en middelgrote datasets is dit een snelle manier om de data te exploreren. Merk op dat je in de viewer het data type kan achterhalen door met je muis over de naam van de variabele (= kolom) te hoveren. Je kan in de `Environment`-tab ook het object openklappen om die informatie te zien. Een derde manier om snel de inhoud van eender welk object in R te bekijken is met de `str` functie. Geef in de console de volgende code op en je zou een lange lijst moeten zien verschijnen met de variabele namen en geassocieerd data types, de lengte van de kolom en de eerste waarden. Je ziet ook dat het object van het type `tibble` is, een soort tabel afgeleid van een `data.frame`.
+The data is saved in an R-object called `sem_1_anon` en if you look under the 'Environment' tab, you should see this object appear. The last line of this code opens your data file in the RStudio viewer. For data files from a small to moderate size this is a convenient way to explore your data. You can also retrieve the 'data type' RStudio assigned to each variable by hovering over the variable name/column name. This might help you explain why RStudio is not willing to produce a certain visual (i.e. because it interpreted a numerical variable as a factor (ordinal variable)). You can get similar information by clicking open the `Environment`-tab. This is especially handy for a large data set if you want to look up how a certain variable in your set is written. A third way to consult the content of any object in R is to use the`str` function. Copy the code bellow in your console and you should see a long list of all varaibles and their data types. You also get an indication of the length of the columns and a sample with the values of the first couple of rows. Finally, you can see that this oblect is a `tibble`, a table derived from a `data.frame`. (for those who are interested: a tibble is a format that belongs to the tidyverse, a cluster of integrated R-packages aimed at tidying, wrangling, visualizing and presenting data: https://www.tidyverse.org/).
 
 ```{r view-object, output.lines = 15}
 # In de console:
 str(sem_1_anon)
 ```
 
-In je nieuw Rmd bestand, verwijder je de voorbeeld code, i.e. alles vanaf `## R Markdown`. Maak dan een nieuw titeltje aan '## TODO: TITEL WIJZIGEN' met daarna een lege lijn. Druk dan op het icoontje om codeblok (eng: _code chunk_) in te voegen en kies in de keuzelijst voor R-code. Plak dan de gegenereerde code uit de console in deze codeblok zodat je de volgende twee blokken krijgt:
+Let's switch to our newly generated example Rmd-file. Delete all example code (or start bellow the code if you want to retain it for further inspection later on). For those who want to delete: everything bellow `## R Markdown` is ok. Next, make a new title: '## TODO: TITEL WIJZIGEN' followed by an empty line (## tells R-Markdown to make a title at the second level). Bellow the title, insert a code chunk. Click insert (somewhere on the top right of the window where you can view your Rmd-file). In the drop-down menu, select the _code chunk_ you want to insert: R-code in this case (actually two separate code chunks :) ). Paste the code from console in the chunks according to the example bellow: 
 
 ````md
 `r ''````{r setup, include=FALSE}
@@ -82,42 +72,96 @@ View(sem_1_anon)
 ```
 ````
 
-## Woordenschat
+_Pro tip 1:_ It is conventient to start each new document with a code chunk in which you load not only your data, but also all the packages you will use in your analyses. I personally have a list of frequently used packages I copy/paste in this chunk across all my projects. 
 
-Elke rij in de dataset stelt een student voor en elke kolom een eigenschap die op die student van toepassing is. Laten we een aantal van die eigenschappen eens van naderbij onderzoeken. Het is tenslotte belangrijk om een beeld te vormen van de data. We beginnen met het laden van een aantal pakketten. Plak deze code na de vorige `library`-statement, zodat al de dependencies vooraf gekend zijn.
+_Pro tip 2:_ You can see the 'notebook' taking shape here: within the R-code chunks you execute your analyses or create your visualizations. Between the chunks you can write down interpretations, intriguing results or questions for your supervisor. You can easily structure your notbook by adding titles (remember the ## title, followed by an empty line) 
+
+you can 'print' the entire document by clikcing the 'knit' button in the menu bar in the top left corner. This wil produce a html-page including all calculations and visuals, but also the text and titles in between (so the entire notebook)
+
+
+Now, let's turn to visualizing our data (finally)
+
+
+## Exploring the distribution of the variable 'Woordenschat' (Vocabulary) through a histogram
+
+As stated above: our dataset is composed of various testresults and some background variables in the columns and participating students as rows. Let's start exploring our data by visualizing some of the variables (exploratory data visualization). To get started we have to load the required packages. In R this is a two step procedure: First, you have to download the packages to your computer (via install.packages). Second you have to activate the packages in R (via library). You have to download the packages only once, but have to activate them for each session.
+
+
+```r
+# In de console (enkel eenmalig bij eerste gebruik):
+install.packages(c("data.table", "magrittr", "tidyverse"))
+```
+_Pro tip 3_: We prefer not to incorporate our 'install.packages' commands in our Rmd-file. Otherwise R would download these packages every time we would run our code. That would slow down the computing time significantly.
+
+You can paste the code bellow after previous `library`-statements.
 
 ```r
 library(readxl)
 library(data.table)
 library(magrittr)
-library(dplyr)
+library(tidyverse)
 ```
 
-Het opladen van de pakketten zal enkel functioneren als de pakketten ook op jouw pc zijn geïnstalleerd. Voer indien nodig de onderstaande code eenmalig uit in de console:
+_Pro tip 4_: I would add these to the first 'load' chunk at the top of the Rmd-file.
 
-```r
-# In de console (enkel eenmalig bij eerste gebruik):
-install.packages(c("data.table", "magrittr", "dplyr"))
-```
 
-Nu kunnen we bijvoorbeeld de variabele `woordenschat` onderzoeken. We isoleren de variabele uit de `sem_1_anon` dataset en gebruiken een speciale operator teken van `magrittr` (`%>%`) om het resultaat door te geven aan de `hist`-functie (men spreekt van _method chaining_ of _piping_). Daarna voegen we een lijn toe ter hoogte van de 50% om te accentueren dat de grote meerderheid van de studenten voor deze proef geslaagd was. De kleuren worden centraal beheert met de fucntie `palette` zodat we op één plek de kleuren van onze plots kunnen wijzigen. Dus, `col = 1` betekent `aliceblue` en `col = 2` staat voor `black`.
+We will now examine the distribution of the variable  `woordenschat`. Observe how the code is constructed bellow:
+
+* We define which colors we want to use by identifying a palette. So `col = 1` means `aliceblue` and `col = 2` indicates `black`. We can use this palette throughout the whole document if are looking for consistency in our datavisualizations. We could also add more colors to this list (e.g. all branding colors from our organization). 
+* We select the variable from the `sem_1_anon` dataset by stating the dataset, followed by '$' and the variable name 
+* We use a special operator mark from the package `magrittr` (`%>%`) to pass on the result to the `hist`-function (this is called _method chaining_ of _piping_). 
+*'hist' is the code that creates the actual histogram. 
+* We define a title and names for the X and Y-axis. 
+* To the message in our graph more easily understandable, we add a vertical line at the 50% mark, using the function `abline`. 
 
 ```{r fig.width=6}
 
-palette(c("aliceblue", "black"))
+palette(c("aliceblue", "black", "blue", "red", "green", "yellow", "purple"))
+# Palette defines a range of colours. you can refer to these colors by using the 'order number' in the palette statement
 
 sem_1_anon$Woordenschat %>%
   hist(main = "Verdeling score woordenschat",
     xlab = "Score", ylab = "Aantal studenten",
-    col = 1)
+    col = 1:7, )
 
 abline(v = 50, lwd = 2, col = 2)
 ```
 
+_Pro tip 5_: If you are unsure about what specific code functions mean or do, you can consult the help function. there are 3 common ways of doing this: (1) type '?' directly followed by the code (e.g. ?hist) in the console. (2) In the bottom right of your RStudio concole, you can see a tab called 'Help'. click it and write the name of the function in the search field on the top right. (3) Google the name of the function + R an you will probably come across more information than you need (Yes, R is thinkering)
 
-## Departement
 
-Laten we nu eens onderzoeken welke departementen vertegenwoordigd zijn in de gegevensset. 
+## Exercise time
+
+1. Write down an observation regarding the histogram underneath the figure in your Rmd file.
+2. Consult the help file for histogram. Try changing the width of the rectangles from 10 to 5, by adapting the 'breaks' in the histogram. (Copy the code to a new chunk before you start tinkering)
+3. Make the current histogram more 'disco' by adding 5 more collors based on name or HEX-code to the palette. (this will help: http://www.sthda.com/english/wiki/colors-in-r). To use the succession of colors instead of a single color, use col = 1:7 (: means 'from 1 untill 7) 
+4. Make a similar histogram on the variable 'vergelijkingen1'
+5. Distinguish the histograms by adding a sub-title above each histogram containing the variable-name.
+6. Can you add a red, striped vertical line where the mean in the histogram of 'Vergelijkingen1' is situated? (this will help: http://www.sthda.com/english/wiki/abline-r-function-an-easy-way-to-add-straight-lines-to-a-plot-using-r-software)
+7. Change the histogram for Vergelijkingen1 to a 'density plot' (check the help function for hist and look for 'freq')
+
+
+## Exploring the distribution of a categorical variable (Departement) 
+
+We will now explore how student-participation is distributed across departements in AP. For those who are really curious:
+
+* GW = Gezondheid en Welzijn
+* MC = Management en Communicatie
+* OT = Onderwijs en Training
+* WT = Wetenschap en Techniek
+* KC = Koninklijk Conservatorium
+* KA = Koninklijke Academie
+
+
+Observe how the code is constructed bellow:
+
+* We select the variable from the `sem_1_anon` dataset by stating the dataset, followed by '$' and the variable name 
+* We use a special operator mark from the package `magrittr` (`%>%`) to pass on the result to the `table`-function (this is called _method chaining_ of _piping_) and so on. 
+*`table` counts the number of rows pertaining to a specific value of the categorical variable `Departement` 
+* `sort`organizes this count ascending.
+* `rev` swiches the order to descending
+* `barplot` creates the actual barplot. 
+
 
 ```{r}
 sem_1_anon$Departement %>%
@@ -129,7 +173,15 @@ sem_1_anon$Departement %>%
     cex.names = .7, cex.axis = .9, col = 1)
 ```
 
-We zien dat een aantal departementen amper vertegenwoordigd zijn. Die laten we eruit. In de eerste lijn zetten we het tibble object om naar een `data.table` object d.m.v. de `setDT` functie. Daarna tellen we het aantal studenten (met speciale functie `.N`) per departement, selecteren we de departementen waarvoor méér dan 5 studenten antwoorden en bewaren we het resultaat in het object `dep_top`.
+We can observe that some of the departments are barely represented in our data file. If we would continue with analyses in which Departement is included as a predictor, this would hamper our power. So based on our visualizations it would be better to remove these students and continue with only 4 Departements.
+
+We can do this by using the following steps:
+
+* We convert our Tibble to a `data.table` object using the `setDT` function. 
+* We count the number of students per departement using the function `.N`) per departement
+* We selecteren those departments containing more than 5 participating students and we save the results in a new object called `dep_top`.
+
+From now on we can use the data file `sem_1_anon`if we want to use all data and `dep_top` if we want to use the cleaned version.
 
 ```{r}
 sem_1_anon <- setDT(sem_1_anon)
@@ -138,6 +190,15 @@ dep_top <- sem_1_anon[, .N, Departement][N > 5, Departement]
 
 dep_top
 ```
+
+_Pro Tip 6:_ an alternative for filtering out these teulst would be to use the `dplyr` package. It is a part of the tidyverse and specififcally aimed at data-wrangling. The code is provided as an example. Results should be identical (However, the dplyr-result will remain a tibble, not a data table)
+
+```{r}
+dep_top_alt <- sem_1_anon%>%
+  filter(Departement, n>5)
+```
+
+
 
 ## De boxplot
 
@@ -153,3 +214,4 @@ sem_1_anon %>%
 abline(h = 50, lwd = 2, col = 2)
 ```
 
+## What's next
