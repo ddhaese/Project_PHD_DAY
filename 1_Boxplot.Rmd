@@ -116,13 +116,13 @@ We will now examine the distribution of the variable  `woordenschat`. Observe ho
 
 ```{r fig.width=6}
 
-palette(c("aliceblue", "black", "blue", "red", "green", "yellow", "purple"))
+palette(c("aliceblue", "black"))
 # Palette defines a range of colours. you can refer to these colors by using the 'order number' in the palette statement
 
 sem_1_anon$Woordenschat %>%
   hist(main = "Verdeling score woordenschat",
     xlab = "Score", ylab = "Aantal studenten",
-    col = 1:7, )
+    col = 1)
 
 abline(v = 50, lwd = 2, col = 2)
 ```
@@ -165,13 +165,15 @@ Observe how the code is constructed bellow:
 
 ```{r}
 sem_1_anon$Departement %>%
-  table %>%
+  table%>%
+  prop.table%>%
   sort %>%
   rev %>%
   barplot(main = "Verdeling per departement",
     xlab = "Department", ylab = "Aantal studenten",
     cex.names = .7, cex.axis = .9, col = 1)
 ```
+
 
 We can observe that some of the departments are barely represented in our data file. If we would continue with analyses in which Departement is included as a predictor, this would hamper our power. So based on our visualizations it would be better to remove these students and continue with only 4 Departements.
 
@@ -181,7 +183,6 @@ We can do this by using the following steps:
 * We count the number of students per departement using the function `.N`) per departement
 * We selecteren those departments containing more than 5 participating students and we save the results in a new object called `dep_top`.
 
-From now on we can use the data file `sem_1_anon`if we want to use all data and `dep_top` if we want to use the cleaned version.
 
 ```{r}
 sem_1_anon <- setDT(sem_1_anon)
@@ -191,20 +192,142 @@ dep_top <- sem_1_anon[, .N, Departement][N > 5, Departement]
 dep_top
 ```
 
-_Pro Tip 6:_ an alternative for filtering out these teulst would be to use the `dplyr` package. It is a part of the tidyverse and specififcally aimed at data-wrangling. The code is provided as an example. Results should be identical (However, the dplyr-result will remain a tibble, not a data table)
+_Pro Tip 6:_ an alternative for filtering out these results would be to use the `dplyr` package. It is a part of the tidyverse and specififcally aimed at data-wrangling. The code is provided as an example. Results should be identical (However, the dplyr-result will remain a tibble, not a data table)
 
 ```{r}
-dep_top_alt <- sem_1_anon%>%
-  filter(Departement, n>5)
+
 ```
 
 
 
-## De boxplot
+## Exercise time
 
-We kennen de globale verdeling van de scores voor woordenschat en we weten welke van de 4 departmenten we willen bestuderen. Nu kunnen we een boxplot uittekenen:
+1. Explore the reduced dataset you just created using the function `str()`
+2. Change the barplot so it will plot the 'relative frequencies'. You can do this by adding `prop.table` to an object that is the result of a `table` function. Can you do this using the pipes?
+3. Change the relative barplot to a barplot containing percentages by adding another line in the pipe: `multiply_by (100) %>%`.
+4. Make a  Barplot for the variable 'Opleidingstype'.
+5.  Make a barplot for the variable `opleiding`. See how difficult it is to read these long names. Now flip the barplot by adding horiz = TRUE to the function `barplot` (don't forget your comma!). Now that's easier to read :)
+6. Make a barplot on the variable `Generatiestudent`. Should we keep students who do not have the status of 'generatiestudenten' in our sample?
+7. Let's say you have to present your data to the teachers of the department MC. You want their data to stand out in the barplot. How would you do that, using colors? Implement in a new graph.
+8. Let's say that last year all departments promised that 'at least' 20% of their students would participate in AP-Vaardig. How would you make this clear in the barplot? How could you use `abline` to accomplish this?
+
+
+_Pro Tip 7_: sometimes R interprets a variable as 'numerical' while it is in fact a categorical variable. For instance, in our data set the variable `Lemo_T` indicates whether or not a student participated in a certain version of the Lemo questionnaire. If we want to explore the response rate using a barplot we need tot convert this variable from type 'numeric' to type 'Character' before creating the barplot. The code bellow demonstrates how
+
+```{r}
+sem_1_anon$Lemo_T <- as.character(sem_1_anon$Lemo_T)
+sem_1_anon$Lemo_T %>%
+  table %>%
+  prop.table %>%
+  multiply_by(100) %>%
+  sort %>%
+  rev %>%
+  barplot(main = "Respongraad Lemo",
+    xlab = "Status deelname", ylab = "Percentage", ylim=c(0,100),
+    cex.names = .7, cex.axis = .9, col = c("blue", "Orange"))
+
+```
+
+
+## Expansion: Grouped & stacked barplots
+
+
+Sometimes you want to compare a distribution across two categorical variables. For instance, we could be wondering whether or not participation in Lemo differs across Departments. We could investigate this using a **grouped barplot** and/or a **stacked barplot**. Construction of this barplot is quite similar to a simple barplot:
+
+* Make a crosstable of the two variables using the function `table`
+* (If needed, make a proportional table or a table containing percentages)
+* Sort if needed
+* Use this output as an input for the function `barplot`
+
+Take notice of:
+
+* the fact that we use the cleaned version of our dataset with only Departments with sufficient participants. We run the function `filter` from the dplyr-package and use the object `dep_top` we created before to filter out the appropriate departments.  
+* the new function called `legend` we are using to display a legend in our graph 
+* the fact that how you organize your initial table affects which variable is used as grouping variable. This in turn affects the message your table is displaying and its readability.
+* the argument `besides` decides whether the barplot is grouped or stacked.
+
+
+### Grouped barplot with department as grouping variable
+
+```{r}
+
+palette(c("dodgerblue4", "lightblue", "blue", "cadetblue"))
+
+dep_top_alt <- sem_1_anon%>%
+   filter(Departement %in% dep_top)
+
+dep_Lemo <- table (dep_top_alt$Departement, dep_top_alt$Lemo_T)
+dep_Lemo_2 <- prop.table(dep_Lemo)*100
+
+barplot(dep_Lemo_2,
+        col = 1:4, beside = TRUE, ylim=c(0,50))
+legend("topright", legend = rownames(dep_Lemo_2), 
+       fill = 1:4, box.lty = 0, cex = 0.8)
+
+```
+
+
+### Stacked barplot with participation in Lemo as grouping variable
+
+```{r}
+Lemo_dep <- table (dep_top_alt$Lemo_T, dep_top_alt$Departement)
+Lemo_dep_2 <- prop.table(Lemo_dep)*100
+
+barplot(Lemo_dep_2,
+        col = c(1, 4), beside = FALSE, ylim=c(0,50))
+        legend("top", legend = rownames(Lemo_dep_2), 
+       fill = c(1,4), box.lty = 0, cex = 0.8)
+```
+
+
+## Boxplots
+
+
+### Boxplot of various numerical scales
+
+We familiarized ourselves with the distribution of the scores for a single scale 'Woordenschat' through a histogram. we can compare descriptive statistics for various numerical variables (with a similar scale) using boxplots.
+
+Observe the steps in the code bellow:
+
+* If all scales in your data file are numeric, you can just input the data file as source and R does the rest. Therefore we used the function `select`from dplyr to select all scales regarding language skills in our data set. 
+* Because our variable names are long we adjusted the margins in our plot using the function `par`. The numbers in between brackets define the margins for respectively: **bottom, left, top, right** in inches.
+* the function `boxplot`creates the boxplot for the data frame "scales", `las` tilts the orientation of the labels.
+
+
+```{r}
+scales<-sem_1_anon %>%
+  select(Woordenschat:Email) %>%
+
+par(mar=c(10,5,1,1))
+
+boxplot(scales, las=2, col =1:4, main = "Verdeling scores schalen taalvaardigheid")
+
+```
+
+### Providing an indication of distribution 
+
+If you have a small sample and if it is important to emphasize distribution in more detail you can consider adding a stripchart to your boxplot. The stripchart adds an extra layer over your boxplots containing individual data points. In large datasets these points just create a large 'blob'. We therefore selected the first 25 rows in our dataset using the function `slice` . The jitter method disperses the data a bit, so they don't overlap with features in the boxplot. We also went overboard with flashy colors by using rainbow colors. 
+
+```{r}
+scales<-sem_1_anon %>%
+  select(Woordenschat:Email) %>%
+  slice_head (n=25)
+
+par(mar=c(10,5,1,1))
+
+boxplot(scales, las=2, col =1:4, main = "Verdeling scores schalen taalvaardigheid")
+
+stripchart(scales, method = "jitter", pch = 19, add = TRUE, col = rainbow(ncol(scales)))
+```
+
+
+### Grouped boxplots
+
+Finally, let's explore how the distribution of our variable 'Woordenschat' differs in the various departments. We know from previous analyses that not all Departments have a decent participation rate. We therefore filter adequate departments using the object `dep_top` which contains the names of all departments (alternatively we could just sum them up using c("Mc3, "GW", "WT", "OT")). We use a `~` to instruct R to plot Woordenschat across departments. 
 
 ```{r fig.width = 6}
+
+
 sem_1_anon %>% 
   filter(Departement %in% dep_top) %>% 
   boxplot(Woordenschat ~ Departement, data = .,
@@ -214,4 +337,20 @@ sem_1_anon %>%
 abline(h = 50, lwd = 2, col = 2)
 ```
 
-## What's next
+## Exercise time
+
+1. Can you repeat the boxplots we constructed on language skills for the mathematical skills incorporated in AP-Vaardig (Column Rekenen up until column Goniometrie)
+2. One of your colleagues has the odd hypothesis that participating in Lemo (Lemo_T) is related to differences in the variable Deductief_redeneren. Can you explore the ide by making a grouped boxplot? 
+
+
+## What's next?
+
+We already mentioned the `tidyverse` as a group of packages to tidy, wrangle and present data. Up till now we used three packages from the tidyverse: dplyr, magrittr and tibble. however, the tidyverse also includes a package for visualizing data called `ggplot2`. The gg stands for *grammar of graphics*. It has a consistent and methodical way of programming visuals, which can be daunting for beginners. However, when mastered it will give you the option of designing al your graphs to the very detail. 
+Mastering the basics in data visualization using just Base R  will help you understand the grammar behind ggplot2. If you feel ready for the next step, ggplot2 is definitly a package to explore. The following books/resources can help you:
+
+* http://www.cookbook-r.com/Graphs/
+* https://rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf
+* https://r4ds.had.co.nz/
+* https://ggplot2-book.org/
+
+A good start would be to try and replicate the graphs in this workshop using ggplot2.
