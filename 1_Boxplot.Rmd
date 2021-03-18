@@ -84,7 +84,11 @@ The data is saved in an R-object called `sem_1_anon` en if you look under the 'E
 str(sem_1_anon)
 ```
 
+<<<<<<< HEAD
 Let's switch to our newly generated example Rmd-file. Delete all example code (or start below the code if you want to retain it for further inspection later on). For those who want to delete: everything below `## R Markdown` is ok. Next, make a new title: '## Loading the data' followed by an empty line (## tells R-Markdown to make a title at the second level). Below the title, insert a code chunk. Click insert (somewhere on the top right of the window where you can view your Rmd-file). In the drop-down menu, select the _code chunk_ you want to insert: R-code in this case (actually two separate code chunks :) ). Paste the code from console in the chunks according to the example bellow:
+=======
+Let's switch to our newly generated example Rmd-file. Delete all example code (or start below the code if you want to retain it for further inspection later on). For those who want to delete: everything below `## R Markdown` is ok. Next, make a new title: '## TODO: TITEL WIJZIGEN' followed by an empty line (## tells R-Markdown to make a title at the second level). Below the title, insert a code chunk. Click insert (somewhere on the top right of the window where you can view your Rmd-file). In the drop-down menu, select the _code chunk_ you want to insert: R-code in this case (actually two separate code chunks :) ). Paste the code from console in the chunks according to the example bellow:
+>>>>>>> 5f49f7ca1658390137c61dd2bbc6843001779b4f
 
 ````md
 `r ''````{r setup, include=FALSE}
