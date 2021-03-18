@@ -14,9 +14,35 @@ library(readxl)
 library(data.table)
 library(magrittr)
 library(dplyr)
+library(tidyverse)
 
 
-sem_1_anon <- read_excel("dat/sem_1_anon.xlsx")
+sem_1_anon <- read_excel("dat/sem_1_anon.xlsx", 
+    col_types = c("numeric", "text", "text", 
+        "text", "text", "text", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric", "numeric", "numeric", 
+        "numeric"))
+View(sem_1_anon)
 ```
 
 # Visualizing Descriptive analyses for beginners
@@ -40,6 +66,7 @@ The data file you have to import can be found in the chat or on this location:
 ```
 https://github.com/ddhaese/Project_PHD_DAY/tree/main/dat
 ```
+Save the code in your project folder for convenience.
 
 You'll notice that RStudio wrote some code in your console.  This is the code the _Import Dataset_ wizard used to import the data file. Y can use this code to import the data in RStudio in the future, instead of using the import wizard. You can also amend this code later, for instance by adding code to define 'NA'-values:
 
@@ -50,14 +77,14 @@ sem_1_anon <- read_excel("dat/sem_1_anon.xlsx")
 View(sem_1_anon)
 ```
 
-The data is saved in an R-object called `sem_1_anon` en if you look under the 'Environment' tab, you should see this object appear. The last line of this code opens your data file in the RStudio viewer. For data files from a small to moderate size this is a convenient way to explore your data. You can also retrieve the 'data type' RStudio assigned to each variable by hovering over the variable name/column name. This might help you explain why RStudio is not willing to produce a certain visual (i.e. because it interpreted a numerical variable as a factor (ordinal variable)). You can get similar information by clicking open the `Environment`-tab. This is especially handy for a large data set if you want to look up how a certain variable in your set is written. A third way to consult the content of any object in R is to use the`str` function. Copy the code bellow in your console and you should see a long list of all varaibles and their data types. You also get an indication of the length of the columns and a sample with the values of the first couple of rows. Finally, you can see that this oblect is a `tibble`, a table derived from a `data.frame`. (for those who are interested: a tibble is a format that belongs to the tidyverse, a cluster of integrated R-packages aimed at tidying, wrangling, visualizing and presenting data: https://www.tidyverse.org/).
+The data is saved in an R-object called `sem_1_anon` en if you look under the 'Environment' tab, you should see this object appear. The last line of the code above opens your data file in the RStudio viewer. For data files from a small to moderate size this is a convenient way to explore your data. You can also retrieve the 'data type' RStudio assigned to each variable by hovering over the variable name/column name. This might help you explain why RStudio is not willing to produce a certain visual (i.e. because it interpreted a numerical variable as a factor (ordinal variable)). You can get similar information by clicking open the object in the `Environment`-tab. This is especially convenient for a large data set if you want to look up how a certain variable in your set is labeled. A third way to consult the content of any object in R is to use the`str` function. Copy the code below in your console and you should see a long list of all variables and their data types. You also get an indication of the length of the columns and a sample with the values of the first couple of rows. Finally, you can see that this oblect is a `tibble`, a table derived from a `data.frame`. (for those who are interested: a tibble is a format that belongs to the `tidyverse`, a cluster of integrated R-packages aimed at tidying, wrangling, visualizing and presenting data: https://www.tidyverse.org/).
 
 ```{r view-object, output.lines = 15}
 # In de console:
 str(sem_1_anon)
 ```
 
-Let's switch to our newly generated example Rmd-file. Delete all example code (or start bellow the code if you want to retain it for further inspection later on). For those who want to delete: everything bellow `## R Markdown` is ok. Next, make a new title: '## TODO: TITEL WIJZIGEN' followed by an empty line (## tells R-Markdown to make a title at the second level). Bellow the title, insert a code chunk. Click insert (somewhere on the top right of the window where you can view your Rmd-file). In the drop-down menu, select the _code chunk_ you want to insert: R-code in this case (actually two separate code chunks :) ). Paste the code from console in the chunks according to the example bellow: 
+Let's switch to our newly generated example Rmd-file. Delete all example code (or start below the code if you want to retain it for further inspection later on). For those who want to delete: everything below `## R Markdown` is ok. Next, make a new title: '## TODO: TITEL WIJZIGEN' followed by an empty line (## tells R-Markdown to make a title at the second level). Below the title, insert a code chunk. Click insert (somewhere on the top right of the window where you can view your Rmd-file). In the drop-down menu, select the _code chunk_ you want to insert: R-code in this case (actually two separate code chunks :) ). Paste the code from console in the chunks according to the example bellow: 
 
 ````md
 `r ''````{r setup, include=FALSE}
@@ -74,12 +101,12 @@ View(sem_1_anon)
 
 _Pro tip 1:_ It is conventient to start each new document with a code chunk in which you load not only your data, but also all the packages you will use in your analyses. I personally have a list of frequently used packages I copy/paste in this chunk across all my projects. 
 
-_Pro tip 2:_ You can see the 'notebook' taking shape here: within the R-code chunks you execute your analyses or create your visualizations. Between the chunks you can write down interpretations, intriguing results or questions for your supervisor. You can easily structure your notbook by adding titles (remember the ## title, followed by an empty line) 
+_Pro tip 2:_ You can see the idea of a 'notebook' taking shape here: within the R-code chunks you execute your analyses or create your visualizations. Between the chunks you can write down interpretations, intriguing results or questions for your supervisor. You can easily structure your notbook by adding titles (remember the ## title, followed by an empty line) 
 
-you can 'print' the entire document by clikcing the 'knit' button in the menu bar in the top left corner. This wil produce a html-page including all calculations and visuals, but also the text and titles in between (so the entire notebook)
+you can 'print' the entire document by clikcing the 'knit' button in the menu bar in the top left corner. This will produce a html-page including all calculations and visuals, but also the text and titles in between (so the entire notebook)
 
 
-Now, let's turn to visualizing our data (finally)
+Now, let's turn to visualizing our data (finally).
 
 
 ## Exploring the distribution of the variable 'Woordenschat' (Vocabulary) through a histogram
@@ -105,14 +132,14 @@ library(tidyverse)
 _Pro tip 4_: I would add these to the first 'load' chunk at the top of the Rmd-file.
 
 
-We will now examine the distribution of the variable  `woordenschat`. Observe how the code is constructed bellow:
+We will now examine the distribution of the variable `woordenschat`. Observe how the code is constructed below:
 
-* We define which colors we want to use by identifying a palette. So `col = 1` means `aliceblue` and `col = 2` indicates `black`. We can use this palette throughout the whole document if are looking for consistency in our datavisualizations. We could also add more colors to this list (e.g. all branding colors from our organization). 
-* We select the variable from the `sem_1_anon` dataset by stating the dataset, followed by '$' and the variable name 
+* We define which colors we want to use by identifying a palette. So `col = 1` means `aliceblue` and `col = 2` indicates `black`. We can use this palette throughout the whole document if are looking for consistency in our visualizations. We could also add more colors to this list (e.g. all branding colors from our organization). 
+* We select the variable from the `sem_1_anon` dataset by stating the dataset, followed by `$` and the variable name 
 * We use a special operator mark from the package `magrittr` (`%>%`) to pass on the result to the `hist`-function (this is called _method chaining_ of _piping_). 
-*'hist' is the code that creates the actual histogram. 
+* `hist` is the code that creates the actual histogram. 
 * We define a title and names for the X and Y-axis. 
-* To the message in our graph more easily understandable, we add a vertical line at the 50% mark, using the function `abline`. 
+* To make the message in our graph easily understandable, we add a vertical line at the 50% mark, using the function `abline`. 
 
 ```{r fig.width=6}
 
@@ -127,23 +154,23 @@ sem_1_anon$Woordenschat %>%
 abline(v = 50, lwd = 2, col = 2)
 ```
 
-_Pro tip 5_: If you are unsure about what specific code functions mean or do, you can consult the help function. there are 3 common ways of doing this: (1) type '?' directly followed by the code (e.g. ?hist) in the console. (2) In the bottom right of your RStudio concole, you can see a tab called 'Help'. click it and write the name of the function in the search field on the top right. (3) Google the name of the function + R an you will probably come across more information than you need (Yes, R is thinkering)
+_Pro tip 5_: If you are unsure about what specific code functions mean or do, you can consult the help function. there are 3 common ways of doing this: (1) type '?' directly followed by the function (e.g. ?hist) in the console. (2) In the bottom right of your RStudio dashboard, you can see a tab called 'Help'. Click it and write the name of the function in the search field on the top right. (3) Google the name of the function + R an you will probably come across more information than you need (Yes, R is thinkering).
 
 
-## Exercise time
+## Histogram exercises
 
 1. Write down an observation regarding the histogram underneath the figure in your Rmd file.
-2. Consult the help file for histogram. Try changing the width of the rectangles from 10 to 5, by adapting the 'breaks' in the histogram. (Copy the code to a new chunk before you start tinkering)
-3. Make the current histogram more 'disco' by adding 5 more collors based on name or HEX-code to the palette. (this will help: http://www.sthda.com/english/wiki/colors-in-r). To use the succession of colors instead of a single color, use col = 1:7 (: means 'from 1 untill 7) 
+2. Consult the help file for histogram. Try changing the width of the rectangles from 10 to 5, by adapting the 'breaks' in the histogram. (Copy the code to a new chunk before you start tinkering, otherwise you will lose your working code)
+3. Make the current histogram more 'disco' by adding 5 more collors based on name or HEX-code to the palette. (this will help: http://www.sthda.com/english/wiki/colors-in-r). To use the succession of colors instead of a single color, use `col = 1:7` (: means from 1 untill 7) 
 4. Make a similar histogram on the variable 'vergelijkingen1'
-5. Distinguish the histograms by adding a sub-title above each histogram containing the variable-name.
+5. Distinguish the  created histograms by adding a sub-title above each histogram containing the variable-name.
 6. Can you add a red, striped vertical line where the mean in the histogram of 'Vergelijkingen1' is situated? (this will help: http://www.sthda.com/english/wiki/abline-r-function-an-easy-way-to-add-straight-lines-to-a-plot-using-r-software)
-7. Change the histogram for Vergelijkingen1 to a 'density plot' (check the help function for hist and look for 'freq')
+7. Change the histogram for Vergelijkingen1 to a 'density plot' (check the help function for hist and look for `freq`)
 
 
-## Exploring the distribution of a categorical variable (Departement) 
+## Exploring the distribution of a Departement using barplots 
 
-We will now explore how student-participation is distributed across departements in AP. For those who are really curious:
+We will now explore how student-participation in AP-Vaardig is distributed across departements in AP. For those who are really curious about what the codes mean:
 
 * GW = Gezondheid en Welzijn
 * MC = Management en Communicatie
@@ -153,11 +180,11 @@ We will now explore how student-participation is distributed across departements
 * KA = Koninklijke Academie
 
 
-Observe how the code is constructed bellow:
+The variable Department is a categorical variable so we are switching from a historgram to a barplot. Observe how the code is constructed below:
 
-* We select the variable from the `sem_1_anon` dataset by stating the dataset, followed by '$' and the variable name 
-* We use a special operator mark from the package `magrittr` (`%>%`) to pass on the result to the `table`-function (this is called _method chaining_ of _piping_) and so on. 
-*`table` counts the number of rows pertaining to a specific value of the categorical variable `Departement` 
+* We select the variable from `sem_1_anon` by stating the dataset, followed by '$' and the variable name 
+* We use a special operator mark from the package `magrittr` (`%>%`) to pass on the result to the `table`-function (this is called _method chaining_ of _piping_). 
+* `table` counts the number of rows pertaining to a specific value of the categorical variable `Departement` 
 * `sort`organizes this count ascending.
 * `rev` swiches the order to descending
 * `barplot` creates the actual barplot. 
@@ -175,13 +202,13 @@ sem_1_anon$Departement %>%
 ```
 
 
-We can observe that some of the departments are barely represented in our data file. If we would continue with analyses in which Departement is included as a predictor, this would hamper our power. So based on our visualizations it would be better to remove these students and continue with only 4 Departements.
+We can observe that some of the departments are barely represented in our data file. If we would continue with analyses where Departement is included as a predictor, this would hamper our power. So based on our visualizations it would be better to remove these underrepresented departments.
 
 We can do this by using the following steps:
 
 * We convert our Tibble to a `data.table` object using the `setDT` function. 
-* We count the number of students per departement using the function `.N`) per departement
-* We selecteren those departments containing more than 5 participating students and we save the results in a new object called `dep_top`.
+* We count the number of students per departement using the function `.N`) per departement.
+* We selecteren those departments containing more than 5 participating students and we save the results in a new object called `dep_top`.If needed we can use the object `dep_top` to filter out our dataset.
 
 
 ```{r}
@@ -192,27 +219,20 @@ dep_top <- sem_1_anon[, .N, Departement][N > 5, Departement]
 dep_top
 ```
 
-_Pro Tip 6:_ an alternative for filtering out these results would be to use the `dplyr` package. It is a part of the tidyverse and specififcally aimed at data-wrangling. The code is provided as an example. Results should be identical (However, the dplyr-result will remain a tibble, not a data table)
 
-```{r}
-
-```
+## Barplot exercises
 
 
-
-## Exercise time
-
-1. Explore the reduced dataset you just created using the function `str()`
-2. Change the barplot so it will plot the 'relative frequencies'. You can do this by adding `prop.table` to an object that is the result of a `table` function. Can you do this using the pipes?
-3. Change the relative barplot to a barplot containing percentages by adding another line in the pipe: `multiply_by (100) %>%`.
-4. Make a  Barplot for the variable 'Opleidingstype'.
-5.  Make a barplot for the variable `opleiding`. See how difficult it is to read these long names. Now flip the barplot by adding horiz = TRUE to the function `barplot` (don't forget your comma!). Now that's easier to read :)
-6. Make a barplot on the variable `Generatiestudent`. Should we keep students who do not have the status of 'generatiestudenten' in our sample?
-7. Let's say you have to present your data to the teachers of the department MC. You want their data to stand out in the barplot. How would you do that, using colors? Implement in a new graph.
-8. Let's say that last year all departments promised that 'at least' 20% of their students would participate in AP-Vaardig. How would you make this clear in the barplot? How could you use `abline` to accomplish this?
+1. Change the barplot so it will plot the 'relative frequencies'. You can do this by adding `prop.table` to an object that is the result of a `table` function. Can you do this using the pipes?
+2. Change the relative barplot to a barplot containing percentages by adding another line in the pipe: `multiply_by (100) %>%`.
+3. Make a  Barplot for the variable 'Opleidingstype'.
+4.  Make a barplot for the variable `opleiding`. See how difficult it is to read these long names. Now flip the barplot by adding horiz = TRUE to the function `barplot` (don't forget your comma!). Now that's easier to read :)
+5. Make a barplot on the variable `Generatiestudent`. Should we keep students who do not have the status of 'generatiestudenten' in our sample?
+6. Let's say you have to present your data to the teachers of the department MC. You want their data to stand out in the barplot. How would you do that, using colors? Implement in a new graph.
+7. Let's say that last year all departments promised that 'at least' 20% of their students would participate in AP-Vaardig. How would you make this clear in the barplot? How could you use `abline` to accomplish this?
 
 
-_Pro Tip 7_: sometimes R interprets a variable as 'numerical' while it is in fact a categorical variable. For instance, in our data set the variable `Lemo_T` indicates whether or not a student participated in a certain version of the Lemo questionnaire. If we want to explore the response rate using a barplot we need tot convert this variable from type 'numeric' to type 'Character' before creating the barplot. The code bellow demonstrates how
+_Pro Tip 6_: sometimes R interprets a variable as 'numerical' while it is in fact a categorical variable. For instance, in our data set the variable `Lemo_T` indicates whether or not a student participated the Lemo questionnaire. If we want to explore the response rate using a barplot we need tot convert this variable from type 'numeric' to type 'Character' before creating the barplot. The code bellow demonstrates how
 
 ```{r}
 sem_1_anon$Lemo_T <- as.character(sem_1_anon$Lemo_T)
@@ -227,6 +247,7 @@ sem_1_anon$Lemo_T %>%
     cex.names = .7, cex.axis = .9, col = c("blue", "Orange"))
 
 ```
+_Pro Tip 7_: I wanted the colors in this plot to support my message. So I aimed at giving participation a more positive color and non-participation a more negative one.  We tend to use green and red to indicate positive and negative. However, for color blind people this is not optimal, as they have difficulty discerning these colors. Therefore it is advised (by color experts) to switch to blue and orange as alternatives. 
 
 
 ## Expansion: Grouped & stacked barplots
@@ -239,12 +260,14 @@ Sometimes you want to compare a distribution across two categorical variables. F
 * Sort if needed
 * Use this output as an input for the function `barplot`
 
-Take notice of:
+We therefore do not go into detail on these variations. However, take notice of the following:
 
-* the fact that we use the cleaned version of our dataset with only Departments with sufficient participants. We run the function `filter` from the dplyr-package and use the object `dep_top` we created before to filter out the appropriate departments.  
-* the new function called `legend` we are using to display a legend in our graph 
+
+* We use a filtered version of our dataset containing only Departments with sufficient participants. We run the function `filter` from the dplyr-package and use the object `dep_top` we created before to filter out the appropriate departments.  
+* we inserted a new function called `legend` to display a legend in our graph. 
 * the fact that how you organize your initial table affects which variable is used as grouping variable. This in turn affects the message your table is displaying and its readability.
-* the argument `besides` decides whether the barplot is grouped or stacked.
+* the argument `besides` decides whether the barplot is grouped (besides = TRUE) or stacked (besides = FALSE).
+* you can see I really like shades of blue as a base color for my graphs.
 
 
 ### Grouped barplot with department as grouping variable
@@ -266,7 +289,6 @@ legend("topright", legend = rownames(dep_Lemo_2),
 
 ```
 
-
 ### Stacked barplot with participation in Lemo as grouping variable
 
 ```{r}
@@ -279,6 +301,8 @@ barplot(Lemo_dep_2,
        fill = c(1,4), box.lty = 0, cex = 0.8)
 ```
 
+If you want to excercise this, try making a grouped barplot for `Lemo Participation` and `Opleidingstype`. and answer the following question: AP-vaardig was originally intended as an assessment tool for 'Graduaten'. 'Bachelor students' were allowed, but not obliged to take part in the tool. So there should be mainly students from Graduaten in the sample. Is this true? 
+
 
 ## Boxplots
 
@@ -287,16 +311,18 @@ barplot(Lemo_dep_2,
 
 We familiarized ourselves with the distribution of the scores for a single scale 'Woordenschat' through a histogram. we can compare descriptive statistics for various numerical variables (with a similar scale) using boxplots.
 
-Observe the steps in the code bellow:
+Observe the steps in the code below:
 
 * If all scales in your data file are numeric, you can just input the data file as source and R does the rest. Therefore we used the function `select`from dplyr to select all scales regarding language skills in our data set. 
 * Because our variable names are long we adjusted the margins in our plot using the function `par`. The numbers in between brackets define the margins for respectively: **bottom, left, top, right** in inches.
-* the function `boxplot`creates the boxplot for the data frame "scales", `las` tilts the orientation of the labels.
+* the function `boxplot`creates the boxplot for the data frame "scales". 
+* `las` tilts the orientation of the labels for readability.
+* If you wanted a boxplot for a single scale you could just insert `datafile$variablename`.
 
 
 ```{r}
 scales<-sem_1_anon %>%
-  select(Woordenschat:Email) %>%
+  select(Woordenschat:Email)
 
 par(mar=c(10,5,1,1))
 
@@ -306,7 +332,7 @@ boxplot(scales, las=2, col =1:4, main = "Verdeling scores schalen taalvaardighei
 
 ### Providing an indication of distribution 
 
-If you have a small sample and if it is important to emphasize distribution in more detail you can consider adding a stripchart to your boxplot. The stripchart adds an extra layer over your boxplots containing individual data points. In large datasets these points just create a large 'blob'. We therefore selected the first 25 rows in our dataset using the function `slice` . The jitter method disperses the data a bit, so they don't overlap with features in the boxplot. We also went overboard with flashy colors by using rainbow colors. 
+If you have a small sample and if it is important to emphasize distribution into more detail, you can consider adding a `stripchart` to your boxplot. The stripchart adds an extra layer over your boxplots containing individual data points. In large datasets like ours these points just create a large 'blob'. To exemplify the function, we therefore selected the first 25 rows in our dataset using the function `slice` (again from the dplyr package) . The jitter method disperses the data a bit, so they don't overlap with features in the boxplot. We also went with a very soft color, because we did not want to draw too much attention to the individual points. 
 
 ```{r}
 scales<-sem_1_anon %>%
@@ -316,14 +342,13 @@ scales<-sem_1_anon %>%
 par(mar=c(10,5,1,1))
 
 boxplot(scales, las=2, col =1:4, main = "Verdeling scores schalen taalvaardigheid")
-
-stripchart(scales, method = "jitter", pch = 19, add = TRUE, col = rainbow(ncol(scales)))
+stripchart(scales, las=2, vertical= TRUE, method = "jitter", pch = 19, bg=2, add = TRUE, col = "mistyrose")
 ```
 
 
 ### Grouped boxplots
 
-Finally, let's explore how the distribution of our variable 'Woordenschat' differs in the various departments. We know from previous analyses that not all Departments have a decent participation rate. We therefore filter adequate departments using the object `dep_top` which contains the names of all departments (alternatively we could just sum them up using c("Mc3, "GW", "WT", "OT")). We use a `~` to instruct R to plot Woordenschat across departments. 
+Finally, let's explore how the distribution of our variable 'Woordenschat' differs in the various departments. We know from previous analyses that not all Departments have a decent participation rate. We therefore filter adequate departments using the object `dep_top` which contains the names of all departments (alternatively we could just sum them up using c("Mc3, "GW", "WT", "OT")). We use a `~` to instruct R to plot Woordenschat across departments. T finish it of, we constructed a horizontal line on the general median across the entire dataset, just as a point of reference for comparisons.
 
 ```{r fig.width = 6}
 
@@ -334,13 +359,16 @@ sem_1_anon %>%
     col = 1, pch = 19, cex = .5,
     main = "Verdeling score woordenschat per departement")
 
-abline(h = 50, lwd = 2, col = 2)
+abline(h = median(sem_1_anon$Woordenschat, na.rm = T), lwd = 2, col = "orange", lty=2)
 ```
 
 ## Exercise time
 
-1. Can you repeat the boxplots we constructed on language skills for the mathematical skills incorporated in AP-Vaardig (Column Rekenen up until column Goniometrie)
-2. One of your colleagues has the odd hypothesis that participating in Lemo (Lemo_T) is related to differences in the variable Deductief_redeneren. Can you explore the ide by making a grouped boxplot? 
+1. Can you repeat the boxplots we constructed on language skills for the mathematical skills incorporated in AP-Vaardig (column Rekenen up until column Goniometrie)
+2. One of your colleagues has the odd hypothesis that participating in Lemo (Lemo_T) is related to differences in the variable Deductief_redeneren. Can you explore the idea by making a grouped boxplot? 
+
+
+_Pro tip 8:_ In most cases you do not want readers to see your code, just your results. By adding `, echo=FALSE`in between the brackets and after the r at the start of each chunk, you instruct RStudio to solely print the outcome of your analyses
 
 
 ## What's next?
