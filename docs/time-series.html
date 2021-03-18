@@ -212,20 +212,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>directly open data from within an archive (i.e. <code>fread ("dev.gz")</code>)</li>
 </ul>
 <ol style="list-style-type: decimal">
-<li>In your new Rmd file, delete the sample code and add the code below:</li>
+<li>In your new Rmd file, delete the sample code and add the code below (replace single quotes by backticks (<a href="https://en.wikipedia.org/wiki/Grave_accent">grave accents</a>)):</li>
 </ol>
-<pre class="rmd"><code>---
-title: &quot;Timeseries&quot;
-author: &quot;Your name here&quot;
-date: &quot;Published on 2021-03-16&quot;
-output: 
-  html_document: 
-    highlight: zenburn
----
-   
-## Workshop Time Series
-   
-...</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="time-series.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb1-2"><a href="time-series.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Timeseries&quot;</span></span>
+<span id="cb1-3"><a href="time-series.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Your name here&quot;</span></span>
+<span id="cb1-4"><a href="time-series.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Published on &#39;r Sys.Date()&#39;&quot;</span></span>
+<span id="cb1-5"><a href="time-series.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb1-6"><a href="time-series.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb1-7"><a href="time-series.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">highlight</span><span class="kw">:</span><span class="at"> zenburn</span></span>
+<span id="cb1-8"><a href="time-series.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb1-9"><a href="time-series.html#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">   </span></span>
+<span id="cb1-10"><a href="time-series.html#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">## Workshop Time Series</span></span>
+<span id="cb1-11"><a href="time-series.html#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">   </span></span>
+<span id="cb1-12"><a href="time-series.html#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">...</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Enter in your name and replace <code>...</code> with a new R code block (eng: <em>code chunk</em>) using the shortcut <code>Ctrl + Alt + I</code></li>
 <li>Make sure in a rMarkdown file to add an empty line before and after each code block, title and list</li>
@@ -242,8 +242,8 @@ output:
 <span id="cb2-9"><a href="time-series.html#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-10"><a href="time-series.html#cb2-10" aria-hidden="true" tabindex="-1"></a>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb2-11"><a href="time-series.html#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="time-series.html#cb2-12" aria-hidden="true" tabindex="-1"></a>sales <span class="ot">&lt;-</span> <span class="fu">fread</span>(, <span class="st">&quot;dat/sales.tsv&quot;</span>)</span></code></pre></div>
-<p>With the various <code>library</code> expressions, the necessary packages are loaded into memory. If these lines generate an error, it usually means the package needs installing first. If so, use an expression such as <code>install.packages (c (" data.table "," magrittr "))</code> in the console to install the missing packages. Let us now briefly review why we need these packages:</p>
+<span id="cb2-12"><a href="time-series.html#cb2-12" aria-hidden="true" tabindex="-1"></a>sales <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">&quot;dat/sales.tsv&quot;</span>)</span></code></pre></div>
+<p>With the various <code>library</code> expressions, the necessary packages are loaded into memory. If these lines generate an error, it usually means the package needs installing first. If so, use an expression such as <code>install.packages(c("data.table", "magrittr"))</code> in the console to install the missing packages. Let us now briefly review why we need these packages:</p>
 <ul>
 <li><code>knitr</code>: parsing the RMarkdown to an HTML report</li>
 <li><code>data.table</code>: loading and manipulating data</li>
@@ -271,6 +271,9 @@ Figuur 2.1: The dyad blue-5 versus yellow-red-5 (5B-5YR). In each colored box yo
 </p>
 </div>
 
+<ol style="list-style-type: decimal">
+<li>Try to use function <code>colorRampPalette</code> to make a gradient across sampling points corresponding to indices 20, 30 and 66 in above figure. Use <code>?colorRampPalette</code> if you have used this function before.</li>
+</ol>
 </div>
 <div id="data-exploration" class="section level2" number="2.4">
 <h2><span class="header-section-number">2.4</span> Data exploration</h2>
@@ -453,9 +456,10 @@ Figuur 2.1: The dyad blue-5 versus yellow-red-5 (5B-5YR). In each colored box yo
 </ol>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="time-series.html#cb7-1" aria-hidden="true" tabindex="-1"></a>sales_ts <span class="ot">&lt;-</span> sales[</span>
 <span id="cb7-2"><a href="time-series.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  Date <span class="sc">&lt;</span> <span class="st">&quot;2020-02-01&quot;</span>,    <span class="co"># Filter by date</span></span>
-<span id="cb7-3"><a href="time-series.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  .(A, C, E)] <span class="sc">%&gt;%</span>         <span class="co"># Selecte features</span></span>
+<span id="cb7-3"><a href="time-series.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  .(A, C, E)] <span class="sc">%&gt;%</span>         <span class="co"># Select features</span></span>
 <span id="cb7-4"><a href="time-series.html#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ts</span>(<span class="at">frequency =</span> <span class="dv">12</span>,    <span class="co"># Convert to ts, 12 months per year</span></span>
 <span id="cb7-5"><a href="time-series.html#cb7-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2014</span>, <span class="dv">1</span>)) <span class="co"># Provide start of the time series</span></span></code></pre></div>
+<p>The dot can have multiple meanings in R and this can be confusing at first. Here it stands as a synonym of <code>list</code>. Within a <code>magrittr</code>-pipe (i.e. after the <code>%&gt;%</code>) the dot stands for <em>whatever is being passed on from previous step</em>, comparable to <code>ans</code> on scientific calculators.</p>
 </div>
 <div id="plotting-time-series" class="section level2" number="2.6">
 <h2><span class="header-section-number">2.6</span> Plotting time series</h2>
@@ -468,7 +472,11 @@ Figuur 2.1: The dyad blue-5 versus yellow-red-5 (5B-5YR). In each colored box yo
 <span id="cb8-4"><a href="time-series.html#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-5"><a href="time-series.html#cb8-5" aria-hidden="true" tabindex="-1"></a>sales_ts <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="at">main =</span> main, <span class="at">xlab =</span> <span class="st">&quot;Year&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/sales-plot-01-1.png" width="672" /></p>
-<p>Close, but no cigar. There is still an issue with the y-axes. The position of the labels on the axes in ‘base R’ is determined by a function <code>pretty</code>. So you could turn off the y-axes in the plot (<code>yaxt = "n"</code>) and plot them all manually using the <code>axis</code> function. Of course, it is much easier to divide the numbers by a factor 1000.</p>
+<p>Close, but no cigar. There is still an issue with the y-axes.</p>
+<ol style="list-style-type: decimal">
+<li>Try to think how to fix this issue before you continue. Then see below how it was fixed here.</li>
+</ol>
+<p>The position of the labels on the axes in ‘base R’ is determined by a function <code>pretty</code>. So you could turn off the y-axes in the plot (<code>yaxt = "n"</code>) and plot them all manually using the <code>axis</code> function. Of course, it is much easier to divide the numbers by a factor 1000.</p>
 <ol style="list-style-type: decimal">
 <li>Adjust the previous code to divide the sales figures by 1000 and than adjust the title of the figure:</li>
 </ol>
@@ -485,11 +493,14 @@ Figuur 2.1: The dyad blue-5 versus yellow-red-5 (5B-5YR). In each colored box yo
 <h2><span class="header-section-number">2.7</span> Time series analyses</h2>
 <p>This is not a workshop on analyses, but in reality the analyses and the visualization go hand-in-hand. After all, visualization often serves as a diagnostics tool. Let us measure the amount of cross-correlation among the sales of our three selected products.</p>
 <ol style="list-style-type: decimal">
-<li>Examine the auto- and cross-correlation for all combinations of the sales volumes for the products A, c and E. Do this for a <em>horizon</em> of 18 months in the future (positive) and in the past (negative):</li>
+<li>Examine the auto- and cross-correlation for all combinations of the sales volumes for the products A, C and E. Do this for a <em>horizon</em> of 18 months in the future (positive) and in the past (negative):</li>
 </ol>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="time-series.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">bg =</span> <span class="dv">4</span>)</span>
 <span id="cb10-2"><a href="time-series.html#cb10-2" aria-hidden="true" tabindex="-1"></a>sales_ts_th <span class="sc">%&gt;%</span> <span class="fu">acf</span>(<span class="at">lag.max =</span> <span class="dv">18</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/sales-plot-03-1.png" width="672" /></p>
+<ol style="list-style-type: decimal">
+<li>Take a quick look at <code>?acf</code> and then take a look at the left-most values on the subplots on the diagonal with titles <strong>A</strong>, <strong>C</strong> and <strong>E</strong>. Why are these values 1?</li>
+</ol>
 <p>From this we learn, for example, that there is a correlation between products A and E with a horizon of 1 ‘season’ (1 year in this case), but that the relationship is not completely symmetrical. In other words one event seems to precede the other and that may be en important hint to analyse possible causal dependencies. To see this, compare the correlation at 1.0 for <em>A &amp; E</em> (below the dashed blue line indicating the significance level) with that of -1.0 for <em>E &amp; A</em> (above significance level).</p>
 </div>
 <div id="decompose-time-series" class="section level2" number="2.8">
@@ -503,9 +514,9 @@ Figuur 2.1: The dyad blue-5 versus yellow-red-5 (5B-5YR). In each colored box yo
 <p><img src="_main_files/figure-html/sales-plot-04-1.png" width="672" /></p>
 <p>Note that the problem of the axes is solved here by alternating the position of the y-axis.</p>
 <ol style="list-style-type: decimal">
-<li>Investigate how the plot of a <code>stl</code> object causes the axes to be displayed alternately:</li>
+<li><p>Investigate how the plot of a <code>stl</code> object causes the axes to be displayed alternately, use <code>stats:::plot.stl</code>.</p></li>
+<li><p>Did you notice the grey bars on the right in the figure above? Any idea what their function is?</p></li>
 </ol>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="time-series.html#cb12-1" aria-hidden="true" tabindex="-1"></a>stats<span class="sc">:::</span>plot.stl</span></code></pre></div>
 </div>
 <div id="predictions" class="section level2" number="2.9">
 <h2><span class="header-section-number">2.9</span> Predictions</h2>
@@ -513,94 +524,105 @@ Figuur 2.1: The dyad blue-5 versus yellow-red-5 (5B-5YR). In each colored box yo
 <ol style="list-style-type: decimal">
 <li>Let us take the standard plot for multivariate <code>forecast</code> objects:</li>
 </ol>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="time-series.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">bg =</span> <span class="dv">4</span>)</span>
-<span id="cb13-2"><a href="time-series.html#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="time-series.html#cb13-3" aria-hidden="true" tabindex="-1"></a>sales_ts_th <span class="sc">%&gt;%</span> forecast <span class="sc">%&gt;%</span></span>
-<span id="cb13-4"><a href="time-series.html#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">col =</span> <span class="dv">3</span>, <span class="at">xlab =</span> <span class="st">&quot;Year&quot;</span>,</span>
-<span id="cb13-5"><a href="time-series.html#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">main =</span> <span class="st">&quot;Items sold (x 1000)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="time-series.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">bg =</span> <span class="dv">4</span>)</span>
+<span id="cb12-2"><a href="time-series.html#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="time-series.html#cb12-3" aria-hidden="true" tabindex="-1"></a>sales_ts_th <span class="sc">%&gt;%</span> forecast <span class="sc">%&gt;%</span></span>
+<span id="cb12-4"><a href="time-series.html#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">col =</span> <span class="dv">3</span>, <span class="at">xlab =</span> <span class="st">&quot;Year&quot;</span>,</span>
+<span id="cb12-5"><a href="time-series.html#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">main =</span> <span class="st">&quot;Items sold (x 1000)&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/sales-forecast-1.png" width="672" /></p>
-<p>This is already quite good, but there are some problems. Let us start with an important detail: the color and shades of the prediction intervals.</p>
+<ol style="list-style-type: decimal">
+<li>Before reading on, try to understand what the shaded areas are on the right?</li>
+</ol>
+<p>The shaded areas on the right of the above figure correspond to the 80% and 95% prediction intervals. These are conceptually similar, <em>but not the same</em>, as confidence intervals.</p>
+<ol style="list-style-type: decimal">
+<li>Try to cut the chaining in above code chunk short and simply run <code>sales_ts_th %&gt;% forecast</code>. How would you exploit this object to manually draw the prediction intervals?</li>
+</ol>
+<p>The above figure is already quite good, but there are some issues still. Let us start with an important detail: the color and shades of the prediction intervals.</p>
 <ol style="list-style-type: decimal">
 <li>With <code>fan</code> you can obtain more color shades and with <code>colorRampPalette</code> we make a simple color gradient:</li>
 </ol>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="time-series.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">bg =</span> <span class="dv">4</span>)</span>
-<span id="cb14-2"><a href="time-series.html#cb14-2" aria-hidden="true" tabindex="-1"></a>ramp <span class="ot">&lt;-</span> <span class="fu">colorRampPalette</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)(<span class="dv">25</span>) </span>
-<span id="cb14-3"><a href="time-series.html#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-4"><a href="time-series.html#cb14-4" aria-hidden="true" tabindex="-1"></a>sales_ts_th <span class="sc">%&gt;%</span></span>
-<span id="cb14-5"><a href="time-series.html#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">forecast</span>(<span class="at">fan =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb14-6"><a href="time-series.html#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">col =</span> <span class="dv">3</span>, <span class="at">xlab =</span> <span class="st">&quot;Year&quot;</span>, <span class="at">shadecols =</span> ramp,</span>
-<span id="cb14-7"><a href="time-series.html#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">main =</span> <span class="st">&quot;Items sold (x 1000)&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="time-series.html#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">bg =</span> <span class="dv">4</span>)</span>
+<span id="cb13-2"><a href="time-series.html#cb13-2" aria-hidden="true" tabindex="-1"></a>ramp <span class="ot">&lt;-</span> <span class="fu">colorRampPalette</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>)(<span class="dv">25</span>) </span>
+<span id="cb13-3"><a href="time-series.html#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="time-series.html#cb13-4" aria-hidden="true" tabindex="-1"></a>sales_ts_th <span class="sc">%&gt;%</span></span>
+<span id="cb13-5"><a href="time-series.html#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">forecast</span>(<span class="at">fan =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="time-series.html#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">col =</span> <span class="dv">3</span>, <span class="at">xlab =</span> <span class="st">&quot;Year&quot;</span>, <span class="at">shadecols =</span> ramp,</span>
+<span id="cb13-7"><a href="time-series.html#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">main =</span> <span class="st">&quot;Items sold (x 1000)&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/sales-forecast-color-1.png" width="672" /></p>
 <p>Now comes the main problem: we really only want to forecast only 2019 and we want to see the current and forecast data superposed. It would also be nice if there were a clear marking to demarcate the start of the prediction.</p>
+<p>While the default plot is very useful already, there comes a time when we need to customize such graphs and this is exactly what we need to do here. We will create a <code>for</code> loop to draw the prediction-plot one at the time</p>
 <ol style="list-style-type: decimal">
 <li>Try to reproduce the predictions with the above requirements:</li>
 </ol>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="time-series.html#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">bg =</span> <span class="dv">4</span>, <span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>), <span class="at">oma =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
-<span id="cb15-2"><a href="time-series.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">2</span>))</span>
-<span id="cb15-3"><a href="time-series.html#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="time-series.html#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (series_name <span class="cf">in</span> sales_ts <span class="sc">%&gt;%</span> colnames) {</span>
-<span id="cb15-5"><a href="time-series.html#cb15-5" aria-hidden="true" tabindex="-1"></a>  series <span class="ot">&lt;-</span> sales_ts_th[, series_name]</span>
-<span id="cb15-6"><a href="time-series.html#cb15-6" aria-hidden="true" tabindex="-1"></a>  fc <span class="ot">&lt;-</span> series <span class="sc">%&gt;%</span></span>
-<span id="cb15-7"><a href="time-series.html#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">window</span>(<span class="at">end =</span> <span class="fu">c</span>(<span class="dv">2019</span>, <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb15-8"><a href="time-series.html#cb15-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">forecast</span>(<span class="at">fan =</span> <span class="cn">TRUE</span>, <span class="at">h =</span> <span class="dv">12</span>)</span>
-<span id="cb15-9"><a href="time-series.html#cb15-9" aria-hidden="true" tabindex="-1"></a>  fc <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="at">shadecols =</span> ramp, <span class="at">col =</span> <span class="dv">3</span>,</span>
-<span id="cb15-10"><a href="time-series.html#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">xaxt =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb15-11"><a href="time-series.html#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">title</span>(<span class="at">ylab =</span> series_name)</span>
-<span id="cb15-12"><a href="time-series.html#cb15-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb15-13"><a href="time-series.html#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (series_name <span class="sc">==</span> <span class="st">&quot;E&quot;</span>) {</span>
-<span id="cb15-14"><a href="time-series.html#cb15-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">axis</span>(<span class="dv">1</span>)</span>
-<span id="cb15-15"><a href="time-series.html#cb15-15" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb15-16"><a href="time-series.html#cb15-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="at">v =</span> <span class="dv">2019</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="dv">1</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
-<span id="cb15-17"><a href="time-series.html#cb15-17" aria-hidden="true" tabindex="-1"></a>  fc <span class="ot">&lt;-</span> series <span class="sc">%&gt;%</span></span>
-<span id="cb15-18"><a href="time-series.html#cb15-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">window</span>(<span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2018</span>, <span class="dv">12</span>)) <span class="sc">%&gt;%</span> <span class="fu">lines</span>(<span class="at">col =</span> <span class="dv">3</span>)</span>
-<span id="cb15-19"><a href="time-series.html#cb15-19" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb15-20"><a href="time-series.html#cb15-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-21"><a href="time-series.html#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="at">xlab =</span> <span class="st">&quot;Year&quot;</span>, <span class="at">outer =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="time-series.html#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">bg =</span> <span class="dv">4</span>, <span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">1</span>), <span class="at">oma =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb14-2"><a href="time-series.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">4</span>, <span class="dv">0</span>, <span class="dv">2</span>))</span>
+<span id="cb14-3"><a href="time-series.html#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="time-series.html#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (series_name <span class="cf">in</span> sales_ts <span class="sc">%&gt;%</span> colnames) {</span>
+<span id="cb14-5"><a href="time-series.html#cb14-5" aria-hidden="true" tabindex="-1"></a>  series <span class="ot">&lt;-</span> sales_ts_th[, series_name]</span>
+<span id="cb14-6"><a href="time-series.html#cb14-6" aria-hidden="true" tabindex="-1"></a>  fc <span class="ot">&lt;-</span> series <span class="sc">%&gt;%</span></span>
+<span id="cb14-7"><a href="time-series.html#cb14-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">window</span>(<span class="at">end =</span> <span class="fu">c</span>(<span class="dv">2019</span>, <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb14-8"><a href="time-series.html#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">forecast</span>(<span class="at">fan =</span> <span class="cn">TRUE</span>, <span class="at">h =</span> <span class="dv">12</span>)</span>
+<span id="cb14-9"><a href="time-series.html#cb14-9" aria-hidden="true" tabindex="-1"></a>  fc <span class="sc">%&gt;%</span> <span class="fu">plot</span>(<span class="at">shadecols =</span> ramp, <span class="at">col =</span> <span class="dv">3</span>,</span>
+<span id="cb14-10"><a href="time-series.html#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">xaxt =</span> <span class="st">&quot;n&quot;</span>, <span class="at">main =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb14-11"><a href="time-series.html#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">title</span>(<span class="at">ylab =</span> series_name)</span>
+<span id="cb14-12"><a href="time-series.html#cb14-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-13"><a href="time-series.html#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (series_name <span class="sc">==</span> <span class="st">&quot;E&quot;</span>) {</span>
+<span id="cb14-14"><a href="time-series.html#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">axis</span>(<span class="dv">1</span>)</span>
+<span id="cb14-15"><a href="time-series.html#cb14-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb14-16"><a href="time-series.html#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">abline</span>(<span class="at">v =</span> <span class="dv">2019</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">col =</span> <span class="dv">1</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb14-17"><a href="time-series.html#cb14-17" aria-hidden="true" tabindex="-1"></a>  fc <span class="ot">&lt;-</span> series <span class="sc">%&gt;%</span></span>
+<span id="cb14-18"><a href="time-series.html#cb14-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">window</span>(<span class="at">start =</span> <span class="fu">c</span>(<span class="dv">2018</span>, <span class="dv">12</span>)) <span class="sc">%&gt;%</span> <span class="fu">lines</span>(<span class="at">col =</span> <span class="dv">3</span>)</span>
+<span id="cb14-19"><a href="time-series.html#cb14-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-20"><a href="time-series.html#cb14-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-21"><a href="time-series.html#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="at">xlab =</span> <span class="st">&quot;Year&quot;</span>, <span class="at">outer =</span> <span class="dv">2</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/sales-final-1.png" width="672" /></p>
 <p>Notice how for products A and C the actual sales remain mostly below the point estimate of of the predictions.</p>
+<ol style="list-style-type: decimal">
+<li>There is again an issue with the y-axis, try to fix it.</li>
+</ol>
 </div>
 <div id="extra-resampling-temporal-data" class="section level2" number="2.10">
 <h2><span class="header-section-number">2.10</span> Extra: Resampling temporal data</h2>
 <p>Temporal data is often organized on a weekly, monthly, quarterly, or annual basis. For example sales figures per quarter. In the industry we speak of a <em>bucket</em> and the bucket could be a week, a quarter, etc …. Sometimes, however, as with the student data, a date field is provided, but the data is not neatly aggregated into fixed time units. The aggregation, which is also called <em>resampling</em> or <em>bucketizing</em>, must then be performed manually. This is demonstrated below for the sake of completeness.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="time-series.html#cb16-1" aria-hidden="true" tabindex="-1"></a>sem_1 <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">&quot;dat/sem_1_anon.tsv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="time-series.html#cb15-1" aria-hidden="true" tabindex="-1"></a>sem_1 <span class="ot">&lt;-</span> <span class="fu">fread</span>(<span class="st">&quot;dat/sem_1_anon.tsv&quot;</span>)</span></code></pre></div>
 <p>We first check the range of the variable <code>Datum1</code>, divide it into weeks and add seven days to the end date:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="time-series.html#cb17-1" aria-hidden="true" tabindex="-1"></a>sem_1<span class="sc">$</span>Datum1 <span class="sc">%&gt;%</span></span>
-<span id="cb17-2"><a href="time-series.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">range</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb17-3"><a href="time-series.html#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">strftime</span>(<span class="st">&quot;%Y-W%V-1&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb17-4"><a href="time-series.html#cb17-4" aria-hidden="true" tabindex="-1"></a>  ISOweek2date <span class="sc">%&gt;%</span></span>
-<span id="cb17-5"><a href="time-series.html#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">7</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="time-series.html#cb16-1" aria-hidden="true" tabindex="-1"></a>sem_1<span class="sc">$</span>Datum1 <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="time-series.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">range</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="time-series.html#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">strftime</span>(<span class="st">&quot;%Y-W%V-1&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="time-series.html#cb16-4" aria-hidden="true" tabindex="-1"></a>  ISOweek2date <span class="sc">%&gt;%</span></span>
+<span id="cb16-5"><a href="time-series.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">add</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">7</span>))</span></code></pre></div>
 <p>By alternating the dot color per week, we can investigate where there is sufficient data available to perform an analysis on:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="time-series.html#cb18-1" aria-hidden="true" tabindex="-1"></a>sem_1[, Week_T <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(<span class="fu">ISOweek</span>(Datum1))]</span>
-<span id="cb18-2"><a href="time-series.html#cb18-2" aria-hidden="true" tabindex="-1"></a>week_lev_all <span class="ot">&lt;-</span> sem_1<span class="sc">$</span>Week_T <span class="sc">%&gt;%</span> levels</span>
-<span id="cb18-3"><a href="time-series.html#cb18-3" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb18-4"><a href="time-series.html#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">bg =</span> <span class="dv">4</span>)</span>
-<span id="cb18-5"><a href="time-series.html#cb18-5" aria-hidden="true" tabindex="-1"></a>ramp <span class="ot">&lt;-</span> <span class="fu">rainbow</span>(<span class="dv">24</span>, <span class="dv">1</span>)</span>
-<span id="cb18-6"><a href="time-series.html#cb18-6" aria-hidden="true" tabindex="-1"></a>temp_pal <span class="ot">&lt;-</span> <span class="fu">palette</span>(ramp)</span>
-<span id="cb18-7"><a href="time-series.html#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-8"><a href="time-series.html#cb18-8" aria-hidden="true" tabindex="-1"></a>sem_1[, <span class="fu">plot</span>(Datum1, MemoS_T, <span class="at">col =</span> Week_T,</span>
-<span id="cb18-9"><a href="time-series.html#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">cex =</span> .<span class="dv">7</span>,</span>
-<span id="cb18-10"><a href="time-series.html#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Highlight weeks&quot;</span>,</span>
-<span id="cb18-11"><a href="time-series.html#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Date for review version</span><span class="sc">\n</span><span class="st">(&#39;terugblikversie&#39;)&quot;</span>,</span>
-<span id="cb18-12"><a href="time-series.html#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Memorising&quot;</span>)] <span class="ot">-&gt;</span> d</span>
-<span id="cb18-13"><a href="time-series.html#cb18-13" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb18-14"><a href="time-series.html#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomright&quot;</span>, <span class="at">legend =</span> week_lev_all, <span class="at">col =</span> ramp,</span>
-<span id="cb18-15"><a href="time-series.html#cb18-15" aria-hidden="true" tabindex="-1"></a> <span class="at">cex =</span> .<span class="dv">7</span>, <span class="at">bg =</span> <span class="cn">NA</span>, <span class="at">ncol =</span> <span class="dv">4</span>, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">border =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="time-series.html#cb17-1" aria-hidden="true" tabindex="-1"></a>sem_1[, Week_T <span class="sc">:</span><span class="er">=</span> <span class="fu">factor</span>(<span class="fu">ISOweek</span>(Datum1))]</span>
+<span id="cb17-2"><a href="time-series.html#cb17-2" aria-hidden="true" tabindex="-1"></a>week_lev_all <span class="ot">&lt;-</span> sem_1<span class="sc">$</span>Week_T <span class="sc">%&gt;%</span> levels</span>
+<span id="cb17-3"><a href="time-series.html#cb17-3" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb17-4"><a href="time-series.html#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">bg =</span> <span class="dv">4</span>)</span>
+<span id="cb17-5"><a href="time-series.html#cb17-5" aria-hidden="true" tabindex="-1"></a>ramp <span class="ot">&lt;-</span> <span class="fu">rainbow</span>(<span class="dv">24</span>, <span class="dv">1</span>)</span>
+<span id="cb17-6"><a href="time-series.html#cb17-6" aria-hidden="true" tabindex="-1"></a>temp_pal <span class="ot">&lt;-</span> <span class="fu">palette</span>(ramp)</span>
+<span id="cb17-7"><a href="time-series.html#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="time-series.html#cb17-8" aria-hidden="true" tabindex="-1"></a>sem_1[, <span class="fu">plot</span>(Datum1, MemoS_T, <span class="at">col =</span> Week_T,</span>
+<span id="cb17-9"><a href="time-series.html#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">cex =</span> .<span class="dv">7</span>,</span>
+<span id="cb17-10"><a href="time-series.html#cb17-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Highlight weeks&quot;</span>,</span>
+<span id="cb17-11"><a href="time-series.html#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Date for review version</span><span class="sc">\n</span><span class="st">(&#39;terugblikversie&#39;)&quot;</span>,</span>
+<span id="cb17-12"><a href="time-series.html#cb17-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Memorising&quot;</span>)] <span class="ot">-&gt;</span> d</span>
+<span id="cb17-13"><a href="time-series.html#cb17-13" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb17-14"><a href="time-series.html#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomright&quot;</span>, <span class="at">legend =</span> week_lev_all, <span class="at">col =</span> ramp,</span>
+<span id="cb17-15"><a href="time-series.html#cb17-15" aria-hidden="true" tabindex="-1"></a> <span class="at">cex =</span> .<span class="dv">7</span>, <span class="at">bg =</span> <span class="cn">NA</span>, <span class="at">ncol =</span> <span class="dv">4</span>, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">border =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/herb-03-1.png" width="672" /></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="time-series.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">palette</span>(temp_pal)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="time-series.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">palette</span>(temp_pal)</span></code></pre></div>
 <p>Finally, we can select the portion with sufficient data available and convert to a <code>ts</code> object:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="time-series.html#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">bg =</span> <span class="dv">4</span>)</span>
-<span id="cb20-2"><a href="time-series.html#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="time-series.html#cb20-3" aria-hidden="true" tabindex="-1"></a>sem_1[</span>
-<span id="cb20-4"><a href="time-series.html#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">&quot;2020&quot;</span>, Week_T),        <span class="co"># Selection</span></span>
-<span id="cb20-5"><a href="time-series.html#cb20-5" aria-hidden="true" tabindex="-1"></a>  .(<span class="at">MemoS_T =</span> <span class="fu">mean</span>(MemoS_T)),   <span class="co"># Var-manipulation</span></span>
-<span id="cb20-6"><a href="time-series.html#cb20-6" aria-hidden="true" tabindex="-1"></a>  Week_T] <span class="sc">%&gt;%</span>                   <span class="co"># Groeping</span></span>
-<span id="cb20-7"><a href="time-series.html#cb20-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">arrange</span>(Week_T) <span class="sc">%&gt;%</span>          <span class="co"># dplyr</span></span>
-<span id="cb20-8"><a href="time-series.html#cb20-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">select</span>(MemoS_T) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-9"><a href="time-series.html#cb20-9" aria-hidden="true" tabindex="-1"></a>   <span class="fu">ts</span>(</span>
-<span id="cb20-10"><a href="time-series.html#cb20-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">freq =</span> <span class="fl">365.25</span><span class="sc">/</span><span class="dv">7</span>,</span>
-<span id="cb20-11"><a href="time-series.html#cb20-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">start =</span> <span class="fu">decimal_date</span>(<span class="fu">ymd</span>(<span class="st">&quot;2020-09-07&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb20-12"><a href="time-series.html#cb20-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">xlab =</span> <span class="st">&quot;Tijd (decimaal)&quot;</span>,</span>
-<span id="cb20-13"><a href="time-series.html#cb20-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">&quot;Memoriseren&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Evolutie memoriseren&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="time-series.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">bg =</span> <span class="dv">4</span>)</span>
+<span id="cb19-2"><a href="time-series.html#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="time-series.html#cb19-3" aria-hidden="true" tabindex="-1"></a>sem_1[</span>
+<span id="cb19-4"><a href="time-series.html#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">&quot;2020&quot;</span>, Week_T),        <span class="co"># Selection</span></span>
+<span id="cb19-5"><a href="time-series.html#cb19-5" aria-hidden="true" tabindex="-1"></a>  .(<span class="at">MemoS_T =</span> <span class="fu">mean</span>(MemoS_T)),   <span class="co"># Var-manipulation</span></span>
+<span id="cb19-6"><a href="time-series.html#cb19-6" aria-hidden="true" tabindex="-1"></a>  Week_T] <span class="sc">%&gt;%</span>                   <span class="co"># Groeping</span></span>
+<span id="cb19-7"><a href="time-series.html#cb19-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">arrange</span>(Week_T) <span class="sc">%&gt;%</span>          <span class="co"># dplyr</span></span>
+<span id="cb19-8"><a href="time-series.html#cb19-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">select</span>(MemoS_T) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-9"><a href="time-series.html#cb19-9" aria-hidden="true" tabindex="-1"></a>   <span class="fu">ts</span>(</span>
+<span id="cb19-10"><a href="time-series.html#cb19-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">freq =</span> <span class="fl">365.25</span><span class="sc">/</span><span class="dv">7</span>,</span>
+<span id="cb19-11"><a href="time-series.html#cb19-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">start =</span> <span class="fu">decimal_date</span>(<span class="fu">ymd</span>(<span class="st">&quot;2020-09-07&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb19-12"><a href="time-series.html#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">xlab =</span> <span class="st">&quot;Tijd (decimaal)&quot;</span>,</span>
+<span id="cb19-13"><a href="time-series.html#cb19-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">&quot;Memoriseren&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Evolutie memoriseren&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/herb-04-1.png" width="672" /></p>
 
 </div>

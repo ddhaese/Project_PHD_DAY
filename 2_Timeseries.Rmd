@@ -39,13 +39,13 @@ We use `data.table` to upload the data. This package currently offers the most p
 - define the primary key in case of relational data
 - directly open data from within an archive (i.e. `fread ("dev.gz")`)
 
-1. In your new Rmd file, delete the sample code and add the code below:
+1. In your new Rmd file, delete the sample code and add the code below (replace single quotes by backticks ([grave accents](https://en.wikipedia.org/wiki/Grave_accent))):
 
-```rmd
+```yaml
 ---
 title: "Timeseries"
 author: "Your name here"
-date: "Published on `r Sys.Date()`"
+date: "Published on 'r Sys.Date()'"
 output: 
   html_document: 
     highlight: zenburn
@@ -72,10 +72,10 @@ library(forecast)
 
 opts_chunk$set(echo = TRUE)
 
-sales <- fread(, "dat/sales.tsv")
+sales <- fread("dat/sales.tsv")
 ```
 
-With the various `library` expressions, the necessary packages are loaded into memory. If these lines generate an error, it usually means the package needs installing first. If so, use an expression such as `install.packages (c (" data.table "," magrittr "))` in the console to install the missing packages. Let us now briefly review why we need these packages:
+With the various `library` expressions, the necessary packages are loaded into memory. If these lines generate an error, it usually means the package needs installing first. If so, use an expression such as `install.packages(c("data.table", "magrittr"))` in the console to install the missing packages. Let us now briefly review why we need these packages:
 
 - `knitr`: parsing the RMarkdown to an HTML report
 - `data.table`: loading and manipulating data
@@ -106,6 +106,8 @@ include_graphics("img/Dyad_5B-5YR_Annot.png")
 ```
 
 (ref:munsell) The dyad blue-5 versus yellow-red-5 (5B-5YR). In each colored box you will see from the top down: an index for reference, the Munsell color code, the corresponding RGB values and finally the color represented as a hex triplet. See the [Wikipedia page](https://en.wikipedia.org/wiki/Munsell_color_system) for more info and [this page](https://www.rit.edu/cos/colorscience/rc_munsell_renotation.php) of the Rochester Institute of Technology where you will find datasets to produce similar figures.
+
+1. Try to use function `colorRampPalette` to make a gradient across sampling points corresponding to indices 20, 30 and 66 in above figure. Use `?colorRampPalette` if you have used this function before.
 
 ## Data exploration
 
@@ -162,10 +164,12 @@ This pivoting of data is rather exceptional in statistical analyses and is mainl
 ```{r sales-ts}
 sales_ts <- sales[
   Date < "2020-02-01",    # Filter by date
-  .(A, C, E)] %>%         # Selecte features
+  .(A, C, E)] %>%         # Select features
     ts(frequency = 12,    # Convert to ts, 12 months per year
       start = c(2014, 1)) # Provide start of the time series
 ```
+
+The dot can have multiple meanings in R and this can be confusing at first. Here it stands as a synonym of `list`. Within a `magrittr`-pipe (i.e. after the `%>%`) the dot stands for _whatever is being passed on from previous step_, comparable to `ans` on scientific calculators. 
 
 ## Plotting time series
 
@@ -179,7 +183,11 @@ main <- "Sales figures\nfor three products"
 sales_ts %>% plot(main = main, xlab = "Year")
 ```
 
-Close, but no cigar. There is still an issue with the y-axes. The position of the labels on the axes in 'base R' is determined by a function `pretty`. So you could turn off the y-axes in the plot (`yaxt = "n"`) and plot them all manually using the `axis` function. Of course, it is much easier to divide the numbers by a factor 1000.
+Close, but no cigar. There is still an issue with the y-axes.
+
+1. Try to think how to fix this issue before you continue. Then see below how it was fixed here.
+
+The position of the labels on the axes in 'base R' is determined by a function `pretty`. So you could turn off the y-axes in the plot (`yaxt = "n"`) and plot them all manually using the `axis` function. Of course, it is much easier to divide the numbers by a factor 1000.
 
 1. Adjust the previous code to divide the sales figures by 1000 and than adjust the title of the figure:
 
@@ -197,12 +205,14 @@ sales_ts_th %>% plot(main = main, xlab = "Year")
 
 This is not a workshop on analyses, but in reality the analyses and the visualization go hand-in-hand. After all, visualization often serves as a diagnostics tool. Let us measure the amount of cross-correlation among the sales of our three selected products.
 
-1. Examine the auto- and cross-correlation for all combinations of the sales volumes for the products A, c and E. Do this for a _horizon_ of 18 months in the future (positive) and in the past (negative):
+1. Examine the auto- and cross-correlation for all combinations of the sales volumes for the products A, C and E. Do this for a _horizon_ of 18 months in the future (positive) and in the past (negative):
 
 ```{r sales-plot-03}
 par(bg = 4)
 sales_ts_th %>% acf(lag.max = 18)
 ```
+
+1. Take a quick look at `?acf` and then take a look at the left-most values on the subplots on the diagonal with titles __A__, __C__ and __E__. Why are these values 1?
 
 From this we learn, for example, that there is a correlation between products A and E with a horizon of 1 'season' (1 year in this case), but that the relationship is not completely symmetrical. In other words one event seems to precede the other and that may be en important hint to analyse possible causal dependencies. To see this, compare the correlation at 1.0 for _A & E_ (below the dashed blue line indicating the significance level) with that of -1.0 for _E & A_ (above significance level).
 
@@ -218,11 +228,9 @@ sales_ts_th[, "C"] %>% stl(s.window = "periodic") %>% plot
 
 Note that the problem of the axes is solved here by alternating the position of the y-axis.
 
-1. Investigate how the plot of a `stl` object causes the axes to be displayed alternately:
+1. Investigate how the plot of a `stl` object causes the axes to be displayed alternately, use `stats:::plot.stl`.
 
-```r
-stats:::plot.stl
-```
+1. Did you notice the grey bars on the right in the figure above? Any idea what their function is?
 
 ## Predictions
 
@@ -238,7 +246,13 @@ sales_ts_th %>% forecast %>%
     main = "Items sold (x 1000)")
 ```
 
-This is already quite good, but there are some problems. Let us start with an important detail: the color and shades of the prediction intervals.
+1. Before reading on, try to understand what the shaded areas are on the right?
+
+The shaded areas on the right of the above figure correspond to the 80% and 95% prediction intervals. These are conceptually similar, _but not the same_, as confidence intervals.
+
+1. Try to cut the chaining in above code chunk short and simply run `sales_ts_th %>% forecast`. How would you exploit this object to manually draw the prediction intervals?
+
+The above figure is already quite good, but there are some issues still. Let us start with an important detail: the color and shades of the prediction intervals.
 
 1. With `fan` you can obtain more color shades and with `colorRampPalette` we make a simple color gradient:
 
@@ -253,6 +267,8 @@ sales_ts_th %>%
 ```
 
 Now comes the main problem: we really only want to forecast only 2019 and we want to see the current and forecast data superposed. It would also be nice if there were a clear marking to demarcate the start of the prediction.
+
+While the default plot is very useful already, there comes a time when we need to customize such graphs and this is exactly what we need to do here. We will create a `for` loop to draw the prediction-plot one at the time
 
 1. Try to reproduce the predictions with the above requirements:
 
@@ -281,6 +297,8 @@ title(xlab = "Year", outer = 2)
 ```
 
 Notice how for products A and C the actual sales remain mostly below the point estimate of of the predictions.
+
+1. There is again an issue with the y-axis, try to fix it.
 
 ## Extra: Resampling temporal data
 
