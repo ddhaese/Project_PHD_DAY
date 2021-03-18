@@ -627,24 +627,23 @@ Figuur 2.1: The dyad blue-5 versus yellow-red-5 (5B-5YR). In each colored box yo
 <span id="cb35-12"><a href="time-series.html#cb35-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Memorising&quot;</span>)] <span class="ot">-&gt;</span> d</span>
 <span id="cb35-13"><a href="time-series.html#cb35-13" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb35-14"><a href="time-series.html#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomright&quot;</span>, <span class="at">legend =</span> week_lev_all, <span class="at">col =</span> ramp,</span>
-<span id="cb35-15"><a href="time-series.html#cb35-15" aria-hidden="true" tabindex="-1"></a> <span class="at">cex =</span> .<span class="dv">7</span>, <span class="at">bg =</span> <span class="cn">NA</span>, <span class="at">ncol =</span> <span class="dv">4</span>, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">border =</span> <span class="st">&quot;n&quot;</span>)</span>
-<span id="cb35-16"><a href="time-series.html#cb35-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-17"><a href="time-series.html#cb35-17" aria-hidden="true" tabindex="-1"></a><span class="fu">palette</span>(temp_pal)</span></code></pre></div>
+<span id="cb35-15"><a href="time-series.html#cb35-15" aria-hidden="true" tabindex="-1"></a> <span class="at">cex =</span> .<span class="dv">7</span>, <span class="at">bg =</span> <span class="cn">NA</span>, <span class="at">ncol =</span> <span class="dv">4</span>, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">border =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
 <p><img src="img/gen-herb-03-1.png" width="672" /></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="time-series.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">palette</span>(temp_pal)</span></code></pre></div>
 <p>Finally, we can select the portion with sufficient data available and convert to a <code>ts</code> object:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="time-series.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">bg =</span> <span class="dv">4</span>)</span>
-<span id="cb36-2"><a href="time-series.html#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-3"><a href="time-series.html#cb36-3" aria-hidden="true" tabindex="-1"></a>sem_1[</span>
-<span id="cb36-4"><a href="time-series.html#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">&quot;2020&quot;</span>, Week_T),        <span class="co"># Selection</span></span>
-<span id="cb36-5"><a href="time-series.html#cb36-5" aria-hidden="true" tabindex="-1"></a>  .(<span class="at">MemoS_T =</span> <span class="fu">mean</span>(MemoS_T)),   <span class="co"># Var-manipulation</span></span>
-<span id="cb36-6"><a href="time-series.html#cb36-6" aria-hidden="true" tabindex="-1"></a>  Week_T] <span class="sc">%&gt;%</span>                   <span class="co"># Groeping</span></span>
-<span id="cb36-7"><a href="time-series.html#cb36-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">arrange</span>(Week_T) <span class="sc">%&gt;%</span>          <span class="co"># dplyr</span></span>
-<span id="cb36-8"><a href="time-series.html#cb36-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">select</span>(MemoS_T) <span class="sc">%&gt;%</span> </span>
-<span id="cb36-9"><a href="time-series.html#cb36-9" aria-hidden="true" tabindex="-1"></a>   <span class="fu">ts</span>(</span>
-<span id="cb36-10"><a href="time-series.html#cb36-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">freq =</span> <span class="fl">365.25</span><span class="sc">/</span><span class="dv">7</span>,</span>
-<span id="cb36-11"><a href="time-series.html#cb36-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">start =</span> <span class="fu">decimal_date</span>(<span class="fu">ymd</span>(<span class="st">&quot;2020-09-07&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb36-12"><a href="time-series.html#cb36-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">xlab =</span> <span class="st">&quot;Tijd (decimaal)&quot;</span>,</span>
-<span id="cb36-13"><a href="time-series.html#cb36-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">&quot;Memoriseren&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Evolutie memoriseren&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="time-series.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">bg =</span> <span class="dv">4</span>)</span>
+<span id="cb37-2"><a href="time-series.html#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="time-series.html#cb37-3" aria-hidden="true" tabindex="-1"></a>sem_1[</span>
+<span id="cb37-4"><a href="time-series.html#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">&quot;2020&quot;</span>, Week_T),        <span class="co"># Selection</span></span>
+<span id="cb37-5"><a href="time-series.html#cb37-5" aria-hidden="true" tabindex="-1"></a>  .(<span class="at">MemoS_T =</span> <span class="fu">mean</span>(MemoS_T)),   <span class="co"># Var-manipulation</span></span>
+<span id="cb37-6"><a href="time-series.html#cb37-6" aria-hidden="true" tabindex="-1"></a>  Week_T] <span class="sc">%&gt;%</span>                   <span class="co"># Groeping</span></span>
+<span id="cb37-7"><a href="time-series.html#cb37-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">arrange</span>(Week_T) <span class="sc">%&gt;%</span>          <span class="co"># dplyr</span></span>
+<span id="cb37-8"><a href="time-series.html#cb37-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">select</span>(MemoS_T) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-9"><a href="time-series.html#cb37-9" aria-hidden="true" tabindex="-1"></a>   <span class="fu">ts</span>(</span>
+<span id="cb37-10"><a href="time-series.html#cb37-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">freq =</span> <span class="fl">365.25</span><span class="sc">/</span><span class="dv">7</span>,</span>
+<span id="cb37-11"><a href="time-series.html#cb37-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">start =</span> <span class="fu">decimal_date</span>(<span class="fu">ymd</span>(<span class="st">&quot;2020-09-07&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb37-12"><a href="time-series.html#cb37-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">xlab =</span> <span class="st">&quot;Tijd (decimaal)&quot;</span>,</span>
+<span id="cb37-13"><a href="time-series.html#cb37-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">&quot;Memoriseren&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Evolutie memoriseren&quot;</span>)</span></code></pre></div>
 <p><img src="img/gen-herb-04-1.png" width="672" /></p>
 
 </div>
