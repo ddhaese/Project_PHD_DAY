@@ -1,7 +1,7 @@
 ---
 title: "An introduction to datavisualisation in R"
 author: "Gert Vanthournout and David D'Haese"
-date: "Published on `r Sys.time()`"
+date: "Published on `r Sys.time()`</br><img src='img/cover.png'>"
 site: bookdown::bookdown_site
 output:
   bookdown::gitbook:
