@@ -46,6 +46,8 @@ knit_hooks$set(output = function(x, options) {
 opts_chunk$set(echo = TRUE)
 ```
 
+![ ](img/cover.png)
+
 # Summary {-}
 
 This workshop will provide you with the basics on visualizing your data using the statistical package R. The workshop will focus on how to generate frequently used graphics, such as the scatter plot, the (ordered) bar chart or the box and whisker plot. For more experienced users more advanced visuals are added in the form of time series analyses and social network analyses.
