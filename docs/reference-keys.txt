@@ -33,3 +33,7 @@ reducing-size
 the-network
 vectors
 cascading-style-sheets
+saving-your-plot
+using-the-report
+using-rstudios-export-function
+programmatoricaly

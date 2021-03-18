@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Saving your plots</title>
+  <title>Workshop 4 Saving your plot | Saving your plots</title>
   <meta name="description" content="Workshop as a part of the FSS PhD &amp; PostDoc Day event on March 18 2021" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Saving your plots" />
+  <meta property="og:title" content="Workshop 4 Saving your plot | Saving your plots" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Saving your plots" />
+  <meta name="twitter:title" content="Workshop 4 Saving your plot | Saving your plots" />
   
   <meta name="twitter:description" content="Workshop as a part of the FSS PhD &amp; PostDoc Day event on March 18 2021" />
   
@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+<link rel="prev" href="social-network.html"/>
 
-<link rel="next" href="getting-started.html"/>
 <script src="libs/header-attrs-2.7/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -207,23 +207,57 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Saving your plots</h1>
-<p class="author"><em>David D’Haese</em></p>
-<p class="date"><em>18-3-2021</em></p>
+<div id="saving-your-plot" class="section level1" number="4">
+<h1><span class="header-section-number">Workshop 4</span> Saving your plot</h1>
+<p>Let us conclude with a quickly overview on the number of ways one to persist a plot in R and RStudio. We will be first quickly drawing a plot:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="saving-your-plot.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(JohnsonJohnson)</span></code></pre></div>
+<p><img src="img/gen-unnamed-chunk-17-1.png" width="672" /></p>
+<div id="using-the-report" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Using the Report</h2>
+<p>Simply right-click on the report to export the generated plot into a png file:</p>
+<p><img src="img/export_01.png" /></p>
 </div>
-<div id="summary" class="section level1 unnumbered">
-<h1>Summary</h1>
-<p>This workshop will provide you with the basics on visualizing your data using the statistical package R. The workshop will focus on how to generate frequently used graphics, such as the scatter plot, the (ordered) bar chart or the box and whisker plot. For more experienced users more advanced visuals are added in the form of time series analyses and social network analyses.
-Participants will be able to practice via exercises. Basic knowledge of R is recommended, and R-studio should be installed prior to the session. A simple dataset will be provided, but participants can also use their own research-data.</p>
+<div id="using-rstudios-export-function" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Using RStudio’s export function</h2>
+<p>If you plot from within the console, your plot will appear in teh <em>Plots</em> tab.</p>
+<p><img src="img/export_02.png" /></p>
+<p><img src="img/export_03.png" /></p>
+<p>Similarly you can use the <em>Zoom</em> functionality:</p>
+<p><img src="img/export_04.png" /></p>
+</div>
+<div id="programmatoricaly" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Programmatoricaly</h2>
+<p>Of course, there is also a way to export plot from within your script or notebook:</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="saving-your-plot.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">svg</span>(<span class="st">&quot;img/J&amp;J_Quaterly.svg&quot;</span>, <span class="dv">300</span>, <span class="dv">600</span>)</span>
+<span id="cb45-2"><a href="saving-your-plot.html#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(JohnsonJohnson)</span>
+<span id="cb45-3"><a href="saving-your-plot.html#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+<pre><code>## png 
+##   2</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="saving-your-plot.html#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">jpeg</span>(<span class="st">&quot;img/J&amp;J_Quaterly.jpg&quot;</span>, <span class="dv">300</span>, <span class="dv">600</span>)</span>
+<span id="cb47-2"><a href="saving-your-plot.html#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(JohnsonJohnson)</span>
+<span id="cb47-3"><a href="saving-your-plot.html#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+<pre><code>## png 
+##   2</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="saving-your-plot.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tiff</span>(<span class="st">&quot;img/J&amp;J_Quaterly.tif&quot;</span>, <span class="dv">300</span>, <span class="dv">600</span>)</span>
+<span id="cb49-2"><a href="saving-your-plot.html#cb49-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(JohnsonJohnson)</span>
+<span id="cb49-3"><a href="saving-your-plot.html#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+<pre><code>## png 
+##   2</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="saving-your-plot.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">png</span>(<span class="st">&quot;img/J&amp;J_Quaterly.png&quot;</span>, <span class="dv">300</span>, <span class="dv">600</span>)</span>
+<span id="cb51-2"><a href="saving-your-plot.html#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(JohnsonJohnson)</span>
+<span id="cb51-3"><a href="saving-your-plot.html#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">dev.off</span>()</span></code></pre></div>
+<pre><code>## png 
+##   2</code></pre>
+
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
+<a href="social-network.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
-<a href="getting-started.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -253,7 +287,7 @@ gitbook.start({
 "text": null
 },
 "view": {
-"link": "https://github.com/ddhaese/Project_PHD_DAY/blob/main/index.Rmd",
+"link": "https://github.com/ddhaese/Project_PHD_DAY/blob/main/4_Saving.Rmd",
 "text": "Bron"
 },
 "download": null,
