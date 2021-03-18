@@ -14,7 +14,7 @@ library(knitr)
 
 # Time Series
 
-![](img/ts.png)
+![ ](img/ts.png)
 
 ## Introduction to time series
 
@@ -120,7 +120,7 @@ We are going to keep data exploration here to a minimum.
 sales %>% str
 ```
 
-```
+```txt
 ## Classes 'data.table' and 'data.frame':   935 obs. of  86 variables:
 ##  $ Key                                              : chr  "A" "B" "C" "D" ...
 ##  $ Date                                             : POSIXct, format: "2014-01-01" "2014-01-01" ...
@@ -140,7 +140,7 @@ We see that there are a number of products (under `Key`), a date of sale (`Date`
 
 ## Prepare data
 
-The particular thing about time series (but also, for example, GIS data) is that the dependent variables do not only depend on other variables, but also on themselves. We speak of _autocorrelation_ when a value depends on a neighbouring value either through space or time.
+The particular thing about time series (but also, for example, GIS data) is that the dependent variables do not only depend on other variables, but also on themselves. We speak of _autocorrelation_ when a value depends on a neighboring value either through space or time.
 
 1. To conduct a time series in R, you are best to work with `ts` class objects (stands for _time series_). In order to do that, we first need to pivot the data:
 
@@ -169,7 +169,7 @@ sales_ts <- sales[
       start = c(2014, 1)) # Provide start of the time series
 ```
 
-The dot can have multiple meanings in R and this can be confusing at first. Here it stands as a synonym of `list`. Within a `magrittr`-pipe (i.e. after the `%>%`) the dot stands for _whatever is being passed on from previous step_, comparable to `ans` on scientific calculators. 
+The dot can have multiple meanings in R and this can be confusing at first. Here it stands as a synonym of `list`. Within a `magrittr`-pipe (i.e. after the `%>%`) the dot stands for _whatever is being passed on from previous step_, comparable to `ans` on scientific calculators.
 
 ## Plotting time series
 
@@ -341,7 +341,7 @@ palette(temp_pal)
 ```
 
 Finally, we can select the portion with sufficient data available and convert to a `ts` object:
- 
+
 ```{r herb-04}
 par(bg = 4)
 

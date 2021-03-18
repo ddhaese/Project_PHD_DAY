@@ -10,7 +10,7 @@ css: "css/labo.css"
 
 # Social network
 
-![](img/social.png)
+![ ](img/social.png)
 
 ```{r include=FALSE}
 library(knitr)
