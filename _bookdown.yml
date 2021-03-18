@@ -1,4 +1,5 @@
 output_dir: "docs"
+view: https://github.com/ddhaese/Project_PHD_DAY/blob/main/%s
 
 delete_merged_file: true
 language:
@@ -20,3 +21,4 @@ language:
   ui:
     edit: Bewerken
     chapter_name: "Workshop "
+    view: Bron
