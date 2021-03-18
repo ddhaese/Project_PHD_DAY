@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Workshop 2 Time Series | Social Network</title>
+  <title>Workshop 2 Time Series | SAving</title>
   <meta name="description" content="Workshop as a part of the FSS PhD &amp; PostDoc Day event on March 18 2021" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Workshop 2 Time Series | Social Network" />
+  <meta property="og:title" content="Workshop 2 Time Series | SAving" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Workshop 2 Time Series | Social Network" />
+  <meta name="twitter:title" content="Workshop 2 Time Series | SAving" />
   
   <meta name="twitter:description" content="Workshop as a part of the FSS PhD &amp; PostDoc Day event on March 18 2021" />
   
@@ -184,6 +184,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.6" data-path="social-network.html"><a href="social-network.html#vectors"><i class="fa fa-check"></i><b>3.6</b> Vectors</a></li>
 <li class="chapter" data-level="3.7" data-path="social-network.html"><a href="social-network.html#cascading-style-sheets"><i class="fa fa-check"></i><b>3.7</b> Cascading style sheets</a></li>
 </ul></li>
+<li class="chapter" data-level="4" data-path="saving-your-plot.html"><a href="saving-your-plot.html"><i class="fa fa-check"></i><b>4</b> Saving your plot</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="saving-your-plot.html"><a href="saving-your-plot.html#using-the-report"><i class="fa fa-check"></i><b>4.1</b> Using the Report</a></li>
+<li class="chapter" data-level="4.2" data-path="saving-your-plot.html"><a href="saving-your-plot.html#using-rstudios-export-function"><i class="fa fa-check"></i><b>4.2</b> Using RStudio’s export function</a></li>
+<li class="chapter" data-level="4.3" data-path="saving-your-plot.html"><a href="saving-your-plot.html#programmatoricaly"><i class="fa fa-check"></i><b>4.3</b> Programmatoricaly</a></li>
+</ul></li>
 </ul>
 
       </nav>
@@ -193,7 +199,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Social Network</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">SAving</a>
           </h1>
         </div>
 
@@ -621,23 +627,24 @@ Figuur 2.1: The dyad blue-5 versus yellow-red-5 (5B-5YR). In each colored box yo
 <span id="cb35-12"><a href="time-series.html#cb35-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Memorising&quot;</span>)] <span class="ot">-&gt;</span> d</span>
 <span id="cb35-13"><a href="time-series.html#cb35-13" aria-hidden="true" tabindex="-1"></a> </span>
 <span id="cb35-14"><a href="time-series.html#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;bottomright&quot;</span>, <span class="at">legend =</span> week_lev_all, <span class="at">col =</span> ramp,</span>
-<span id="cb35-15"><a href="time-series.html#cb35-15" aria-hidden="true" tabindex="-1"></a> <span class="at">cex =</span> .<span class="dv">7</span>, <span class="at">bg =</span> <span class="cn">NA</span>, <span class="at">ncol =</span> <span class="dv">4</span>, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">border =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<span id="cb35-15"><a href="time-series.html#cb35-15" aria-hidden="true" tabindex="-1"></a> <span class="at">cex =</span> .<span class="dv">7</span>, <span class="at">bg =</span> <span class="cn">NA</span>, <span class="at">ncol =</span> <span class="dv">4</span>, <span class="at">pch =</span> <span class="dv">19</span>, <span class="at">border =</span> <span class="st">&quot;n&quot;</span>)</span>
+<span id="cb35-16"><a href="time-series.html#cb35-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-17"><a href="time-series.html#cb35-17" aria-hidden="true" tabindex="-1"></a><span class="fu">palette</span>(temp_pal)</span></code></pre></div>
 <p><img src="img/gen-herb-03-1.png" width="672" /></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="time-series.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">palette</span>(temp_pal)</span></code></pre></div>
 <p>Finally, we can select the portion with sufficient data available and convert to a <code>ts</code> object:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="time-series.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">bg =</span> <span class="dv">4</span>)</span>
-<span id="cb37-2"><a href="time-series.html#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-3"><a href="time-series.html#cb37-3" aria-hidden="true" tabindex="-1"></a>sem_1[</span>
-<span id="cb37-4"><a href="time-series.html#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">&quot;2020&quot;</span>, Week_T),        <span class="co"># Selection</span></span>
-<span id="cb37-5"><a href="time-series.html#cb37-5" aria-hidden="true" tabindex="-1"></a>  .(<span class="at">MemoS_T =</span> <span class="fu">mean</span>(MemoS_T)),   <span class="co"># Var-manipulation</span></span>
-<span id="cb37-6"><a href="time-series.html#cb37-6" aria-hidden="true" tabindex="-1"></a>  Week_T] <span class="sc">%&gt;%</span>                   <span class="co"># Groeping</span></span>
-<span id="cb37-7"><a href="time-series.html#cb37-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">arrange</span>(Week_T) <span class="sc">%&gt;%</span>          <span class="co"># dplyr</span></span>
-<span id="cb37-8"><a href="time-series.html#cb37-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">select</span>(MemoS_T) <span class="sc">%&gt;%</span> </span>
-<span id="cb37-9"><a href="time-series.html#cb37-9" aria-hidden="true" tabindex="-1"></a>   <span class="fu">ts</span>(</span>
-<span id="cb37-10"><a href="time-series.html#cb37-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">freq =</span> <span class="fl">365.25</span><span class="sc">/</span><span class="dv">7</span>,</span>
-<span id="cb37-11"><a href="time-series.html#cb37-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">start =</span> <span class="fu">decimal_date</span>(<span class="fu">ymd</span>(<span class="st">&quot;2020-09-07&quot;</span>))) <span class="sc">%&gt;%</span></span>
-<span id="cb37-12"><a href="time-series.html#cb37-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">xlab =</span> <span class="st">&quot;Tijd (decimaal)&quot;</span>,</span>
-<span id="cb37-13"><a href="time-series.html#cb37-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">&quot;Memoriseren&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Evolutie memoriseren&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="time-series.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">bg =</span> <span class="dv">4</span>)</span>
+<span id="cb36-2"><a href="time-series.html#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="time-series.html#cb36-3" aria-hidden="true" tabindex="-1"></a>sem_1[</span>
+<span id="cb36-4"><a href="time-series.html#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">grepl</span>(<span class="st">&quot;2020&quot;</span>, Week_T),        <span class="co"># Selection</span></span>
+<span id="cb36-5"><a href="time-series.html#cb36-5" aria-hidden="true" tabindex="-1"></a>  .(<span class="at">MemoS_T =</span> <span class="fu">mean</span>(MemoS_T)),   <span class="co"># Var-manipulation</span></span>
+<span id="cb36-6"><a href="time-series.html#cb36-6" aria-hidden="true" tabindex="-1"></a>  Week_T] <span class="sc">%&gt;%</span>                   <span class="co"># Groeping</span></span>
+<span id="cb36-7"><a href="time-series.html#cb36-7" aria-hidden="true" tabindex="-1"></a>   <span class="fu">arrange</span>(Week_T) <span class="sc">%&gt;%</span>          <span class="co"># dplyr</span></span>
+<span id="cb36-8"><a href="time-series.html#cb36-8" aria-hidden="true" tabindex="-1"></a>   <span class="fu">select</span>(MemoS_T) <span class="sc">%&gt;%</span> </span>
+<span id="cb36-9"><a href="time-series.html#cb36-9" aria-hidden="true" tabindex="-1"></a>   <span class="fu">ts</span>(</span>
+<span id="cb36-10"><a href="time-series.html#cb36-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">freq =</span> <span class="fl">365.25</span><span class="sc">/</span><span class="dv">7</span>,</span>
+<span id="cb36-11"><a href="time-series.html#cb36-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">start =</span> <span class="fu">decimal_date</span>(<span class="fu">ymd</span>(<span class="st">&quot;2020-09-07&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb36-12"><a href="time-series.html#cb36-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot</span>(<span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">xlab =</span> <span class="st">&quot;Tijd (decimaal)&quot;</span>,</span>
+<span id="cb36-13"><a href="time-series.html#cb36-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">ylab =</span> <span class="st">&quot;Memoriseren&quot;</span>, <span class="at">main =</span> <span class="st">&quot;Evolutie memoriseren&quot;</span>)</span></code></pre></div>
 <p><img src="img/gen-herb-04-1.png" width="672" /></p>
 
 </div>

@@ -1,0 +1,63 @@
+---
+title: "Saving your plots"
+author: "David D'Haese"
+date: "18-3-2021"
+output: html_document
+---
+
+```{r echo=FALSE}
+knitr::opts_knit$set(global.par = TRUE)
+```
+
+# Saving your plot
+
+Let us conclude with a quickly overview on the number of ways one to persist a plot in R and RStudio. We will be first quickly drawing a plot:
+
+```{r echo = FALSE}
+par(bg = "#D2EAEF")
+```
+
+```{r}
+plot(JohnsonJohnson)
+```
+
+## Using the Report
+
+Simply right-click on the report to export the generated plot into a png file:
+
+![ ](img/export_01.png)
+
+## Using RStudio's export function
+
+If you plot from within the console, your plot will appear in teh _Plots_ tab.
+
+![ ](img/export_02.png)
+
+![ ](img/export_03.png)
+
+Similarly you can use the _Zoom_ functionality:
+
+![ ](img/export_04.png)
+
+## Programmatoricaly
+
+Of course, there is also a way to export plot from within your script or notebook:
+
+```{r}
+svg("img/J&J_Quaterly.svg", 300, 600)
+plot(JohnsonJohnson)
+dev.off()
+
+jpeg("img/J&J_Quaterly.jpg", 300, 600)
+plot(JohnsonJohnson)
+dev.off()
+
+tiff("img/J&J_Quaterly.tif", 300, 600)
+plot(JohnsonJohnson)
+dev.off()
+
+png("img/J&J_Quaterly.png", 300, 600)
+plot(JohnsonJohnson)
+dev.off()
+```
+
