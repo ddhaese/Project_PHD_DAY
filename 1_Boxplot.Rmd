@@ -58,7 +58,7 @@ The data file contains the results of +- 4000 unique students who participated i
 
 In addition to these core-variables we obtained some background variables such as Department, Study program (Opleiding) and Program type (Professionele bachelor or graduaat). We also included students' average score on their exams in January (GPA; Grade Point Average). All variable names are in Dutch.
 
-There are multiple ways of importing data files in R-studio. The most straightforward is using the user interface in RStudio. You can access this via _Environment > Import Dataset > From Excel..._. If you are using RStudio for the first time, the program might ask you to download and install some packages. Just agree to installing and let the installation finish.  
+There are multiple ways of importing data files in RStudio. The most straightforward is using the user interface in RStudio. You can access this via _Environment > Import Dataset > From Excel..._. If you are using RStudio for the first time, the program might ask you to download and install some packages. Just agree to installing and let the installation finish.  
 
 The data file you have to import can be found in the chat or on this location:
 

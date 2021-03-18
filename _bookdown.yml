@@ -19,6 +19,6 @@ language:
     remark: "Opmerking "
     solution: "Solution "
   ui:
-    edit: Bewerken
+    edit: Edit
     chapter_name: "Workshop "
-    view: Bron
+    view: Source

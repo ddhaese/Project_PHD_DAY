@@ -49,7 +49,7 @@ opts_chunk$set(echo = TRUE)
 # Summary {-}
 
 This workshop will provide you with the basics on visualizing your data using the statistical package R. The workshop will focus on how to generate frequently used graphics, such as the scatter plot, the (ordered) bar chart or the box and whisker plot. For more experienced users more advanced visuals are added in the form of time series analyses and social network analyses.
-Participants will be able to practice via exercises. Basic knowledge of R is recommended, and R-studio should be installed prior to the session. A simple dataset will be provided, but participants can also use their own research-data. 
+Participants will be able to practice via exercises. Basic knowledge of R is recommended, and RStudio should be installed prior to the session. A simple dataset will be provided, but participants can also use their own research-data. 
 
 # Getting started {-}
 
