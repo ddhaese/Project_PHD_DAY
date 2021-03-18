@@ -27,6 +27,8 @@ We will be using the [MUSAE GitHub Social Network](https://www.kaggle.com/rozemb
 - a set of nodes containing the name of the developers
 - a set of edges depicting the relationships among developers
 
+> You can find all datasets [here](https://github.com/ddhaese/Project_PHD_DAY/tree/main/dat)
+
 1. Start a new project
 1. Load the two files containing the data
 

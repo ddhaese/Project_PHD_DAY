@@ -43,7 +43,7 @@ Similarly you can use the _Zoom_ functionality:
 
 Of course, there is also a way to export plot from within your script or notebook:
 
-```{r}
+```{r eval=FALSE}
 svg("img/J&J_Quaterly.svg", 300, 600)
 plot(JohnsonJohnson)
 dev.off()

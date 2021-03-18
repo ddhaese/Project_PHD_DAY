@@ -1,6 +1,6 @@
 :root{
   --shadow: grey;
-  --default_back: #D2EaEF;
+  --default_back: #D2EAEF;
   --default_light: #B4EFFD;
   --default_front: #646464;
 }
@@ -67,8 +67,13 @@ h4.date{
   font-size: .8em;
 }
 
-pre, pre:not([class]) {
+pre {
   background-color: var(--default_light);
+  border: none;
+}
+
+pre:not([class]) {
+  background-color: var(--default_back);
   border: none;
 }
 

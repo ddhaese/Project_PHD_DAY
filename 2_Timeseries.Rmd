@@ -24,6 +24,8 @@ In this workshop we will learn how to handle and visualize temporal data. Most a
 
 At the end of the workshop you will have the opportunity to work with the same dataset as for the Boxplot workshop, but because that data is slightly more difficult to use for time series analysis, we will first start with a simpler dataset.
 
+> You can find all datasets [here](https://github.com/ddhaese/Project_PHD_DAY/tree/main/dat)
+
 On [Kaggle](https://www.kaggle.com) you will find the dataset called [Time Series Data](https://www.kaggle.com/yugagrawal95/timeseries-data). The data is originally made available as an Excel workbook, but we will be using the same data converted into a `tsv` file. This dataset consists of the sales figures of a number of products along with several other variables that will not be used here.
 
 > Excel is often very problematic as a data source, so if you can avoid it, preferably use a format that will still be understood 2000 years from now: plain text, preferably tab-separated values (`.tsv`) so that values with commas need not to be escaped with double quotes.
