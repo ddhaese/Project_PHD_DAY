@@ -212,20 +212,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>directly open data from within an archive (i.e. <code>fread ("dev.gz")</code>)</li>
 </ul>
 <ol style="list-style-type: decimal">
-<li>In your new Rmd file, delete the sample code and add the code below:</li>
+<li>In your new Rmd file, delete the sample code and add the code below (replace single quotes by backticks (<a href="https://en.wikipedia.org/wiki/Grave_accent">grave accents</a>)):</li>
 </ol>
-<pre class="rmd"><code>---
-title: &quot;Timeseries&quot;
-author: &quot;Your name here&quot;
-date: &quot;Published on 2021-03-16&quot;
-output: 
-  html_document: 
-    highlight: zenburn
----
-   
-## Workshop Time Series
-   
-...</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode yaml"><code class="sourceCode yaml"><span id="cb1-1"><a href="time-series.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb1-2"><a href="time-series.html#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Timeseries&quot;</span></span>
+<span id="cb1-3"><a href="time-series.html#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Your name here&quot;</span></span>
+<span id="cb1-4"><a href="time-series.html#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">date</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Published on &#39;r Sys.Date()&#39;&quot;</span></span>
+<span id="cb1-5"><a href="time-series.html#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">output</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb1-6"><a href="time-series.html#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html_document</span><span class="kw">:</span><span class="at"> </span></span>
+<span id="cb1-7"><a href="time-series.html#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">highlight</span><span class="kw">:</span><span class="at"> zenburn</span></span>
+<span id="cb1-8"><a href="time-series.html#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb1-9"><a href="time-series.html#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">   </span></span>
+<span id="cb1-10"><a href="time-series.html#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">## Workshop Time Series</span></span>
+<span id="cb1-11"><a href="time-series.html#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">   </span></span>
+<span id="cb1-12"><a href="time-series.html#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">...</span></span></code></pre></div>
 <ol style="list-style-type: decimal">
 <li>Enter in your name and replace <code>...</code> with a new R code block (eng: <em>code chunk</em>) using the shortcut <code>Ctrl + Alt + I</code></li>
 <li>Make sure in a rMarkdown file to add an empty line before and after each code block, title and list</li>
