@@ -1,3 +1,4 @@
+fig:munsell
 visualizing-descriptive-analyses-for-beginners
 load-data
 exploring-the-distribution-of-the-variable-woordenschat-vocabulary-through-a-histogram
