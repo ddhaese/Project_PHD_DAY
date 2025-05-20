@@ -5,6 +5,12 @@
 <title>Startpagina</title>
 <link rel="stylesheet" type="text/css" media="screen" href="Bestanden/rw_common/themes/UA/consolidated-screen.css" />
 <script src="Bestanden/rw_common/themes/UA/javascript.js"></script>
+<script>
+  if(document.referrer.toLowerCase().indexOf("lms.uantwerpen.be") == -1) {
+    window.location.replace("https://ddhaese.github.io/Project_PHD_DAY/time-series.html");
+  }
+</script>
+ 
 <link rel="stylesheet" type="text/css" media="all" href="Bestanden/rw_common/plugins/stacks/stacks.css" />
 <!--[if lte IE 7]>
 			<link rel="stylesheet" type="text/css" media="all" href="Bestanden/rw_common/themes/UA/rw_common/plugins/stacks/stacks_ie.css" />
